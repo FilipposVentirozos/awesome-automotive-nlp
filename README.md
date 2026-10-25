@@ -2,9 +2,9 @@
 
 A curated list of corpora for natural language processing on automotive text, speech and driving scenes: vehicle adverts and listings, reviews and complaints, repair manuals and parts catalogues, in-car dialogue, driving-scene language and the knowledge resources that tie them together. The list grew out of three Auto Trader UK advertisement corpora (AutoSpecNER, Auto-AdvER and Auto-Features), whose related-work sections showed how scattered the field's datasets are. Every row carries task, modality, language, size, licence, access and year tags, and says which of our papers cites it. A corpus is listed if it is freely downloadable or described in a public paper (in which case the row says *paper only* and readers can contact the authors); fee-based commercial catalogues are excluded. See [Contributing](#contributing) to add one.
 
-**131 corpora** (55 text, 40 multimodal, 15 tabular+text, 11 speech, 10 image) in 14 languages.
+**131 corpora** (55 text, 40 multimodal, 15 tabular+text, 11 speech, 10 image) in 11 languages.
 
-**Languages:** English 90 · Chinese 12 · Korean 5 · Japanese 4 · Multilingual 3 · Cantonese 2 · German 2 · Italian 2 · Chinese (Simplified and Traditional) 1 · Chinese (Taiwan Mandarin) 1 · Czech 1 · French 1 · Indonesian 1 · Romanian 1 · n/a (images) 10 · n/a (noise recordings) 2 · unknown 1
+**Languages:** English 90 · Chinese 14 · Korean 5 · Japanese 4 · Cantonese 2 · German 2 · Italian 2 · Czech 1 · French 1 · Indonesian 1 · Romanian 1 · n/a (images) 10 · Multilingual 3 · n/a (noise recordings) 2 · unknown 1
 
 ## Contents
 

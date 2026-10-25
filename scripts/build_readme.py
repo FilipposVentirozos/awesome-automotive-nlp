@@ -355,11 +355,13 @@ def render_summary(corpora: list) -> str:
     mod_text = ", ".join(f"{n} {m}" for m, n in sorted(modalities.items(), key=lambda kv: (-kv[1], kv[0])))
     tags = Counter()
     for e in corpora:
-        tags.update({t.strip() for t in e["language"].split(", ") if t.strip()})
+        # Count base languages: "Chinese (Taiwan Mandarin)" counts as Chinese. Cantonese stays separate.
+        tags.update({t.strip() if t.strip().startswith("n/a") else t.split(" (")[0].strip()
+                     for t in e["language"].split(", ") if t.strip()})
 
     def not_a_language(tag):
         t = tag.casefold()
-        return t.startswith("n/a") or t == "unknown"
+        return t.startswith("n/a") or t in ("unknown", "multilingual")
 
     def rank(items):
         return sorted(items, key=lambda kv: (-kv[1], kv[0].casefold()))
