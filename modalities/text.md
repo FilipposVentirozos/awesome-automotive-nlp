@@ -48,11 +48,11 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 
 ### 🧩 C. Features, attributes & catalogue linking
 
-*No public automotive-specific attribute-extraction or catalogue-linking corpus was found. Auto-Features (forthcoming, listed below) is built for this task; the general product-attribute sets MAVE, OA-Mine and AE-110K contain no automotive category.*
+*No public automotive-specific attribute-extraction or catalogue-linking corpus was found. Auto-Features (to be released, listed below) is built for this task; the general product-attribute sets MAVE, OA-Mine and AE-110K contain no automotive category.*
 
 | Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|
-| Auto-Features | NER + entity linking | English | 1,256 adverts | to be announced at release | forthcoming | 2026 | forthcoming (release pending) | — |
+| Auto-Features | NER + entity linking | English | 1,256 adverts | to be announced at release | to be released | 2026 | to be released | — |
 
 ### ⭐ D. Reviews, opinion & sentiment
 

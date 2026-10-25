@@ -98,11 +98,11 @@ The primary axis is the application area, one section per bucket; larger section
 
 ### 🧩 C. Features, attributes & catalogue linking
 
-*No public automotive-specific attribute-extraction or catalogue-linking corpus was found. Auto-Features (forthcoming, listed below) is built for this task; the general product-attribute sets MAVE, OA-Mine and AE-110K contain no automotive category.*
+*No public automotive-specific attribute-extraction or catalogue-linking corpus was found. Auto-Features (to be released, listed below) is built for this task; the general product-attribute sets MAVE, OA-Mine and AE-110K contain no automotive category.*
 
 | Corpus | Task | Modality | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|---|
-| Auto-Features | NER + entity linking | text | English | 1,256 adverts | to be announced at release | forthcoming | 2026 | forthcoming (release pending) | — |
+| Auto-Features | NER + entity linking | text | English | 1,256 adverts | to be announced at release | to be released | 2026 | to be released | — |
 
 ### ⭐ D. Reviews, opinion & sentiment
 
@@ -405,13 +405,7 @@ To cite the list itself, use the repository's [CITATION.cff](CITATION.cff). The 
 }
 ```
 
-```bibtex
-% TODO author to complete: Auto-Features is under review; add authors, venue and year at camera-ready.
-@misc{auto-features-TODO,
-  title = {Auto-Features: An LLM-Assisted Corpus for Contextual Recognition of Standard and Optional Car Features},
-  note  = {Under review}
-}
-```
+Auto-Features: the citation will be added when the corpus is released.
 
 ## 🤝 Contributing
 

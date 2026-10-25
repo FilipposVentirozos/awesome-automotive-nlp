@@ -22,7 +22,7 @@
     "bibkey": "lee-etal-2026-autospecner",
     "source_quote": "659 car listings annotated with 4,609 entity spans across 15 vehicle-specification types, plus a three-annotator inter-annotator agreement study on 100 documents.",
     "verified": true,
-    "notes": "Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI 10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version). Entity-count discrepancy: the public release contains 4,609 entity spans, whereas the paper reports 11,117 labelled entities; the two figures are not yet reconciled. Annotation guidelines are included in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25."
+    "notes": "Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI 10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version). Annotation guidelines are included in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25."
   },
   {
     "name": "Auto-AdvER",
@@ -50,7 +50,7 @@
     "bibkey": "ventirozos2026autoadver",
     "source_quote": "Span-labelling corpus of 605 UK car adverts annotated for Condition, Historic and Sales Options",
     "verified": true,
-    "notes": "Ventirozos et al., AACL-IJCNLP 2026 (to appear). paper_url is the December 2024 arXiv preprint \"Shifting NER into High Gear: The Auto-AdvER Approach\" (bibkey ventirozos2024shifting in the author's .bib files); the camera-ready title differs. Folds f1-f3 are the paper's three cross-validation folds; four further folds were cut but never used and are not shipped. Licence split read from the repository page on 2026-10-25: code MIT, data, stored predictions and annotation guidelines CC BY 4.0."
+    "notes": "Ventirozos et al., AACL-IJCNLP 2026 (to appear). paper_url is the December 2024 arXiv preprint \"Shifting NER into High Gear: The Auto-AdvER Approach\" (BibTeX key ventirozos2024shifting); the camera-ready title differs. Folds f1-f3 are the paper's three cross-validation folds; four further folds were cut but never used and are not shipped. Licence split read from the repository page on 2026-10-25: code MIT, data, stored predictions and annotation guidelines CC BY 4.0."
   },
   {
     "name": "Auto-Features",
@@ -73,9 +73,9 @@
     "year": 2026,
     "cited_in": [],
     "bibkey": null,
-    "source_quote": "The Auto-Features corpus: 1,256 adverts, ~189K (advert, feature) instances per fold, in two documented layers: a human-gold layer (430 adverts, screened annotators) and an LLM-silver layer (925 adverts, search-grounded auto-annotation), with grouped, advert-disjoint train/validation/test splits.",
+    "source_quote": "A corpus for feature-conditioned named entity recognition over UK car advertisements",
     "verified": false,
-    "notes": "Release pending; the paper is under review (anonymous submission) at the time of writing, so there is no public page and verified is false. The source quote is taken from the manuscript. Task: given an advert and one feature from the catalogue of that exact vehicle, extract the span(s) expressing it; the set of catalogue features that received a span gives an entity-linking view at no extra cost. On release, set dataset_url, change access to public and record the licence."
+    "notes": "To be released by the list author. Task: given an advert and one feature from the catalogue of that exact vehicle, extract the span(s) that express it; the set of catalogue features that received a span gives an entity-linking view at no extra cost. On release, set dataset_url and paper_url, change access to public and record the licence."
   },
   {
     "name": "FindVehicle",
@@ -108,7 +108,7 @@
     "bibkey": "guan2024findvehicle",
     "source_quote": "Datasets like FindVehicle target vehicle retrieval with entity types including vehicle colour, brand, model, and location, but lack the granularity needed for technical specification extraction.",
     "verified": true,
-    "notes": "Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024. Cited in all three papers and the manuscript as the nearest automotive NER dataset, with 'coarse types (colour, brand, model, location)'. Manuscript lists it as a candidate (not chosen) external test set for RQ3 with a todo to 'verify each dataset's release, licence and inventory'. Alternative bucket H (driving-scene language) because the NL queries describe vehicles in traffic scenes and VehicleFinder is cross-modal. VERIFIED 2026-10-25: GitHub repo GuanRunwei/FindVehicle is live ('The first NER dataset in traffic domain for natural language-based vehicle retrieval'; 62 commits, 40 stars; entity types in examples: vehicle_color, vehicle_brand, vehicle_model, vehicle_type (incl. 'vehicle_type-suv'), vehicle_orientation, vehicle_location; companion repo GuanRunwei/VehicleFinder-CTIM). arXiv API: 2304.10893 (21 Apr 2023), '42.3k labelled NL descriptions of vehicle tracks', 'The dataset is open-source via the link https://github.com/GuanRunwei/FindVehicle'. Springer landing page could not be fetched (auth redirect). Entity set is traffic-oriented (orientation/location), not spec-oriented; language English by inspection of examples."
+    "notes": "Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024 (arXiv 2304.10893). 42.3k labelled natural-language descriptions of vehicle tracks; entity types include vehicle colour, brand, model, type, orientation and location. Companion retrieval system: github.com/GuanRunwei/VehicleFinder-CTIM. It could also sit in section H, because the descriptions refer to vehicles in traffic scenes. GitHub repository and arXiv record checked 2026-10-25."
   },
   {
     "name": "EWNERTC (automotive subset)",
@@ -138,7 +138,7 @@
     "bibkey": "lothritz-etal-2020-evaluating",
     "source_quote": "To the best of our knowledge, the earliest relevant work is by Lothritz et al. (2020), who evaluate a sequence labelling task on Wikipedia articles spanning multiple domains, including the automotive domain. The annotation-tags included automotive-specific entities such as fuel, engine, dates, manufacturers, models, generation and vehicle types.",
     "verified": true,
-    "notes": "paper; it did not release a new dataset but evaluated on the publicly available EWNERTC corpus (Sahin et al. 2017), whose automotive domain is the automotive relevance. COLING 2020, pp. 3750-3760. VERIFIED 2026-10-25: ACL Anthology page matches; PDF text (downloaded via the Anthology) states 'we apply the selected models to the English Wikipedia Named Entity Recognition and Text Categorization (EWNERTC) dataset published by Sahin et al. (2017b)... roughly 7 million annotated sentences, divided into 49 separate domains', footnote 4 gives https://data.mendeley.com/datasets/cdcztymf4k/1 and footnote 5 https://github.com/lothritz/FG-NER-data-statistics (per-domain statistics); the results table lists domain 12 'automotive' with 10 349 sentences. Mendeley record VERIFIED 2026-10-25: 'English/Turkish Wikipedia Named-Entity Recognition and Text Categorization Dataset', Sahin et al., published 9 Feb 2017, DOI 10.17632/cdcztymf4k.1, CC BY 4.0; description states gazetteers crawled from Freebase with 77 domains and >1,000 fine-grained entity types, English corpora >7M sentences (raw, domain-dependent and domain-independent versions); the page's file list did not render. Lothritz et al. used 49 of the domains. Annotations are automatic (gazetteer-based), so quality is unverified per the paper's own threats-to-validity. Auto-AdvER calls this 'the earliest relevant work' on automotive IE; manuscript: 'sequence labelling over Wikipedia articles with automotive tags'. Encyclopaedic register, not advert text."
+    "notes": "Lothritz et al., COLING 2020, pp. 3750-3760, evaluated fine-grained NER on EWNERTC (Sahin et al. 2017), whose automotive domain has 10,349 sentences. EWNERTC is on Mendeley Data (DOI 10.17632/cdcztymf4k.1, CC BY 4.0); per-domain statistics are at github.com/lothritz/FG-NER-data-statistics. Annotations are automatic (gazetteer-based) and the register is encyclopaedic, not advert text. ACL Anthology page, paper PDF and Mendeley record checked 2026-10-25."
   },
   {
     "name": "ADMit automotive NER data",
@@ -169,7 +169,7 @@
     "bibkey": "park2023admit",
     "source_quote": "Park et al. (2023) introduced ADMit, combining adversarial training and multi-task learning for automotive NER for Korean and English. Their work addresses domain adaptation between general and automotive-specific terminology but focuses on FAQ systems rather than technical specifications.",
     "verified": true,
-    "notes": "paper, no dataset released (none named in the citing papers). Park, Jeong, Kim, Expert Systems with Applications 225, 2023. Cited as a method precedent (adversarial multi-task NER for Korean and English automotive dialogue) in AutoSpecNER, Auto-AdvER and the manuscript (both the automotive-IE and the multi-task-learning subsections). NOT VERIFIED: Elsevier linkinghub returned only a 'Redirecting' page and Semantic Scholar API returned 404/429 on 2026-10-25; bibliographic fields taken from the bib entry only. Park, Jeong and Kim, Expert Systems with Applications 225:120007 (September 2023). Title, authors and venue verified through the Crossref API on 2026-10-25; the Elsevier page blocked the fetcher."
+    "notes": "Park, Jeong and Kim, Expert Systems with Applications 225:120007 (September 2023). Adversarial multi-task NER for Korean and English automotive FAQ systems; no dataset release found. Title, authors and venue verified through the Crossref API on 2026-10-25; the Elsevier page blocked the fetcher."
   },
   {
     "name": "Stanford Cars",
@@ -1666,7 +1666,7 @@
     "bibkey": "hu2024named",
     "source_quote": "Closest to our work, Hu et al. (2024) address NER for automotive accessories and parts in Chinese (e.g., brake discs) with entities such as accessory name, price, and warranty period",
     "verified": true,
-    "notes": "2024 4th International Conference on Neural Networks, Information and Communication Engineering (NNICE), pp. 604-612. DOI metadata verified through the Crossref API on 2026-10-25 (title, authors, venue and pages match the author's .bib entry); the IEEE Xplore landing page itself could not be fetched. The description is quoted from the related-work section of Auto-Features; no dataset release is known. Cited in AutoSpecNER and Auto-Features as hu2024named and in Auto-AdvER under the BibTeX key 10499162."
+    "notes": "2024 4th International Conference on Neural Networks, Information and Communication Engineering (NNICE), pp. 604-612. DOI metadata verified through the Crossref API on 2026-10-25 (title, authors, venue and pages match the bibliographic record); the IEEE Xplore landing page itself could not be fetched. The description is quoted from the related-work section of Auto-Features; no dataset release is known. Cited in AutoSpecNER and Auto-Features as hu2024named and in Auto-AdvER under the BibTeX key 10499162."
   },
   {
     "name": "Automotive ISO 26262 Safety Requirements Dataset",

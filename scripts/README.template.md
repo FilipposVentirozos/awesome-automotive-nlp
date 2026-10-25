@@ -63,13 +63,7 @@ To cite the list itself, use the repository's [CITATION.cff](CITATION.cff). The 
 }
 ```
 
-```bibtex
-% TODO author to complete: Auto-Features is under review; add authors, venue and year at camera-ready.
-@misc{auto-features-TODO,
-  title = {Auto-Features: An LLM-Assisted Corpus for Contextual Recognition of Standard and Optional Car Features},
-  note  = {Under review}
-}
-```
+Auto-Features: the citation will be added when the corpus is released.
 
 {{H2:Contributing}}
 

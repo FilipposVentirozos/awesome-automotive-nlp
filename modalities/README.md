@@ -7,7 +7,7 @@ Part of [awesome-automotive-nlp](../README.md). Each page lists the corpora of o
 | 📝 Text | 55 | 7 | [text.md](text.md) |
 | 🎙️ Speech | 11 | 6 | [speech.md](speech.md) |
 | 🎬 Multimodal | 40 | 5 | [multimodal.md](multimodal.md) |
-| 🖼️ Images | 10 | 0 | [image.md](image.md) |
+| 🖼️ Images | 10 | n/a | [image.md](image.md) |
 | 📊 Tabular + text | 15 | 3 | [tabular-text.md](tabular-text.md) |
 
 ---

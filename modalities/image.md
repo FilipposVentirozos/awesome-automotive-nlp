@@ -2,7 +2,7 @@
 
 Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: see [Taxonomy](../README.md#️-taxonomy).
 
-**10 corpora** in 0 languages.
+**10 corpora**.
 
 **Languages:** n/a (images) 10
 
