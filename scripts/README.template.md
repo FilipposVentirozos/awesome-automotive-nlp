@@ -2,6 +2,8 @@
 
 A curated list of corpora for natural language processing on automotive text, speech and driving scenes: vehicle adverts and listings, reviews and complaints, repair manuals and parts catalogues, in-car dialogue, driving-scene language and the knowledge resources that tie them together. The list grew out of three Auto Trader UK advertisement corpora (AutoSpecNER, Auto-AdvER and Auto-Features), whose related-work sections showed how scattered the field's datasets are. Every row carries task, modality, language, size, licence, access and year tags, and says which of our papers cites it. A corpus is listed if it is freely downloadable or described in a public paper (in which case the row says *paper only* and readers can contact the authors); fee-based commercial catalogues are excluded. See [Contributing](#contributing) to add one.
 
+{{SUMMARY}}
+
 ## Contents
 
 {{CONTENTS}}
@@ -14,7 +16,7 @@ A curated list of corpora for natural language processing on automotive text, sp
 
 ## Taxonomy
 
-The primary axis is the application area, one section per bucket. The secondary axes are the table columns: task, modality (text, speech, multimodal, image, tabular+text), language, size, licence, access, year, links and the paper of ours that cites the row.
+The primary axis is the application area, one section per bucket; larger sections are split into sub-headings. Every bucket is shown, even when empty, and a short note under a section heading explains a gap or points to where related corpora are listed. The secondary axes are the table columns: task, modality (text, speech, multimodal, image, tabular+text), language, size, licence (short form; the full terms are in `data/corpora.yaml`), access, year, links and the paper of ours that cites the row.
 
 {{TAXONOMY}}
 

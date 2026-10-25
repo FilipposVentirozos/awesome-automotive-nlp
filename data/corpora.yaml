@@ -1,84 +1,2693 @@
 # awesome-automotive-nlp: single source of truth for corpora.
-# One entry per corpus. Field reference and the inclusion rule: CONTRIBUTING.md.
+# One entry per corpus. Field reference, inclusion rule and verification rule: CONTRIBUTING.md.
 # Render README.md with: python scripts/build_readme.py
 #
-# section   bucket code A-K (see the Taxonomy section of README.md)
-# access    public | request | paper only (contact authors) | forthcoming | unreleased | unknown
-# verified  true ONLY if dataset_url or paper_url was fetched and the page matched
-# ours      true for the list author's own corpora (rendered first, under "Our corpora")
+# section     bucket code A-K (see the Taxonomy section of README.md)
+# subsection  sub-heading within the section; "" for none. Sub-headings render in first-appearance order.
+# access      public | request | paper only (contact authors) | forthcoming | unreleased | unknown
+# verified    true ONLY if dataset_url or paper_url was fetched and the page matched
+# ours        true for the list author's own corpora (rendered first, under "Our corpora")
 
 entries:
-  - name: AutoSpecNER
-    aliases: []
-    section: A
-    ours: true
-    task_type: NER
-    modality: text
-    language: English
-    domain_subtopic: vehicle-specification extraction from used-car adverts
-    size: "659 vehicle adverts; 15 entity types; 4,609 entity spans (public release); 100-document 3-annotator IAA study"
-    license: CC BY 4.0
-    access: public
-    dataset_url: https://github.com/FilipposVentirozos/AutoSpecNER
-    paper_url: https://aclanthology.org/2026.icnlsp-1.8/
-    year: 2026
-    cited_in: []
-    bibkey: lee-etal-2026-autospecner
-    source_quote: "659 car listings annotated with 4,609 entity spans across 15 vehicle-specification types, plus a three-annotator inter-annotator agreement study on 100 documents."
-    verified: true
-    notes: >-
-      Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI
-      10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version).
-      Entity-count discrepancy: the public release contains 4,609 entity spans, whereas the paper reports
-      11,117 labelled entities; the two figures are not yet reconciled. Annotation guidelines are included
-      in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25.
-
-  - name: Auto-AdvER
-    aliases: []
-    section: B
-    ours: true
-    task_type: span labelling
-    modality: text
-    language: English
-    domain_subtopic: used-car adverts (vehicle condition, history and commercial offers)
-    size: "605 UK car adverts; 104,382 tokens; 3 span labels (Condition / Historic / Sales Options); 113-advert 3-annotator IAA subset; 3 cross-validation folds"
-    license: CC BY 4.0 (data and guidelines); MIT (code)
-    access: public
-    dataset_url: https://github.com/FilipposVentirozos/Auto-AdvER
-    paper_url: https://arxiv.org/abs/2412.05655
-    year: 2026
-    cited_in: ["AutoSpecNER", "Auto-Features"]
-    bibkey: ventirozos2026autoadver
-    source_quote: "Span-labelling corpus of 605 UK car adverts annotated for Condition, Historic and Sales Options"
-    verified: true
-    notes: >-
-      Ventirozos et al., AACL-IJCNLP 2026 (to appear). paper_url is the December 2024 arXiv preprint
-      "Shifting NER into High Gear: The Auto-AdvER Approach" (bibkey ventirozos2024shifting in the author's
-      .bib files); the camera-ready title differs. Folds f1-f3 are the paper's three cross-validation folds;
-      four further folds were cut but never used and are not shipped. Licence split read from the repository
-      page on 2026-10-25: code MIT, data, stored predictions and annotation guidelines CC BY 4.0.
-
-  - name: Auto-Features
-    aliases: []
-    section: C
-    ours: true
-    task_type: feature-conditioned NER; entity linking
-    modality: text
-    language: English
-    domain_subtopic: standard and optional car features in used-car adverts, linked to the vehicle's own catalogue
-    size: "1,256 UK car adverts (430 human-gold + 925 LLM-silver, 99 overlap); 188,980 (advert, feature) instances per fold"
-    license: to be announced at release
-    access: forthcoming
-    dataset_url: null
-    paper_url: null
-    year: 2026
-    cited_in: []
-    bibkey: null
-    source_quote: "The Auto-Features corpus: 1,256 adverts, ~189K (advert, feature) instances per fold, in two documented layers: a human-gold layer (430 adverts, screened annotators) and an LLM-silver layer (925 adverts, search-grounded auto-annotation), with grouped, advert-disjoint train/validation/test splits."
-    verified: false
-    notes: >-
-      Release pending; the paper is under review (anonymous submission) at the time of writing, so there is
-      no public page and verified is false. The source quote is taken from the manuscript. Task: given an
-      advert and one feature from the catalogue of that exact vehicle, extract the span(s) expressing it; the
-      set of catalogue features that received a span gives an entity-linking view at no extra cost. On
-      release, set dataset_url, change access to public and record the licence.
+- name: AutoSpecNER
+  aliases: []
+  section: A
+  subsection: 'Text: vehicle-domain NER'
+  ours: true
+  task_type: NER
+  modality: text
+  language: English
+  domain_subtopic: vehicle-specification extraction from used-car adverts
+  size: 659 vehicle adverts; 15 entity types; 4,609 entity spans (public release); 100-document 3-annotator IAA study
+  license: CC BY 4.0
+  access: public
+  dataset_url: https://github.com/FilipposVentirozos/AutoSpecNER
+  paper_url: https://aclanthology.org/2026.icnlsp-1.8/
+  year: 2026
+  cited_in: []
+  bibkey: lee-etal-2026-autospecner
+  source_quote: 659 car listings annotated with 4,609 entity spans across 15 vehicle-specification types, plus a three-annotator inter-annotator agreement study on 100 documents.
+  verified: true
+  notes: 'Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI 10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version). Entity-count discrepancy: the public release contains 4,609 entity spans, whereas the paper reports 11,117 labelled entities; the two figures are not yet reconciled. Annotation guidelines are included in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25.'
+- name: Auto-AdvER
+  aliases: []
+  section: B
+  subsection: Listings and adverts
+  ours: true
+  task_type: span labelling
+  modality: text
+  language: English
+  domain_subtopic: used-car adverts (vehicle condition, history and commercial offers)
+  size: 605 UK car adverts; 104,382 tokens; 3 span labels (Condition / Historic / Sales Options); 113-advert 3-annotator IAA subset; 3 cross-validation folds
+  license: CC BY 4.0 (data and guidelines); MIT (code)
+  access: public
+  dataset_url: https://github.com/FilipposVentirozos/Auto-AdvER
+  paper_url: https://arxiv.org/abs/2412.05655
+  year: 2026
+  cited_in:
+  - AutoSpecNER
+  - Auto-Features
+  bibkey: ventirozos2026autoadver
+  source_quote: Span-labelling corpus of 605 UK car adverts annotated for Condition, Historic and Sales Options
+  verified: true
+  notes: 'Ventirozos et al., AACL-IJCNLP 2026 (to appear). paper_url is the December 2024 arXiv preprint "Shifting NER into High Gear: The Auto-AdvER Approach" (bibkey ventirozos2024shifting in the author''s .bib files); the camera-ready title differs. Folds f1-f3 are the paper''s three cross-validation folds; four further folds were cut but never used and are not shipped. Licence split read from the repository page on 2026-10-25: code MIT, data, stored predictions and annotation guidelines CC BY 4.0.'
+- name: Auto-Features
+  aliases: []
+  section: C
+  subsection: ''
+  ours: true
+  task_type: feature-conditioned NER; entity linking
+  modality: text
+  language: English
+  domain_subtopic: standard and optional car features in used-car adverts, linked to the vehicle's own catalogue
+  size: 1,256 UK car adverts (430 human-gold + 925 LLM-silver, 99 overlap); 188,980 (advert, feature) instances per fold
+  license: to be announced at release
+  access: forthcoming
+  dataset_url: null
+  paper_url: null
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: 'The Auto-Features corpus: 1,256 adverts, ~189K (advert, feature) instances per fold, in two documented layers: a human-gold layer (430 adverts, screened annotators) and an LLM-silver layer (925 adverts, search-grounded auto-annotation), with grouped, advert-disjoint train/validation/test splits.'
+  verified: false
+  notes: 'Release pending; the paper is under review (anonymous submission) at the time of writing, so there is no public page and verified is false. The source quote is taken from the manuscript. Task: given an advert and one feature from the catalogue of that exact vehicle, extract the span(s) expressing it; the set of catalogue features that received a span gives an entity-linking view at no extra cost. On release, set dataset_url, change access to public and record the licence.'
+- name: FindVehicle
+  aliases:
+  - FindVehicle and VehicleFinder
+  - VehicleFinder
+  - arXiv:2304.10893
+  section: A
+  subsection: 'Text: vehicle-domain NER'
+  task_type: NER (text side of natural-language vehicle retrieval; VehicleFinder is a keyword-based cross-modal retrieval system)
+  modality: text
+  language: English
+  domain_subtopic: 'traffic-surveillance vehicle retrieval: NL descriptions of vehicles on the road (UA-DETRAC-based test set); entities vehicle_color, vehicle_brand, vehicle_model, vehicle_type, vehicle_orientation, vehicle_location'
+  size: 42.3k labelled natural-language descriptions of vehicle tracks (arXiv abstract); released as FindVehicle_train/test in CoNLL-style .txt and .jsonl (NER + relation labels), hosted on Google Drive / Baidu Cloud Disk
+  license: unknown (no licence file shown in the GitHub repo)
+  access: public
+  dataset_url: https://github.com/GuanRunwei/FindVehicle
+  paper_url: https://doi.org/10.1007/s11042-023-16373-y
+  year: 2024
+  cited_in:
+  - AutoSpecNER
+  - Auto-AdvER
+  - Auto-Features
+  bibkey: guan2024findvehicle
+  source_quote: Datasets like FindVehicle target vehicle retrieval with entity types including vehicle colour, brand, model, and location, but lack the granularity needed for technical specification extraction.
+  verified: true
+  notes: 'Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024. Cited in all three papers and the manuscript as the nearest automotive NER dataset, with ''coarse types (colour, brand, model, location)''. Manuscript lists it as a candidate (not chosen) external test set for RQ3 with a todo to ''verify each dataset''s release, licence and inventory''. Alternative bucket H (driving-scene language) because the NL queries describe vehicles in traffic scenes and VehicleFinder is cross-modal. VERIFIED 2026-10-25: GitHub repo GuanRunwei/FindVehicle is live (''The first NER dataset in traffic domain for natural language-based vehicle retrieval''; 62 commits, 40 stars; entity types in examples: vehicle_color, vehicle_brand, vehicle_model, vehicle_type (incl. ''vehicle_type-suv''), vehicle_orientation, vehicle_location; companion repo GuanRunwei/VehicleFinder-CTIM). arXiv API: 2304.10893 (21 Apr 2023), ''42.3k labelled NL descriptions of vehicle tracks'', ''The dataset is open-source via the link https://github.com/GuanRunwei/FindVehicle''. Springer landing page could not be fetched (auth redirect). Entity set is traffic-oriented (orientation/location), not spec-oriented; language English by inspection of examples.'
+- name: EWNERTC (automotive subset)
+  aliases:
+  - English Wikipedia Named Entity Recognition and Text Categorization (EWNERTC) dataset
+  - 'Lothritz et al. 2020: Evaluating Pretrained Transformer-based Models on the Task of Fine-Grained Named Entity Recognition'
+  section: A
+  subsection: 'Text: vehicle-domain NER'
+  task_type: fine-grained NER
+  modality: text
+  language: English
+  domain_subtopic: Wikipedia sentences, automatically annotated (EWNERTC, Sahin et al. 2017); 'automotive' is one of 49 domains; the citing paper lists tags such as fuel, engine, dates, manufacturers, models, generation and vehicle types
+  size: 'EWNERTC: ~7 million automatically annotated Wikipedia sentences in 49 domains; the ''automotive'' domain subset has 10,349 sentences (paper Table, row 12); entity types capped at the top 50 per domain for the experiments'
+  license: CC BY 4.0 (Mendeley Data record)
+  access: public
+  dataset_url: https://data.mendeley.com/datasets/cdcztymf4k/1
+  paper_url: https://aclanthology.org/2020.coling-main.334
+  year: 2020
+  cited_in:
+  - Auto-AdvER
+  bibkey: lothritz-etal-2020-evaluating
+  source_quote: To the best of our knowledge, the earliest relevant work is by Lothritz et al. (2020), who evaluate a sequence labelling task on Wikipedia articles spanning multiple domains, including the automotive domain. The annotation-tags included automotive-specific entities such as fuel, engine, dates, manufacturers, models, generation and vehicle types.
+  verified: true
+  notes: 'paper; it did not release a new dataset but evaluated on the publicly available EWNERTC corpus (Sahin et al. 2017), whose automotive domain is the automotive relevance. COLING 2020, pp. 3750-3760. VERIFIED 2026-10-25: ACL Anthology page matches; PDF text (downloaded via the Anthology) states ''we apply the selected models to the English Wikipedia Named Entity Recognition and Text Categorization (EWNERTC) dataset published by Sahin et al. (2017b)... roughly 7 million annotated sentences, divided into 49 separate domains'', footnote 4 gives https://data.mendeley.com/datasets/cdcztymf4k/1 and footnote 5 https://github.com/lothritz/FG-NER-data-statistics (per-domain statistics); the results table lists domain 12 ''automotive'' with 10 349 sentences. Mendeley record VERIFIED 2026-10-25: ''English/Turkish Wikipedia Named-Entity Recognition and Text Categorization Dataset'', Sahin et al., published 9 Feb 2017, DOI 10.17632/cdcztymf4k.1, CC BY 4.0; description states gazetteers crawled from Freebase with 77 domains and >1,000 fine-grained entity types, English corpora >7M sentences (raw, domain-dependent and domain-independent versions); the page''s file list did not render. Lothritz et al. used 49 of the domains. Annotations are automatic (gazetteer-based), so quality is unverified per the paper''s own threats-to-validity. Auto-AdvER calls this ''the earliest relevant work'' on automotive IE; manuscript: ''sequence labelling over Wikipedia articles with automotive tags''. Encyclopaedic register, not advert text.'
+- name: ADMit automotive NER data
+  aliases:
+  - ADMit
+  - 'ADMit: Improving NER in automotive domain with domain adversarial training and multi-task learning'
+  section: F
+  subsection: Manuals, FAQs & question answering
+  task_type: NER (domain-adversarial multi-task training)
+  modality: text
+  language: Korean, English
+  domain_subtopic: automotive FAQ / conversational AI assistant utterances
+  size: unknown (not stated in the citing papers)
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://doi.org/10.1016/j.eswa.2023.120007
+  year: 2023
+  cited_in:
+  - AutoSpecNER
+  - Auto-AdvER
+  bibkey: park2023admit
+  source_quote: Park et al. (2023) introduced ADMit, combining adversarial training and multi-task learning for automotive NER for Korean and English. Their work addresses domain adaptation between general and automotive-specific terminology but focuses on FAQ systems rather than technical specifications.
+  verified: true
+  notes: 'paper, no dataset released (none named in the citing papers). Park, Jeong, Kim, Expert Systems with Applications 225, 2023. Cited as a method precedent (adversarial multi-task NER for Korean and English automotive dialogue) in AutoSpecNER, Auto-AdvER and the manuscript (both the automotive-IE and the multi-task-learning subsections). NOT VERIFIED: Elsevier linkinghub returned only a ''Redirecting'' page and Semantic Scholar API returned 404/429 on 2026-10-25; bibliographic fields taken from the bib entry only. Park, Jeong and Kim, Expert Systems with Applications 225:120007 (September 2023). Title, authors and venue verified through the Crossref API on 2026-10-25; the Elsevier page blocked the fetcher.'
+- name: Stanford Cars
+  aliases:
+  - Cars-196
+  - Cars196
+  section: A
+  subsection: 'Images: make, model and type recognition'
+  task_type: image classification (fine-grained make/model/year)
+  modality: image
+  language: n/a (images)
+  domain_subtopic: car make-model-year recognition from web photos
+  size: 16,185 images, 196 classes (8,144 train / 8,041 test)
+  license: unknown
+  access: public
+  dataset_url: https://www.tensorflow.org/datasets/catalog/cars196
+  paper_url: null
+  year: 2013
+  cited_in: []
+  bibkey: null
+  source_quote: The Cars dataset contains 16,185 images of 196 classes of cars.
+  verified: true
+  notes: Krause, Stark, Deng, Fei-Fei, 3dRR-13 (ICCV-W 2013). Canonical page ai.stanford.edu/~jkrause/cars/car_dataset.html failed to fetch twice (socket closed) -- NOT verified; TFDS catalog used as fetched source. HF mirror tanganke/stanford_cars also fetched (adds 7 corruption test splits). Labels are make+model+year strings; no captions.
+- name: CompCars
+  aliases:
+  - Comprehensive Cars
+  section: A
+  subsection: 'Images: make, model and type recognition'
+  task_type: image classification + attribute prediction + car-model verification
+  modality: image
+  language: n/a (images)
+  domain_subtopic: car make/model hierarchy with model-level attributes; web + surveillance images
+  size: 163 makes, 1,716 models, 136,726 whole-car images + 27,618 part images (web); 50,000 surveillance images
+  license: non-commercial research only (MMLAB agreement); no redistribution
+  access: request
+  dataset_url: https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/index.html
+  paper_url: null
+  year: 2015
+  cited_in: []
+  bibkey: null
+  source_quote: The surveillance-nature data contains 50,000 car images captured in the front view.
+  verified: true
+  notes: 'CVPR 2015 (Yang, Luo, Loy, Tang). TEXT-BEARING attributes: max speed, displacement, doors, seats, car type per model; viewpoint labels; bounding boxes. Access recorded as request: page says downloads are via links with instructions in a separate file plus a password, under the MMLAB non-commercial agreement; the page itself does not use the word request.'
+- name: VMMRdb
+  aliases:
+  - Vehicle Make and Model Recognition Dataset
+  section: A
+  subsection: 'Images: make, model and type recognition'
+  task_type: image classification (make-model-year)
+  modality: image
+  language: n/a (images)
+  domain_subtopic: crowd-sourced vehicle make/model/year recognition
+  size: 291,752 images, 9,170 classes (model years 1950-2016)
+  license: MIT (as stated in repo licence section)
+  access: public
+  dataset_url: https://github.com/faezetta/VMMRdb
+  paper_url: null
+  year: 2017
+  cited_in: []
+  bibkey: null
+  source_quote: containing 9,170 classes consisting of 291,752 images
+  verified: true
+  notes: CVPRW 2017 (Tafazzoli, Nishiyama, Frigui). Dropbox zip. User-taken images across 712 areas; page does not name the source site. Class label = make_model_year.
+- name: BoxCars116k
+  aliases:
+  - BoxCars
+  section: A
+  subsection: 'Images: make, model and type recognition'
+  task_type: image classification (fine-grained, traffic surveillance) + verification
+  modality: image
+  language: n/a (images)
+  domain_subtopic: surveillance-camera vehicle fine-grained recognition with 3D bounding boxes
+  size: ~116k images grouped into tracks (one vehicle ID per track)
+  license: research only (code); dataset licence not stated
+  access: public
+  dataset_url: https://github.com/JakubSochor/BoxCars
+  paper_url: null
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: The dataset contains 116k of images of vehicles with fine-grained labels.
+  verified: true
+  notes: IEEE T-ITS 2018 (Sochor et al.). Download from BUT Traffic Research site + Google Drive backup; pickled atlas/dataset/splits. BoxCars21k not mentioned on page.
+- name: Car Connection Picture Dataset
+  aliases:
+  - The Car Connection Picture Dataset
+  section: A
+  subsection: 'Images: make, model and type recognition'
+  task_type: image classification / attribute prediction (filename-encoded specs)
+  modality: image
+  language: n/a (images)
+  domain_subtopic: scraped car photos labelled with make, model, year, MSRP, horsepower, body style etc.
+  size: ~60,000 exterior images (scraper collects ~297,000 pictures / ~198,000 unique URLs)
+  license: unknown
+  access: public
+  dataset_url: https://github.com/nicolas-gervais/predicting-car-price-from-scraped-data/tree/master/picture-scraper
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: It scrapes 297,000 pictures, of which around 198,000 unique URLs.
+  verified: true
+  notes: 'TEXT-BEARING attributes in filename: Make, Model, Year, MSRP, wheel size, HP@RPM, displacement, engine type, dimensions, MPG, drivetrain, capacity, doors, body style. 681 MB Google Drive; many duplicates. Source thecarconnection.com. Release year not on page (press coverage Jan 2020).'
+- name: Car Models 3778
+  aliases:
+  - Unit293/car_models_3887
+  section: A
+  subsection: 'Images: make, model and type recognition'
+  task_type: image classification (model variants) + attribute metadata
+  modality: image
+  language: n/a (images)
+  domain_subtopic: scraped car model-variant images with 44-column spec metadata
+  size: ~193k images (512x512); 3,778 model variants; 44-column metadata CSV; 7.58 GB
+  license: other (as listed on Hugging Face)
+  access: public
+  dataset_url: https://huggingface.co/datasets/Unit293/car_models_3887
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: A comprehensive collection of 193k car images and metadata.
+  verified: true
+  notes: 'TEXT-BEARING metadata: make, model, year, body type, engine type, transmission, fuel type and more. Scraped from autoevolution.com. Name/slug inconsistency (3778 in card vs 3887 in repo slug). Dataset viewer currently unavailable. No publication.'
+- name: VeRi-776
+  aliases:
+  - VeRi
+  section: A
+  subsection: 'Images: re-identification and damage'
+  task_type: re-identification
+  modality: image
+  language: n/a (images)
+  domain_subtopic: urban surveillance vehicle re-ID with type/colour/brand attributes
+  size: '>50,000 images of 776 vehicles; 20 cameras; 1.0 km^2; 24 h'
+  license: non-commercial use only (no named licence)
+  access: request
+  dataset_url: https://vehiclereid.github.io/VeRi/
+  paper_url: null
+  year: 2016
+  cited_in: []
+  bibkey: null
+  source_quote: It contains over 50,000 images of 776 vehicles captured by 20 cameras covering an 1.0 km^2 area in 24 hours
+  verified: true
+  notes: 'ECCV 2016 / ICME 2016 / TMM 2018 (PROVID), Liu et al. Attributes: vehicle type, colour, brand, plate boxes (plates no longer provided). Email request with affiliation. task_type = re-identification.'
+- name: PKU VehicleID
+  aliases:
+  - VehicleID
+  section: A
+  subsection: 'Images: re-identification and damage'
+  task_type: re-identification (+ vehicle-model labels on subset)
+  modality: image
+  language: n/a (images)
+  domain_subtopic: surveillance vehicle re-ID with model labels (small Chinese city)
+  size: 26,267 vehicles / 221,763 images; model labels for 10,319 vehicles (90,196 images)
+  license: academic use only; commercial use prohibited
+  access: request
+  dataset_url: https://www.pkuml.org/resources/pku-vehicleid.html
+  paper_url: null
+  year: 2016
+  cited_in: []
+  bibkey: null
+  source_quote: There are 26267 vehicles(221763 images in total) in the entire dataset.
+  verified: true
+  notes: CVPR 2016 (Liu et al., DRDL). Signed agreement from academic/institutional email; free-mail requests refused. task_type = re-identification.
+- name: VERI-Wild
+  aliases: []
+  section: A
+  subsection: 'Images: re-identification and damage'
+  task_type: re-identification
+  modality: image
+  language: n/a (images)
+  domain_subtopic: large-scale unconstrained CCTV vehicle re-ID
+  size: 416,314 images of 40,671 vehicles; 174 cameras; 1 month
+  license: non-commercial (no formal licence stated)
+  access: request
+  dataset_url: https://github.com/PKU-IMRE/VERI-Wild
+  paper_url: null
+  year: 2019
+  cited_in: []
+  bibkey: null
+  source_quote: After data cleaning and annotation, 416,314 vehicle images of 40,671 identities are collected.
+  verified: true
+  notes: CVPR 2019 (Lou et al.); TPAMI 2021 extension. Email request with affiliation. Camera IDs, timestamps, cross-camera tracks; no colour/type attributes listed on page. task_type = re-identification.
+- name: CarDD
+  aliases:
+  - Car Damage Detection dataset
+  section: A
+  subsection: 'Images: re-identification and damage'
+  task_type: damage detection / segmentation (image)
+  modality: image
+  language: n/a (images)
+  domain_subtopic: car body damage images (6 damage categories)
+  size: 4,000 high-resolution images; >9,000 instances; 6 damage categories
+  license: unknown (licensing form required)
+  access: request
+  dataset_url: https://cardd-ustc.github.io/
+  paper_url: null
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: Our CarDD contains 4,000 high-resolution car damage images with over 9,000 wellannotated instances of six damage categories
+  verified: true
+  notes: 'IEEE T-ITS 2023 (Wang, Li, Wu). Google Drive link after form. Mark task_type: damage, not make/model.'
+- name: DVM-CAR
+  aliases:
+  - Deep Visual Marketing Car dataset
+  - DVM-CAR 2.0
+  section: B
+  subsection: Listings and adverts
+  task_type: listing corpus (tables + images); image classification / price prediction
+  modality: multimodal
+  language: English
+  domain_subtopic: UK used-car advertisements with images, price, sales and trim tables
+  size: 1,451,784 images; 899 UK-market car models; >0.25 million used-car adverts; Basic/Sales/Price/Trim/Ad/Image tables
+  license: CC BY-NC 4.0 (non-commercial research and education only)
+  access: public
+  dataset_url: https://deepvisualmarketing.github.io/
+  paper_url: https://arxiv.org/abs/2109.00881
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: Specifically, the created dataset contains 1.4 million images from 899 car models
+  verified: true
+  notes: 'Huang, Chen, Luo, Yue, Ounis, IEEE BigData 2022 (arXiv Aug 2021). DVM-CAR 1.0 Aug 2019, 2.0 May 2021. Download via Figshare (CSV tables; 13.6 GB images; 730 MB front-view). Ad table is structured fields (no free-text description observed on page) so B/J overlap: listing corpus without ad prose. Site states: ''Researcher shall use this dataset only for non-commercial research and educational purposes.'' | TEXT-BEARING (ad table). v1.0 Aug 2019, v2.0 May 2021; paper Huang et al., IEEE BigData 2022. Figshare (13.6 GB full images, 730 MB front-view subset). Cross-list with bucket J (pricing tables).'
+- name: Craigslist Used Cars
+  aliases:
+  - craigslist-carstrucks-data
+  section: B
+  subsection: Listings and adverts
+  task_type: price table with free-text listing description
+  modality: tabular+text
+  language: English
+  domain_subtopic: US Craigslist used-vehicle listings
+  size: '~426,000 rows x 26 columns incl. free-text ''description'' (row count per derivative HF card Yoad22/craigslist-used-cars-eda; Kaggle page: 275 MB zip)'
+  license: 'CC0: Public Domain'
+  access: public
+  dataset_url: https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data
+  paper_url: null
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: This data is scraped every few months, it contains most all relevant information that Craigslist provides on car sales including columns like price, condition, manufacturer, latitude/longitude, and 18 other categories.
+  verified: true
+  notes: 'Kaggle page metadata read from embedded JSON-LD (page body not rendered to fetcher). Last modified 2021-05-06, version 10. Scraper: github.com/AustinReese/UsedVehicleSearch. Derivative HF card lists ''description | Free-text field''. The main open English ad-text corpus besides Auto-AdvER/AutoSpecNER.'
+- name: CraigslistBargain
+  aliases:
+  - CraigslistBargain
+  - Decoupling Strategy and Generation in Negotiation Dialogues (dataset)
+  section: B
+  subsection: Buyer-seller dialogue
+  task_type: dialogue (buyer-seller price negotiation over marketplace listings)
+  modality: text
+  language: English
+  domain_subtopic: Craigslist listings (housing, furniture, electronics, and an unconfirmed car category); price negotiation
+  size: more than 6K negotiation dialogues (5,247 train / 597 validation / 838 test) over six categories, one of which is cars
+  license: unknown
+  access: public
+  dataset_url: https://huggingface.co/datasets/stanfordnlp/craigslist_bargains
+  paper_url: https://aclanthology.org/D18-1256/
+  year: 2018
+  cited_in: []
+  bibkey: he2018decoupling
+  source_quote: scraped from 6 most popular categories (housing, furniture, cars, bikes, phones, and electronics)
+  verified: true
+  notes: He, Chen, Balakrishnan and Liang, EMNLP 2018. Cars are one of six listing categories; filter on category for the automotive slice. Hugging Face card fetched 2026-10-25; source code github.com/stanfordnlp/cocoa.
+- name: OpinRank Review Dataset (Edmunds car reviews)
+  aliases:
+  - OpinRank
+  - Edmunds car reviews (Ganesan & Zhai)
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: full-text car reviews (Edmunds) + hotel reviews (TripAdvisor)
+  size: ~42,230 car reviews (model years 2007, 2008, 2009) + ~259,000 hotel reviews
+  license: CC BY 4.0
+  access: public
+  dataset_url: https://archive.ics.uci.edu/dataset/205/opinrank+review+dataset
+  paper_url: null
+  year: 2011
+  cited_in: []
+  bibkey: null
+  source_quote: Full reviews of cars for model-years 2007, 2008, and 2009
+  verified: true
+  notes: 'Donated to UCI 7/25/2011 by Kavita Ganesan and ChengXiang Zhai. Car reviews organised by model-year folder, one file per make/model; fields: date, author, review text, favorite. Associated paper: Ganesan & Zhai, ''Opinion-Based Entity Ranking'' (Information Retrieval, 2012). No sentiment labels; unlabelled review text often used for opinion summarisation.'
+- name: Amazon Reviews 2023 - Automotive category
+  aliases:
+  - Amazon Reviews'23 Automotive
+  - McAuley-Lab/Amazon-Reviews-2023 raw_review_Automotive
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: Amazon product reviews, Automotive category (parts & accessories)
+  size: 'Automotive: 8.0M users, 2.0M items, 20.0M ratings/reviews, 824.9M review tokens, 1.7B metadata tokens (whole dataset 571.54M reviews)'
+  license: unknown (not stated on page)
+  access: public
+  dataset_url: https://amazon-reviews-2023.github.io/
+  paper_url: null
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: 'This is a large-scale Amazon Reviews dataset, collected in 2023 by McAuley Lab, and it includes rich features such as:'
+  verified: true
+  notes: 'Automotive row verbatim: ''Automotive 8.0M 2.0M 20.0M 824.9M 1.7B''. Hosted on Hugging Face as McAuley-Lab/Amazon-Reviews-2023 (configs raw_review_Automotive, raw_meta_Automotive). Paper: Hou et al., ''Bridging Language and Items for Retrieval and Recommendation'' (2024). Reviews have 1-5 star rating, title, text, helpful votes, verified_purchase; metadata has features/description. Note: Automotive = parts/accessories/tools, not whole-vehicle reviews.'
+- name: Amazon Review Data (2018) - Automotive category
+  aliases:
+  - Amazon Reviews 2018 Automotive
+  - Ni et al. 2019 Amazon reviews
+  - reviews_Automotive_5.json
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: Amazon product reviews, Automotive category (parts & accessories), May 1996 - Oct 2018
+  size: 'Automotive: 7,990,166 reviews (ratings-only 7,990,166), 932,019 product metadata records, 5-core subset 1,711,519 reviews (whole dataset 233.1 million reviews)'
+  license: unknown (not stated on page)
+  access: public
+  dataset_url: https://nijianmo.github.io/amazon/index.html
+  paper_url: null
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: Current data includes reviews in the range May 1996 - Oct 2018.
+  verified: true
+  notes: 'Paper: Ni, Li & McAuley, ''Justifying recommendations using distantly-labeled reviews and fine-grained aspects'' (EMNLP 2019). Per-category files: reviews_Automotive.json.gz, 5-core reviews_Automotive_5.json.gz, meta_Automotive.json.gz. Fields: overall (1-5), reviewText, summary, verified, vote. Predecessor of Amazon Reviews 2023; superset of the 2014 McAuley release. Automotive = parts/accessories, not whole-vehicle reviews.'
+- name: Yelp Open Dataset (Automotive category businesses)
+  aliases:
+  - Yelp Dataset Challenge
+  - Yelp academic dataset
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: local business reviews; Automotive is a business category filter (auto repair, dealers, body shops)
+  size: 'whole dataset: 6,990,280 reviews, 150,346 businesses, 11 metropolitan areas; JSON tar 4.35 GB compressed / 8.65 GB uncompressed (Automotive subset not broken out)'
+  license: intended for educational use (Yelp Dataset Terms of Use; not a standard open licence)
+  access: public
+  dataset_url: https://business.yelp.com/data/resources/open-dataset/
+  paper_url: null
+  year: 2013
+  cited_in: []
+  bibkey: null
+  source_quote: The Yelp Open Dataset is a subset of Yelp data that is intended for educational use.
+  verified: true
+  notes: 'Automotive is not a released subset: filter business.json on categories containing ''Automotive'' (Auto Repair, Car Dealers, Body Shops, Tires, etc.) then join review.json. Reviews carry 1-5 stars + text + useful/funny/cool votes. Requires agreeing to Yelp Dataset Terms of Use; redistribution restricted. First released 2013 as Yelp Dataset Challenge; periodically refreshed.'
+- name: Car Reviews (Hugging Face)
+  aliases:
+  - florentgbelidji/car-reviews
+  - Gflorent/car-reviews
+  - Edmunds consumer car reviews (HF)
+  - Car Reviews (florentgbelidji, Hugging Face)
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: 'consumer car reviews with 1-5 star rating (Edmunds-style: Vehicle_Title, Review_Title, Review, Rating)'
+  size: 36,984 rows, 8 columns, 24.3 MB CSV; review dates 2003-2018 visible
+  license: unknown (not stated; no dataset card)
+  access: public
+  dataset_url: https://huggingface.co/datasets/florentgbelidji/car-reviews
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: Review_Date, Author_Name, Vehicle_Title, Review_Title, Review, Rating
+  verified: true
+  notes: 'Fetched page shows no dataset card ("No dataset card yet"); quote is the column list shown in the viewer. Columns: Unnamed: 0.1, Unnamed: 0, Review_Date, Author_Name, Vehicle_Title, Review_Title, Review, Rating. Provenance not documented; column names match Edmunds consumer reviews scrapes. Mirrored on Kaggle as khaivn123/car-reviews-hugging-face and duplicated as Gflorent/car-reviews. Used in several HF sentiment/ABSA fine-tuning demos. Treat licence as unknown.'
+- name: Edmunds Car Reviews (Kaggle)
+  aliases:
+  - Edmunds-car-review (OpenML 43348)
+  - Edmunds consumer reviews 2000-2019
+  - Edmunds car review (Kaggle, shreemunpranav)
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: Edmunds consumer reviews of new and used cars, popular US brands, 2000-2019
+  size: not stated on page (Review.csv; one row per review with Company, Model, Year, Reviewer, Date, Title, Review, Rating)
+  license: CC BY-SA 4.0
+  access: public
+  dataset_url: https://www.kaggle.com/datasets/shreemunpranav/edmunds-car-review
+  paper_url: null
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: A mix of used and new car reviews from the year 2000 to 2019 of various brands from edmunds.com. I did not  scrape all brands, just the popular ones in the US.
+  verified: true
+  notes: 'Licence read from the Kaggle page''s embedded JSON-LD (''CC BY-SA 4.0''); also mirrored on OpenML as dataset 43348 ''Edmunds-car-review'' (licence CC BY-SA 4.0, uploaded 2022-03-23, ARFF). Star rating 1-5 usable as weak sentiment label; no aspect labels. Scraped data: Edmunds ToS applies to redistribution. Year = Kaggle JSON-LD dateModified (not first publication).'
+- name: Expert Car Reviews Dataset (Kaggle)
+  aliases:
+  - Edmunds expert reviews with GPT-2 summaries
+  - Expert Car Reviews Dataset (Kaggle, ademboukhris)
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: summarisation
+  modality: tabular+text
+  language: English
+  domain_subtopic: Edmunds professional/expert car reviews with strengths, weaknesses, rating and specs
+  size: not stated on page
+  license: Other (specified in description)
+  access: public
+  dataset_url: https://www.kaggle.com/datasets/ademboukhris/expert-car-reviews-dataset
+  paper_url: null
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: This dataset contains expert reviews of various car models, along with additional information about the cars themselves. The reviews are summarized using the GPT-2 language model, providing concise insights into each car's strengths, weaknesses, and overall performance.
+  verified: true
+  notes: Scraped from Edmunds.com. Columns include strengths/weaknesses text, rating, full description and specs (horsepower, curb weight). Note that summaries are machine-generated (GPT-2), so treat the summary field as synthetic. Licence 'Other (specified in description)' read from the embedded JSON-LD. Bridges D and A/C (specs). Year = Kaggle JSON-LD dateModified (not first publication).
+- name: Electric Vehicles User Reviews India (Kaggle)
+  aliases:
+  - EV cars user reviews India
+  - CarDekho/CarWale/BikeWale EV reviews
+  - Electric Vehicles User Reviews India (Kaggle, deadprstkrish)
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: owner reviews of electric two- and four-wheelers in India, scraped from CarDekho, CarWale and BikeWale
+  size: not stated on page (multiple CSVs, one per site/vehicle type)
+  license: 'CC0: Public Domain'
+  access: public
+  dataset_url: https://www.kaggle.com/datasets/deadprstkrish/ev-cars-user-reviews-india
+  paper_url: null
+  year: 2022
+  cited_in: []
+  bibkey: null
+  source_quote: The data has been scraped from many popular websites like carDekho, carwale and bikewale.
+  verified: true
+  notes: 'Only CarDekho-sourced review corpus found in this survey; per-review attributes include review title/text, rating and per-aspect ratings (varies by site). Licence ''CC0: Public Domain'' read from the embedded JSON-LD. EV-owner sentiment angle; English-language Indian reviews. Scraped data: site ToS applies. Year = Kaggle JSON-LD dateModified (not first publication).'
+- name: SRNI-CAR (Chinese automotive market dataset) - owner reviews component
+  aliases:
+  - SRNI-CAR
+  - Sales, Reviews, News and Information - CAR
+  section: D
+  subsection: Consumer and expert reviews
+  task_type: sentiment
+  modality: tabular+text
+  language: Chinese
+  domain_subtopic: Chinese car-owner online reviews with per-aspect ratings and free-text advantages/disadvantages, plus sales, news and specs, 2016-2022
+  size: 217,292 owner comments from 358 cities covering 13,039 models / 672 series / 127 brands; Reviews CSV 480 MB
+  license: CC BY-NC 4.0
+  access: public
+  dataset_url: https://srni-car.github.io
+  paper_url: https://arxiv.org/abs/2401.05395
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: The online review data is based on 217,292 comments from car owners in 358 cities,
+  verified: true
+  notes: 'Ding, Chen, Wilson, Yan & Huang, IEEE BigData 2023. Reviews collected from PCAuto (太平洋汽车) and Dongchedi (懂车帝); each record has ratings for exterior, interior, space, features, power, energy consumption, driving, comfort plus written advantages/disadvantages and per-dimension comments, purchase price, location, mileage. Project page states: ''This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.'' Downloads via Figshare. Largest open Chinese car-review corpus found.'
+- name: JDPA Sentiment Corpus for the Automotive Domain
+  aliases:
+  - J.D. Power and Associates Sentiment Corpus
+  - ICWSM 2010 JDPA corpus
+  - Kessler et al. 2010
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: ABSA
+  modality: text
+  language: English
+  domain_subtopic: blog posts with opinions about automobiles (and digital cameras); entity mentions, sentiment expressions, targets, coreference
+  size: 515 documents (blog posts), 19,322 sentences, 330,762 tokens (automobiles + cameras)
+  license: (c) Copyright 2009-2010, J.D. Power and Associates, All rights reserved, no re-distribution; free for academic research after signed licence agreement
+  access: request
+  dataset_url: https://verbs.colorado.edu/jdpacorpus/README.txt
+  paper_url: null
+  year: 2010
+  cited_in: []
+  bibkey: null
+  source_quote: The JDPA Corpus consists of user-generated content (blog posts) containing opinions about automobiles and digital cameras.
+  verified: true
+  notes: 'Kessler, Eckert, Clark & Nicolov, ''The ICWSM 2010 JDPA Sentiment Corpus for the Automotive Domain'', ICWSM-DCW 2010. Hosted by University of Colorado CLEAR lab (verbs.colorado.edu/jdpacorpus); signed agreement posted to the lab. Rich scheme: entity mentions with coreference, sentiment expressions with polarity and targets, part-of/feature-of relations, comparisons. The classic English automotive ABSA corpus; predates SemEval ABSA.'
+- name: PACE Corpus (Polarity-annotated Automotive and CEllphone)
+  aliases:
+  - PACE
+  - Haenig et al. LREC 2014
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: ABSA
+  modality: text
+  language: English, German
+  domain_subtopic: forum posts on connecting and using cellphones in cars; phrase-level polarity with objects and features
+  size: 1,000 forum posts per language (2,000 total), each annotated by at least four annotators
+  license: unknown (described as publicly available)
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://aclanthology.org/L14-1240/
+  year: 2014
+  cited_in: []
+  bibkey: null
+  source_quote: publicly available multilingual evaluation corpus for phrase-level Sentiment Analysis
+  verified: true
+  notes: 'Haenig, Niekler & Wuensch, LREC 2014 pp. 2219-2224. Annotation: polarity at phrase level plus objects (e.g. ''my car'') and features (e.g. ''address book''); original annotations of all annotators retained. Source texts: English and German Internet forums. No download URL on the Anthology page; check the paper PDF for the hosting address. Rare example of a German automotive opinion corpus and of a car-forum corpus with gold labels. The paper calls the corpus publicly available but gives no download address (PDF checked 2026-10-25).'
+- name: CCF BDCI 2018 Automotive User Opinion Topic and Sentiment Recognition
+  aliases:
+  - 汽车行业用户观点主题及情感识别
+  - CCF-BDCI 2018 automotive ASC
+  - BDCI_Car_2018
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: ABSA
+  modality: text
+  language: Chinese
+  domain_subtopic: Chinese car-forum user comments; 10 aspect topics (power, price, interior, configuration, safety, exterior, handling, fuel consumption, space, comfort) x 3 polarities
+  size: training set + test set (counts not stated on fetched pages; community write-ups report ~9.9k training sentences)
+  license: unknown (DataFountain competition agreement; download after registration)
+  access: request
+  dataset_url: https://www.datafountain.cn/competitions/310
+  paper_url: null
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: 汽车行业用户观点主题及情感识别
+  verified: true
+  notes: 'Organisers: 中国计算机学会 & 艾普深瞳 (CCF & Apex Deep Vision), Aug-Nov 2018, tagged ''Text Categorization'', ''Emotion analysis'', ''Automobile''. Columns per community solutions: content_id, content, subject, sentiment_value (-1/0/1), sentiment_word. Winning solutions on GitHub: yilifzf/BDCI_Car_2018 (first prize; two-stage topic then polarity) and nlpjoe/CCF-BDCI-Automotive-Field-ASC-2018 (6th; README states raw data is downloaded from the DataFountain competition page and shares a preprocessed copy on Baidu Cloud). The most widely used Chinese automotive ABSA benchmark; distinct from AI Challenger 2018 (restaurant reviews) and DMSC (Douban movie comments).'
+- name: IndoNLU CASA (Indonesian car review ABSA)
+  aliases:
+  - CASA
+  - indonlu casa
+  - Ilmania et al. 2018 car reviews
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: ABSA
+  modality: text
+  language: Indonesian
+  domain_subtopic: Indonesian car reviews from online automobile platforms; six aspects (fuel, machine, others, part, price, service) x pos/neg/neu
+  size: 1,080 reviews (train 810 / valid 90 / test 180)
+  license: MIT (IndoNLU benchmark datasets)
+  access: public
+  dataset_url: https://huggingface.co/datasets/indonlp/indonlu
+  paper_url: null
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: An aspect-based sentiment analysis dataset consisting of around a thousand car reviews
+  verified: true
+  notes: 'Original paper: Ilmania, Abdurrahman, Cahyawijaya & Purwarianti, ''Aspect Detection and Sentiment Classification Using Deep Neural Network for Indonesian Aspect-based Sentiment Analysis'', IALP 2018. Packaged in IndoNLU (Wilie et al., AACL 2020) as config ''casa''; card states ''The licensing status of the IndoNLU benchmark datasets is under MIT License.'' Small but cleanly split multi-aspect benchmark; only non-English/Chinese car ABSA set found.'
+- name: ALSA (Aspect-Level Sentiment Analysis in Automotive Domain)
+  aliases:
+  - ALSAdata
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: ABSA
+  modality: text
+  language: English, Korean
+  domain_subtopic: user comments on automobiles, aspect-level sentiment
+  size: 58,000+ comment-aspect pairs
+  license: research use only; redistribution prohibited
+  access: request
+  dataset_url: https://github.com/dmhyun/ALSAdata
+  paper_url: https://aclanthology.org/2020.coling-main.83/
+  year: 2020
+  cited_in: []
+  bibkey: null
+  source_quote: We release large-scale datasets of users’ comments in two languages, English and Korean, for aspect-level sentiment analysis in automotive domain.
+  verified: true
+  notes: COLING 2020 short paper. The data is provided for research purposes only; the README asks users to contact the authors and agree to the terms of use. README fetched 2026-10-25.
+- name: Chinese car review sentiment dataset (Liu et al. 2022, ATWWM-BERT)
+  aliases:
+  - Autohome/Dongchedi car review sentiment set
+  - arXiv:2206.02389 dataset
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: sentiment
+  modality: text
+  language: Chinese
+  domain_subtopic: Chinese car review texts from Autohome and Dongchedi, 3-class polarity
+  size: 9,947 reviews (3,670 positive / 3,661 neutral / 2,616 negative) per paper body; abstract page does not state size
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2206.02389
+  year: 2022
+  cited_in: []
+  bibkey: null
+  source_quote: In the field of car evaluation, more and more netizens choose to express their opinions on the Internet platform
+  verified: true
+  notes: Liu, Li, Shao, Li & Liang, 'A sentiment analysis model for car review texts based on adversarial training and whole word mask BERT'. Motivates domain adaptation because of 'the lexical professionalism and large text noise of review texts in the automotive field'. No release URL on the arXiv page; the 9,947 count coincides with the CCF BDCI 2018 training-set size reported by the community, so it may be a relabelled version of that data. Treat as unreleased unless the authors are contacted.
+- name: InfoBarometer (German automotive industry explainable sentiment)
+  aliases:
+  - Zielinski et al. WASSA 2023 dataset
+  - XAI dataset for the sentimental mood of the German automotive industry
+  section: D
+  subsection: Sentiment and aspect-based gold standards
+  task_type: sentiment
+  modality: text
+  language: German
+  domain_subtopic: German online news about the automotive sector annotated with sentiment, sentiment target (e.g. electromobility) and textual rationales
+  size: 1,039 news articles (per paper; not stated on the Anthology abstract page)
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://aclanthology.org/2023.wassa-1.13/
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: A Dataset for Explainable Sentiment Analysis in the German Automotive Industry
+  verified: true
+  notes: 'Zielinski, Spolwind, Kroll & Grimm (Fraunhofer ISI), WASSA 2023 pp. 138-148. Annotations: overall sentiment (pos/neg/neu), target (innovation topics such as electromobility), rationales. BERT F1 73.6. Authors ''intend to make our dataset public'' but no URL found on the Anthology page or via search (Oct 2026). News, not consumer reviews: the only German automotive sentiment set found; no German consumer car-review corpus (autobild/mobile.de) was located.'
+- name: SenTube (SenTube-A automobiles subset)
+  aliases:
+  - SenTube
+  - SenTube-A
+  - SenTube-T
+  section: D
+  subsection: Social and video media
+  task_type: sentiment
+  modality: text
+  language: English, Italian
+  domain_subtopic: YouTube comments under car (and tablet) product videos annotated for polarity and informativeness/relatedness
+  size: 'SenTube-A automobile subset: 3,381 train / 225 dev / 903 test comments (per Barnes et al. 2017); full corpus counts not stated on the Anthology page'
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://aclanthology.org/L14-1188/
+  year: 2014
+  cited_in: []
+  bibkey: null
+  source_quote: a dataset of user-generated comments on YouTube videos annotated for information content and sentiment polarity
+  verified: true
+  notes: 'Uryupina, Plank, Severyn, Rotondi & Moschitti, LREC 2014 pp. 4244-4249. English and Italian; Spanish and Dutch planned. Annotation: polarity, product vs video relatedness, informativeness, spam. The automobile subset (SenTube-A) is a standard benchmark in Barnes, Klinger & Schulte im Walde 2017 (arXiv:1709.04219). Original hosting at University of Trento (iKernels) not verified in this session.'
+- name: MuSe-CaR (Multimodal Sentiment Analysis in Car Reviews)
+  aliases:
+  - MuSe-CaR
+  - MuSe 2020/2021 challenge dataset
+  section: D
+  subsection: Social and video media
+  task_type: sentiment
+  modality: multimodal
+  language: English
+  domain_subtopic: YouTube car review videos (video, audio, transcript) with continuous arousal/valence/trustworthiness and topic/entity annotations
+  size: over 40 hours of user-generated video material; more than 350 reviews; 70 host speakers and 20 overdubbed narrators
+  license: EULA, academic use only
+  access: request
+  dataset_url: https://www.muse-challenge.org
+  paper_url: https://arxiv.org/abs/2101.06053
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: over 40 hours of user-generated video material
+  verified: true
+  notes: 'Stappen, Baird, Schumann & Schuller, ''The Multimodal Sentiment Analysis in Car Reviews (MuSe-CaR) Dataset: Collection, Insights and Improvements'' (IEEE TAC 2021). Annotation tiers: arousal, valence, trustworthiness, host/narrator turns, banners, speaker topics, physical car entities. Test bed of the MuSe 2020 and 2021 challenges (emotion, emotion-target engagement, trustworthiness). Transcripts make it usable as a text corpus of spoken car reviews.'
+- name: YouTube AV 50K
+  aliases:
+  - 'YouTube AV 50K: An Annotated Corpus for Comments in Autonomous Vehicles'
+  section: D
+  subsection: Social and video media
+  task_type: sentiment
+  modality: text
+  language: English
+  domain_subtopic: YouTube comments under autonomous-vehicle videos, for opinion mining about self-driving cars
+  size: more than 50,000 YouTube comments plus metadata
+  license: unknown (described as freely available)
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/1807.11227
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: We introduce the YouTube AV 50K dataset, a freely-available collections of more than 50,000 YouTube comments
+  verified: true
+  notes: Li, Lin, Choi, Fu, Gong & Wang (Purdue), iSAI-NLP 2018. Built with the YouTube Data API; includes a case study on the first self-driving-car fatality. Paper says data pointers are hosted by the Goodata Foundation; no stable download URL found in this session. Annotation scheme not described on the abstract page.
+- name: Automotive brand's products - Twitter dataset (Mendeley Data)
+  aliases:
+  - hcc2h426h3
+  - automotive brand tweets
+  section: D
+  subsection: Social and video media
+  task_type: sentiment
+  modality: text
+  language: unknown
+  domain_subtopic: tweets about one automotive brand's vehicle models collected by brand/model keywords
+  size: not stated on page
+  license: CC BY 4.0
+  access: public
+  dataset_url: https://data.mendeley.com/datasets/hcc2h426h3/1
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: The data used in this study consists of Twitter posts (tweets) related to an automotive brand's products. The dataset was collected through web scraping using the Twitter API, based on specific keywords such as the brand name and the models of the vehicles being analyzed.
+  verified: true
+  notes: 'Contributor: Muhammad Prudentio Jawairul Falah. Each record: tweet text, posting date, likes, retweets, limited user location. Brand not named on the page; no sentiment labels described. Fetched via curl (page JSON); year inferred from publication metadata not captured, so treat as approximate. Only openly licensed car-brand Twitter set found; the 2026 Sci. Rep. BMW/Mercedes/Porsche/Tesla/Toyota tweet study (15,765 tweets) could not be fetched (paywall redirect).'
+- name: NHTSA ODI Complaints (flat file)
+  aliases:
+  - NHTSA vehicle owner complaints
+  - ODI complaints database
+  - CMPL flat file
+  section: E
+  subsection: NHTSA defects, recalls and investigations (US)
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: NHTSA complaints
+  size: all safety-related defect complaints received by NHTSA since January 1, 1995 (count not stated in dictionary; 2.2M total complaints per MORVS HF card; 51 fields)
+  license: unknown (US federal government work)
+  access: public
+  dataset_url: https://static.nhtsa.gov/odi/ffdd/cmpl/CMPL.txt
+  paper_url: null
+  year: 1995
+  cited_in: []
+  bibkey: null
+  source_quote: The COMPLAINTS file contains all safety-related defect complaints received by NHTSA since January 1, 1995.
+  verified: true
+  notes: 'Free-text field is CDESCR, CHAR(2048), ''DESCRIPTION OF THE COMPLAINT''. Other key fields: MAKETXT, MODELTXT, YEARTXT, COMPDESC (component), CRASH, FIRE, INJURED, DEATHS. Flat files at https://static.nhtsa.gov/odi/ffdd/cmpl/ (FLAT_CMPL.zip, full; plus per-year files). Also served via NHTSA Complaints API. Widely used for complaint classification research (component prediction from CDESCR).'
+- name: NHTSA Recalls (flat file)
+  aliases:
+  - NHTSA safety recall campaigns
+  - RCL flat file
+  - FLAT_RCL
+  section: E
+  subsection: NHTSA defects, recalls and investigations (US)
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: NHTSA recall campaign text
+  size: all NHTSA safety-related defect and compliance campaigns since 1967 (29 fields; count not stated in dictionary)
+  license: unknown (US federal government work)
+  access: public
+  dataset_url: https://static.nhtsa.gov/odi/ffdd/rcl/RCL.txt
+  paper_url: null
+  year: 1967
+  cited_in: []
+  bibkey: null
+  source_quote: The RECALL file contains all NHTSA safety-related defect and compliance campaigns since 1967.
+  verified: true
+  notes: 'Free-text fields: DESC_DEFECT (''Defect Summary''), CONEQUENCE_DEFECT (''Consequence Summary''), CORRECTIVE_ACTION (''Corrective Summary''), NOTES (''Recall Notes''). Component label COMPNAME gives a natural taxonomy target. Flat file at https://static.nhtsa.gov/odi/ffdd/rcl/FLAT_RCL.zip; also NHTSA Recalls API. Used e.g. in Ihshaish et al. 2026 (arXiv:2609.16267) for 16-class component classification of ~16.6k deduplicated campaigns; no split released there. Kaggle mirror: michaelbryantds/automobile-recalls-dataset.'
+- name: NHTSA Defect Investigations (flat file)
+  aliases:
+  - ODI investigations
+  - INV flat file
+  - FLAT_INV
+  section: E
+  subsection: NHTSA defects, recalls and investigations (US)
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: NHTSA defect investigation summaries
+  size: all NHTSA safety-related defect investigations opened since 1972 (11 fields; count not stated)
+  license: unknown (US federal government work)
+  access: public
+  dataset_url: https://static.nhtsa.gov/odi/ffdd/inv/INV.txt
+  paper_url: null
+  year: 1972
+  cited_in: []
+  bibkey: null
+  source_quote: The INVESTIGATION file contains all NHTSA safety-related defect investigations opened since 1972.
+  verified: true
+  notes: 'Free-text fields: SUBJECT CHAR(200) ''Summary Description'' and SUMMARY CHAR(6000) ''Summary Detail''. Fields: NHTSA ACTION NUMBER, MAKE, MODEL, YEAR, COMPNAME, MFR_NAME, ODATE, CDATE, CAMPNO, SUBJECT, SUMMARY. Small corpus (thousands of investigations) but long, well-written engineering narratives; links to recalls via CAMPNO.'
+- name: NHTSA Manufacturer Communications / Technical Service Bulletins (flat file)
+  aliases:
+  - NHTSA TSBs
+  - TSBS flat file
+  - manufacturer communications
+  section: E
+  subsection: NHTSA defects, recalls and investigations (US)
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: technical service bulletins and manufacturer communications
+  size: all manufacturer communications received by NHTSA since January 1, 1995, in 5-year chunks (14 fields; count not stated)
+  license: unknown (US federal government work)
+  access: public
+  dataset_url: https://static.nhtsa.gov/odi/ffdd/tsbs/TSBS.txt
+  paper_url: null
+  year: 1995
+  cited_in: []
+  bibkey: null
+  source_quote: The Manufacturer Communications files contains manufacturer communications received by NHTSA since January 1, 1995.
+  verified: true
+  notes: 'Free-text field ''Summary'': ''Description of the communication''s most pertinent information''. Also Communication Type, Make, Model, Model Year, NHTSA Components, Mfr Component System / Subsystem (manufacturer taxonomy labels). Bridges bucket E and F (repair/technical docs). Files split into 5-year chunks by date received.'
+- name: NHTSA Customer Complaints (Kaggle)
+  aliases:
+  - alshival/nhtsa-complaints
+  - NHTSA daily data dump Kaggle
+  - NHTSA Customer Complaints (Kaggle, alshival)
+  section: E
+  subsection: NHTSA defects, recalls and investigations (US)
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: NHTSA complaints, safety ratings, recalls and investigations, 2016 onwards, refreshed daily
+  size: not stated on page (version 2509 at fetch time, i.e. daily versions); complaints from 2016 onwards
+  license: 'CC0: Public Domain'
+  access: public
+  dataset_url: https://www.kaggle.com/datasets/alshival/nhtsa-complaints
+  paper_url: null
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: A daily data dump of NHTSA data that includes complaints filed by customers, vehicle safety ratings, recalls, and investigations. The data spans all makes and models from the year 2016 onwards.
+  verified: true
+  notes: 'Most convenient Kaggle entry point to the ODI complaint narratives (pulled from the NHTSA API; ''it may take up to two weeks for a new complaint to make it into this dataset''). Licence ''CC0: Public Domain'' read from the Kaggle page''s embedded JSON-LD. Subtitle says 2019-present while body says 2016 onwards; check files. For the full 1995-present history use the NHTSA flat file (FLAT_CMPL). Year = Kaggle JSON-LD dateModified (not first publication).'
+- name: NHTSA ODI complaints - high-signal subset (Hugging Face)
+  aliases:
+  - emperor-mew/nhtsa-complaints
+  - MORVS NHTSA complaints
+  - NHTSA ODI complaints - high-signal subset (Hugging Face, emperor-mew / MORVS)
+  section: E
+  subsection: NHTSA defects, recalls and investigations (US)
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: ODI consumer complaints since 1995 filtered to crash / fire / injury / death cases, with consumer narratives
+  size: 213,093 records out of 2.2M total complaints
+  license: 'federal-works-and-cc0-card-metadata (card: ''CC0 1.0 applies only to MORVS-authored metadata in this card''; underlying data US federal work)'
+  access: public
+  dataset_url: https://huggingface.co/datasets/emperor-mew/nhtsa-complaints
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: Includes consumer narratives describing the defect.
+  verified: true
+  notes: 'Card: ''Every NHTSA Office of Defects Investigation consumer complaint since 1995 where someone was killed, injured, the vehicle caught fire, or was involved in a crash - 213,093 records out of 2.2M total complaints, filtered to the highest-signal subset.'' Data served via a live API (api.morvs.ai); the HF repo itself is ''currently empty'' (6.63 kB card). Primary source cited as https://www-odi.nhtsa.dot.gov/downloads/. Useful as a documented definition of a severity-filtered split; verify availability before linking. The 2.2M figure is the best current total for the full ODI complaint file.'
+- name: DVSA Vehicle Recalls File (UK)
+  aliases:
+  - GOV.UK check vehicle recalls
+  - RecallsFile.csv
+  - DVSA safety recalls
+  section: E
+  subsection: Recalls in other jurisdictions
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: UK vehicle and equipment safety recalls
+  size: all UK recalls since 1992, CSV ~5MB
+  license: Open Government Licence v3.0
+  access: public
+  dataset_url: https://www.check-vehicle-recalls.service.gov.uk/
+  paper_url: null
+  year: 1992
+  cited_in: []
+  bibkey: null
+  source_quote: Download vehicle and equipment recall information
+  verified: true
+  notes: Page offers a CSV of all recalls since 1992 (about 5MB) plus a data user guide (DOC). Each recall has free-text 'Concern' and 'Remedy' fields (per user guide). Hosted on GOV.UK as /documents/RecallsFile.csv. No complaint narratives in the UK equivalent of ODI; DVSA does not publish consumer complaint text.
+- name: Transport Canada Vehicle Recalls Database
+  aliases:
+  - Motor Vehicle Safety Recalls Database
+  - VRDB
+  - Banque de donnees des rappels
+  section: E
+  subsection: Recalls in other jurisdictions
+  task_type: text classification
+  modality: tabular+text
+  language: English, French
+  domain_subtopic: Canadian safety recalls for vehicles, tires and child restraints (bilingual recall notice text)
+  size: full database refreshed monthly (CSV/XML); count not stated on page
+  license: Open Government Licence - Canada
+  access: public
+  dataset_url: https://open.canada.ca/data/en/dataset/1ec92326-47ef-4110-b7ca-959fab03f96d
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: record recalls and monitor recall completion rates pertaining to vehicles, tires, and child restraints.
+  verified: true
+  notes: 'Publisher Transport Canada; monthly CSV + XML dumps with TXT data dictionary (EN/FR), plus JSON/XML Vehicle Recalls API (data.tc.gc.ca/v1.3/api/eng/vehicle-recall-database/recall; API key per docs) and DOCX API guides. The API ''excludes all the inconsequential or non-safety related recall data''. Record last modified 2024-11-20. Free-text recall details (defect description, safety risk, corrective action) are in the records per the data dictionary (not shown on the catalogue page). Bilingual EN/FR text makes it a parallel-ish corpus. R wrapper: caRecall.'
+- name: NMVCCS - National Motor Vehicle Crash Causation Survey
+  aliases:
+  - NMVCCS XML Case Viewer
+  - NMVCCS public use file
+  section: E
+  subsection: Crash and automated-driving incident narratives
+  task_type: text classification
+  modality: multimodal
+  language: English
+  domain_subtopic: on-scene crash investigation cases with narratives, photos, diagrams and coded pre-crash factors (2005-2007)
+  size: 6,949 investigated crashes Jan 2005 - Dec 2007 (5,470 nationally representative + 1,479 clinical cases) per NHTSA report DOT HS 811 059; data.gov page gives no count
+  license: 'unknown (data.gov rights: public; access level public)'
+  access: public
+  dataset_url: https://catalog.data.gov/dataset/national-motor-vehicle-crash-causation-survey-nmvccs-nmvccs-xml-case-viewer
+  paper_url: null
+  year: 2008
+  cited_in: []
+  bibkey: null
+  source_quote: The National Motor Vehicle Crash Causation Survey (NMVVCS) was a nationwide survey
+  verified: true
+  notes: 'Publisher NHTSA (DOT). Access URL https://data.transportation.gov/d/efry-jap6; case viewer https://crashviewer.nhtsa.dot.gov/LegacyNMVCCS/Search (per-case XML/HTML with investigator narrative). NHTSA report 811 059 states the database includes narratives, photographs, schematic diagrams, vehicle information and EDR data (not re-fetched here). Documentation: SAS Analytical User''s Manual DOT HS 811 053, variable databook 811 052, coding manual 811 051. Narratives must be scraped per case; no bulk narrative file. Closed survey (no new data since 2007). FARS and CRSS were checked but excluded: nhtsa.gov pages returned 403 and both systems publish coded fields only, no free text.'
+- name: NHTSA Standing General Order 2021-01 Crash Reports (ADS and Level 2 ADAS)
+  aliases:
+  - SGO 2021-01 incident reports
+  - NHTSA AV crash reporting data
+  - SGO crash CSVs
+  section: E
+  subsection: Crash and automated-driving incident narratives
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: manufacturer-reported crashes involving automated driving systems (ADS) and Level 2 ADAS, with a free-text Narrative field (Field 115) subject to CBI/PII redaction
+  size: monthly CSV releases since June 2021, separate ADS and ADAS files; data dictionary 33 pages; latest change-log entry 10/15/2026 (reports received through September 15, 2026); row counts not stated in dictionary
+  license: unknown (US federal government work)
+  access: public
+  dataset_url: https://static.nhtsa.gov/odi/ffdd/sgo-2021-01/SGO-2021-01_Data_Element_Definitions.pdf
+  paper_url: null
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: Summary incident report data are not normalized.
+  verified: true
+  notes: 'Verified by downloading the data element definitions PDF and extracting its text locally (no PDF renderer available): it states that you can download SGO 2021-01 incident reports in CSV format from the NHTSA Standing General Order on Crash Reporting page, covers Automated Driving Systems (ADS) and Level 2 Advanced Driver Assistance Systems (ADAS), and that confidential business information (CBI) and PII are redacted. Field 115 is the Narrative; redactions appear as ''[REDACTED, MAY CONTAIN CONFIDENTIAL BUSINESS INFORMATION]''. Many coded fields say ''Other, see Narrative''. Landing page nhtsa.gov/laws-regulations/standing-general-order-crash-reporting (403 to the fetcher). Used in arXiv:2512.22589 for L2/L4 crash pattern mining. Caveat from NHTSA: incident report data may be incomplete or unverified; one crash can have several reports.'
+- name: California DMV Autonomous Vehicle Disengagement Reports
+  aliases:
+  - CA DMV AV disengagement reports CSV
+  - OL 311R disengagement reports
+  section: E
+  subsection: Crash and automated-driving incident narratives
+  task_type: text classification
+  modality: tabular+text
+  language: English
+  domain_subtopic: autonomous-vehicle test disengagements with free-text 'description of facts causing disengagement'
+  size: annual CSVs 2020-2024 (standard, first-time filers, driverless); 2024 file ~634k characters of text, hundreds of rows per large filer; older years by request (AVarchive@dmv.ca.gov)
+  license: unknown (California public records)
+  access: public
+  dataset_url: https://www.dmv.ca.gov/portal/file/2024-autonomous-vehicle-disengagement-reports-csv/
+  paper_url: null
+  year: 2015
+  cited_in: []
+  bibkey: null
+  source_quote: DESCRIPTION OF FACTS CAUSING DISENGAGEMENT
+  verified: true
+  notes: 'Verified by fetching the 2024 CSV: header ''Manufacturer, Permit Number, DATE, VIN NUMBER, VEHICLE IS CAPABLE OF OPERATING WITHOUT A DRIVER (Yes or No), DRIVER PRESENT (Yes or No), DISENGAGEMENT INITIATED BY (AV System, Test Driver, Remote Operator, or Passenger), DISENGAGEMENT LOCATION (...), DESCRIPTION OF FACTS CAUSING DISENGAGEMENT''. Example narratives: ''Safety Driver disengaged autonomous mode to ensure stopping at traffic light or stop line.''; ''The ADS initiated a disengagement due to a diagnosed hardware issue.'' Index page (dmv.ca.gov/portal/vehicle-industry-services/autonomous-vehicles/disengagement-reports/) returned 404 to the fetcher but is linked from DMV news releases; required since 2014 under 13 CCR 227.50, proposed 2026 regulations replace it with SGO-aligned crash reporting. Companion OL 316 collision reports are per-incident PDFs (see LEADS).'
+- name: Iowa DOT crash report narratives (as used in Bhagat et al. 2025)
+  aliases:
+  - Iowa crash narratives 2019-2020
+  - Accuracy is Not Agreement dataset
+  section: E
+  subsection: Crash and automated-driving incident narratives
+  task_type: text classification
+  modality: text
+  language: English
+  domain_subtopic: police crash report narratives labelled intersection-related vs not (from coded fields)
+  size: 173,512 crash records and 94,367 crash narrative records (2019-2020)
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2504.13068
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: This study utilizes the Iowa Department of Transportation crash report narratives for 2019-2020.
+  verified: true
+  notes: 'Bhagat, Shihab & Sharma (Iowa State), ''Accuracy is Not Agreement: Expert-Aligned Evaluation of Crash Narrative Classification Models'', IEEE ITSC 2025. Compares BERT variants, USE, zero-shot and four LLMs against expert labels (Cohen''s kappa, SHAP). No public release of narratives or code stated; Iowa DOT crash narratives are obtainable through the state''s data request process. Representative of the US state-DOT crash-narrative literature (no public labelled benchmark exists).'
+- name: DelucionQA
+  aliases: []
+  section: F
+  subsection: Manuals, FAQs & question answering
+  task_type: QA / hallucination detection (RAG over car manual)
+  modality: text
+  language: English
+  domain_subtopic: owner's-manual QA (Jeep 2023 Gladiator)
+  size: 913 unique questions; 2,038 question-context-answer triples (513/100/300 train/dev/test questions + 240 excluded)
+  license: CC BY 4.0 (data); AGPL-3.0 (code)
+  access: public
+  dataset_url: https://github.com/boschresearch/DelucionQA
+  paper_url: https://aclanthology.org/2023.findings-emnlp.59.pdf
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: The dataset DelucionQA is derived from Jeep 2023 Gladiator car manual.
+  verified: true
+  notes: EMNLP 2023 Findings (Bosch Research). Binary hallucinated/not labels from sentence-level supported/conflicted/neither annotations. Also redistributed as the 'delucionqa' subset of RAGBench (huggingface.co/datasets/rungalileo/ragbench, CC BY 4.0, fetched). Closest public 'car manual QA' set found.
+- name: FETA car manuals benchmark
+  aliases:
+  - FETA_IKEA_CAR_MANUALS
+  section: F
+  subsection: Manuals, FAQs & question answering
+  task_type: text-to-image / image-to-text retrieval over manuals
+  modality: multimodal
+  language: English
+  domain_subtopic: public car manuals and sales catalogue brochures
+  size: not stated (archive ~7 GB incl. IKEA part)
+  license: apache-2.0 (HF card tag); not stated in README_data
+  access: public
+  dataset_url: https://huggingface.co/datasets/alfassy/FETA_IKEA_CAR_MANUALS
+  paper_url: https://arxiv.org/abs/2209.03648
+  year: 2022
+  cited_in: []
+  bibkey: null
+  source_quote: Our FETA benchmark focuses on text-to-image and image-to-text retrieval in public car manuals and sales catalogue brochures.
+  verified: true
+  notes: NeurIPS 2022 (per HF card). Data hosted as feta_data.tar.gz on HF; not loadable via datasets library. Human-curated annotations released; automatic annotation code 'upon acceptance'.
+- name: MaQA (Manual Question Answering)
+  aliases: []
+  section: F
+  subsection: Manuals, FAQs & question answering
+  task_type: QA / FAQ classification from car manual
+  modality: text
+  language: Korean, English
+  domain_subtopic: car-specific questions mapped to 1,526 FAQ categories derived from a car manual
+  size: 45,641 questions in each of Korean and English; 1,526 FAQ categories
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://doi.org/10.3390/electronics13244972
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: To tackle this task, we constructed the MaQA dataset in both Korean and English, each consisting of 45,641 questions, and propose an end-to-end neural FAQ model.
+  verified: true
+  notes: 'LEAD (demoted): paper_url (MDPI) returned HTTP 403 in this session; abstract confirmed verbatim via Crossref API only, which does not meet the fetch rule. Electronics 13(24):4972 (MDPI). Abstract retrieved verbatim via the Crossref API for this DOI because mdpi.com returned HTTP 403 in this session; data-availability statement not seen, so release status unknown. Largest car-manual QA set found. Verified through the Crossref metadata API (publisher-deposited abstract); the MDPI page blocked the fetcher.'
+- name: Chinese automobile fault text NER datasets (Entropy 2025)
+  aliases: []
+  section: F
+  subsection: Faults, repair and parts
+  task_type: NER
+  modality: text
+  language: Chinese
+  domain_subtopic: automobile fault/repair texts (fault location, phenomenon, reason, repair strategy)
+  size: 'three datasets: D1 ~4.5k, D2 ~5.5k, D3 ~4.0k sentences (train/test/dev splits)'
+  license: unknown
+  access: request
+  dataset_url: null
+  paper_url: https://pmc.ncbi.nlm.nih.gov/articles/PMC11854445/
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: Our model is evaluated on the automotive fault datasets, Weibo and Resume datasets, and achieves state-of-the-art results.
+  verified: true
+  notes: '''Chinese Named Entity Recognition for Automobile Fault Texts Based on External Context Retrieving and Adversarial Training'', Entropy 27(2):133. Entity types FL/FP/FR/RS. Data Availability Statement: ''The data presented in this study are available upon request from the corresponding author.'' / ''The data are not publicly available due to copyright.'' Source platform cited: autosaas.cn.'
+- name: Automotive_Industry_Fault_Data_Set
+  aliases:
+  - Automotive_Industry_Fault_Data_Set (zhengr)
+  section: F
+  subsection: Faults, repair and parts
+  task_type: relation / triple extraction (instruction format)
+  modality: text
+  language: Chinese
+  domain_subtopic: Chinese vehicle fault reports -> (component, relation, fault) triples; relations 性能故障/部件故障/组成/检测工具
+  size: 1,441 instruction records (spo_0.json, 1.33 MB)
+  license: apache-2.0
+  access: public
+  dataset_url: https://huggingface.co/datasets/zhengr/Automotive_Industry_Fault_Data_Set
+  paper_url: null
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: 你现在是一个信息抽取模型，请你帮我抽取出关系内容为"性能故障", "部件故障", "组成"和 "检测工具"的相关三元组，三元组内部用"_"连接，三元组之间用\n分割。文本：
+  verified: true
+  notes: Dataset card is empty; quote is the instruction field of every record (data file downloaded and line-counted this session). Inputs are repair-case narratives (e.g. '故障现象：发动机水温高...'), outputs 'part_relation_fault' triples. Origin not stated (format resembles a Chinese automotive fault-mode relation-extraction shared task; unconfirmed). Only openly downloadable Chinese fault-text set found.
+- name: Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University)
+  aliases: []
+  section: F
+  subsection: Faults, repair and parts
+  task_type: NER + KG triples over repair/maintenance records
+  modality: tabular+text
+  language: Chinese
+  domain_subtopic: real-world vehicle fleet maintenance records from Chinese repair facilities, 2020-2023, with NER annotations and fault-code causal triples
+  size: 'not stated (files: fault_events.csv 33 fields, vehicle_fleet.csv 20 fields, ner_annotations.csv with 6 entity types, knowledge_graph_triples.csv)'
+  license: CC BY 4.0
+  access: public
+  dataset_url: https://data.mendeley.com/datasets/r98g7g6k5t/1
+  paper_url: null
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: This is a dataset of real-world vehicle fleet maintenance records from some repair facilities in China
+  verified: true
+  notes: Mendeley Data v1, published 2026-06-03, DOI 10.17632/r98g7g6k5t.1. Entity type names and record counts not shown on landing page. The only openly licensed Chinese repair-record NER resource found; F/K overlap (triples).
+- name: Chinese vehicle fault repair case NER (Electronics 2025)
+  aliases: []
+  section: F
+  subsection: Faults, repair and parts
+  task_type: NER (incl. discontinuous/nested entities)
+  modality: text
+  language: Chinese
+  domain_subtopic: historical vehicle repair case texts -> automotive fault knowledge entities
+  size: not stated in abstract
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://doi.org/10.3390/electronics14071361
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: This paper addresses the inefficiency of manually screening fault knowledge in Chinese vehicle repair cases and proposes a NER method based on a combined model aimed at efficiently extracting automotive fault knowledge entities from unstructured vehicle repair case texts.
+  verified: true
+  notes: 'LEAD (demoted): paper_url (MDPI) returned HTTP 403 in this session; abstract confirmed verbatim via Crossref API only, which does not meet the fetch rule. ''A Named Entity Recognition Method for Chinese Vehicle Fault Repair Cases Based on a Combined Model'', Electronics 14(7):1361. Abstract via Crossref API (mdpi.com 403). Data release not confirmed; treat as paper-only unless DAS says otherwise. Verified through the Crossref metadata API (publisher-deposited abstract); the MDPI page blocked the fetcher.'
+- name: Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021)
+  aliases: []
+  section: F
+  subsection: Faults, repair and parts
+  task_type: text classification / IE on service-call failure reports
+  modality: text
+  language: English
+  domain_subtopic: repair-order / service-department free-text failure reports
+  size: not stated
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2111.14977
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: free-text failure reports (generated during customers' calls to the service department)
+  verified: true
+  notes: '''A Natural Language Processing and Deep Learning based Model for Automated Vehicle Diagnostics using Free-Text Customer Service Reports''. Proprietary data; no release stated. Recorded as evidence that repair-order NER corpora are not public.'
+- name: Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model
+  aliases: []
+  section: F
+  subsection: Faults, repair and parts
+  authors: Hu and Ma
+  task_type: NER
+  modality: text
+  language: Chinese
+  domain_subtopic: automotive accessories and parts (accessory name, price, warranty period)
+  size: unknown
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://doi.org/10.1109/NNICE61279.2024.10499162
+  year: 2024
+  cited_in:
+  - AutoSpecNER
+  - Auto-AdvER
+  - Auto-Features
+  bibkey: hu2024named
+  source_quote: Closest to our work, Hu et al. (2024) address NER for automotive accessories and parts in Chinese (e.g., brake discs) with entities such as accessory name, price, and warranty period
+  verified: true
+  notes: 2024 4th International Conference on Neural Networks, Information and Communication Engineering (NNICE), pp. 604-612. DOI metadata verified through the Crossref API on 2026-10-25 (title, authors, venue and pages match the author's .bib entry); the IEEE Xplore landing page itself could not be fetched. The description is quoted from the related-work section of Auto-Features; no dataset release is known. Cited in AutoSpecNER and Auto-Features as hu2024named and in Auto-AdvER under the BibTeX key 10499162.
+- name: Automotive ISO 26262 Safety Requirements Dataset
+  aliases:
+  - Automotive ISO 26262 Safety Requirements Dataset (Muhammmadd)
+  section: F
+  subsection: Requirements, standards and patents
+  task_type: text classification (ASIL rating) / generation
+  modality: text
+  language: English
+  domain_subtopic: synthetic automotive system requirements mapped to ISO 26262 ASIL levels
+  size: ~1,000 samples
+  license: MIT
+  access: public
+  dataset_url: https://huggingface.co/datasets/Muhammmadd/iso26262-automotive-safety-requirements
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: This is a highly structured synthetic dataset designed as a **gold-standard benchmark and evaluation set** for LLMs operating in the automotive technical safety domain.
+  verified: true
+  notes: Fully synthetic (generated by a 'deterministic generation engine'). Requirements-engineering NLP; no real OEM text.
+- name: Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable
+  aliases: []
+  section: F
+  subsection: Requirements, standards and patents
+  task_type: patent corpus (classification, LM, summarisation); automotive via CPC filter
+  modality: text
+  language: English
+  domain_subtopic: USPTO utility patent applications 2004-2018; automotive subset obtainable by cpc_labels starting with B60
+  size: full corpus 2004-2018 (abstract reports >4.5M documents); B60 subset size not stated
+  license: cc-by-sa-4.0
+  access: public
+  dataset_url: https://huggingface.co/datasets/HUPD/hupd
+  paper_url: https://arxiv.org/abs/2207.04043
+  year: 2022
+  cited_in: []
+  bibkey: null
+  source_quote: The Harvard USPTO Dataset (HUPD) is a large-scale, well-structured, and multi-purpose corpus of English-language utility patent applications filed to the United States Patent and Trademark Office (USPTO) between January 2004 and December 2018.
+  verified: true
+  notes: No ready-made automotive patent corpus found ('AutoPatent' is an LLM patent-drafting framework, not automotive). HUPD exposes main_cpc_label / cpc_labels / ipcr_labels fields, so a B60 (vehicles) slice can be derived. Paper URL from search result, not fetched.
+- name: KVRET (Stanford In-Car Assistant dataset)
+  aliases:
+  - KVRET
+  - Stanford Multi-Domain Dialogue (SMD)
+  - In-Car Assistant dataset
+  - ConvLab/kvret
+  section: G
+  subsection: Task-oriented dialogue and tool use
+  task_type: dialogue (task-oriented)
+  modality: text
+  language: English
+  domain_subtopic: 'in-car assistant dialogue: calendar scheduling, weather, point-of-interest navigation (KB-grounded)'
+  size: 3,031 multi-turn dialogues (train 2,424 / validation 302 / test 304)
+  license: 'unknown (ConvLab card: TODO)'
+  access: public
+  dataset_url: https://huggingface.co/datasets/ConvLab/kvret
+  paper_url: https://arxiv.org/abs/1705.05414
+  year: 2017
+  cited_in: []
+  bibkey: null
+  source_quote: we release a corpus of 3,031 multi-turn dialogues in three distinct domains appropriate for an in-car assistant
+  verified: true
+  notes: 'Eric, Krishnan, Charette, Manning, SIGdial 2017 (W17-5506). Wizard-of-Oz crowd collection: one worker as driver, one as car assistant with private KB. Original release via Stanford NLP blog (https://nlp.stanford.edu/blog/a-new-multi-turn-multi-domain-task-oriented-dialogue-dataset/; unreachable this session). De-facto standard benchmark for KB-grounded in-car TOD (Mem2Seq, GLMP, etc.). Also mirrored in DeepPavlov and ConvLab-3.'
+- name: CarMem
+  aliases:
+  - CarMem long-term memory in-car voice assistant dataset
+  section: G
+  subsection: Task-oriented dialogue and tool use
+  task_type: dialogue (task-oriented)
+  modality: text
+  language: English
+  domain_subtopic: synthetic multi-session in-car voice assistant conversations for long-term preference memory (extraction, retrieval, maintenance)
+  size: 'per paper: 1,000 extraction conversations, 1,000 retrieval utterances, 3,000 maintenance utterances (not on fetched pages)'
+  license: unknown (no LICENSE file shown in repo)
+  access: public
+  dataset_url: https://github.com/johanneskirmayr/CarMem
+  paper_url: https://aclanthology.org/2025.coling-industry.29/
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: We also introduce a synthetic multi-turn, multi-session conversation dataset (CarMem)
+  verified: true
+  notes: Kirmayr, Stappen, Schneider, Matthes, Andre (BMW / TUM / Augsburg), COLING 2025 Industry. 'grounded in real industry data, tailored to an in-car voice assistant setting'. Three-level preference taxonomy (main / sub / detail categories). Repo contains dataset folder + generation code.
+- name: CAR-bench
+  aliases:
+  - 'CAR-bench: Evaluating the Consistency and Limit-Awareness of LLM Agents under Real-World Uncertainty'
+  section: G
+  subsection: Task-oriented dialogue and tool use
+  task_type: dialogue (task-oriented)
+  modality: text
+  language: English
+  domain_subtopic: multi-turn tool-using LLM agent benchmark for an in-car assistant (navigation, productivity, charging, vehicle control) with simulated user
+  size: 254 tasks (Base 100 / Hallucination 98 / Disambiguation 56; README elsewhere says 248); 58 tools (27 set, 29 get, 2 no-op)
+  license: MIT (repo); paper CC BY-NC-ND 4.0
+  access: public
+  dataset_url: https://github.com/CAR-bench/car-bench
+  paper_url: https://arxiv.org/abs/2601.22027
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: We introduce CAR-bench, a benchmark for evaluating consistency, uncertainty handling, and capability awareness.
+  verified: true
+  notes: 'Kirmayr, Stappen, Andre (BMW / Univ. Augsburg). Hallucination tasks (missing tools/info) and Disambiguation tasks; frontier models <50% consistent pass rate on Disambiguation. Same first author as CarMem. Inspiration for the HF In-Vehicle-Tool-Calls negatives subset. Repo https://github.com/CAR-bench/car-bench fetched: MIT; tasks and mock environment data hosted on HuggingFace and downloaded on first run; README: ''The benchmark is instantiated in an automotive in-car voice assistant domain''. Also in ACL 2026 long papers.'
+- name: In-Vehicle-Tool-Calls
+  aliases:
+  - Senthi1Kumar/In-Vehicle-Tool-Calls-v0.2
+  section: G
+  subsection: Task-oriented dialogue and tool use
+  task_type: semantic parsing / NL-to-query
+  modality: text
+  language: English
+  domain_subtopic: driver utterances to in-vehicle assistant mapped to structured tool/function calls
+  size: 43,087 rows + 65 held-out novel-tool rows; 25 intents, 6 domains, 30 tool schemas
+  license: 'other (card: released for research use)'
+  access: public
+  dataset_url: https://huggingface.co/datasets/Senthi1Kumar/In-Vehicle-Tool-Calls-v0.2
+  paper_url: null
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: is a synthetic English text dataset for building and studying in-vehicle voice-assistant tool use
+  verified: true
+  notes: 'Fully synthetic (deepseek-v4-flash pipeline, JSON-Schema validated, persona paraphrasing). Subsets: multi-turn dialogues (T3/T6/T7), single_turn_calls, negatives, refusals, clarifications, tool_gen. Cites CAR-bench (arXiv 2601.22027) as inspiration for negatives.'
+- name: AMIE in-cabin passenger-agent dialogue dataset
+  aliases:
+  - AMIE
+  - Intel in-cabin intent/slot dataset
+  section: G
+  subsection: Task-oriented dialogue and tool use
+  task_type: SLU/intent+slot
+  modality: multimodal
+  language: English
+  domain_subtopic: passenger commands to an in-cabin agent in autonomous vehicles (destination, route, speed, stop)
+  size: 1331 utterances with commands to the AMIE agent (per paper; not on abstract page)
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/1904.10500
+  year: 2019
+  cited_in: []
+  bibkey: null
+  source_quote: Understanding passenger intents and extracting relevant slots are important building blocks.
+  verified: true
+  notes: Okur et al., CICLing 2019 (Intel Labs). Wizard-of-Oz scavenger-hunt rides; multi-turn, multi-modal (audio/video/transcripts), human transcripts vs ASR, single- vs multi-passenger. Related papers arXiv 1909.13714 and 2007.03876 use audio-visual version. No public release found; treat as described-but-unreleased.
+- name: LoCar
+  aliases:
+  - Localization-Aware Evaluation of In-Vehicle Assistants
+  section: G
+  subsection: Task-oriented dialogue and tool use
+  task_type: dialogue (task-oriented)
+  modality: text
+  language: Korean
+  domain_subtopic: evaluation of in-vehicle assistants under fine-grained sociolinguistic control (e.g. Korean honorifics)
+  size: not stated on abstract page
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2605.21086
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: we propose a novel evaluation framework for in-vehicle assistants
+  verified: true
+  notes: Jeong et al. (KAIST + BMW's Ken Friedl), ACL 2026 Industry Track. Search snippet says the dataset uses proprietary industry data and cannot be publicly released (not confirmed on abstract page). Multilingual/localisation angle for in-car assistants.
+- name: MAC-SLU
+  aliases:
+  - Multi-Intent Automotive Cabin Spoken Language Understanding Benchmark
+  - Gatsby1984/MAC_SLU
+  section: G
+  subsection: Spoken commands and language understanding
+  task_type: SLU/intent+slot
+  modality: text
+  language: Chinese
+  domain_subtopic: 'multi-intent in-car cabin commands: music, vehicle control, map, video, radio, weather, playback, phone'
+  size: 20.5k rows (train 18k / validation 1.39k / test 1.15k); 8 domains, 81 intents, 192 slots (paper); up to 5 intents per query
+  license: apache-2.0
+  access: public
+  dataset_url: https://huggingface.co/datasets/Gatsby1984/MAC_SLU
+  paper_url: https://arxiv.org/abs/2512.01603
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: The complete MAC-SLU dataset is hosted on the Hugging Face Hub.
+  verified: true
+  notes: 'Peng et al. 2025. HF card tags language as ''en'' but samples are Chinese cabin commands. Paper pairs text with TTS-synthesised speech for LALM evaluation (speech side not in HF ''Text'' modality tag) so modality recorded as text. Code: https://github.com/Gatsby-web/MAC_SLU. Benchmarks LLMs (ICL vs SFT) and end-to-end audio LMs.'
+- name: in_car_commands (Korean in-car voice commands)
+  aliases:
+  - Angeriod/in_car_commands
+  - Angeriod/in_car_commands_60
+  - Angeriod/in_car_commands_26
+  - Angeriod/in_car_commands_26_prepro
+  - Angeriod in_car_commands (Korean in-car voice commands)
+  section: G
+  subsection: Spoken commands and language understanding
+  task_type: ASR
+  modality: speech
+  language: Korean
+  domain_subtopic: in-car voice commands (weather, navigation, infotainment) audio+transcript
+  size: 72,000 rows (train 57.6k / valid 7.2k / test 7.2k), 12.8 GB, clips 0.15-12.7 s
+  license: apache-2.0 (tag on Angeriod/in_car_commands; not shown on _60 variant)
+  access: public
+  dataset_url: https://huggingface.co/datasets/Angeriod/in_car_commands_60
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: 주간 날씨 정보 정리해 줘.
+  verified: true
+  notes: Dataset card is a placeholder ('More Information needed'); features are audio + transcripts; transcripts are Korean in-car assistant commands. Likely a re-upload of a Korean public in-car command corpus (provenance unknown). Five variants on HF collapsed into one record.
+- name: CarExpert factual-correctness evaluation dataset (Giebisch et al. 2025)
+  aliases:
+  - Automated Factual Benchmarking for In-Car Conversational Systems dataset
+  section: G
+  subsection: Assistant evaluation
+  task_type: QA
+  modality: text
+  language: English
+  domain_subtopic: owner's-manual QA answers labelled for factual correctness (in-car assistant evaluation)
+  size: not stated on abstract page
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2504.01248
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: In-car conversational systems bring the promise to improve the in-vehicle user experience.
+  verified: true
+  notes: 'Abstract states the authors ''produced a novel dataset specifically created for the in-car domain'': human-written questions from a BMW SUV owner''s manual answered by CarExpert and labelled by domain experts; GPT-4 IO prompting >90% agreement. No data/code link on arXiv page.'
+- name: In-car contextual-understanding benchmark (Habicht et al. 2025)
+  aliases:
+  - Benchmarking Contextual Understanding for In-Car Conversational Systems dataset
+  section: G
+  subsection: Assistant evaluation
+  task_type: text classification
+  modality: text
+  language: English
+  domain_subtopic: synthetic user utterances + correct/flawed in-car system responses (restaurant recommendation) for LLM-as-judge evaluation
+  size: not stated on abstract page
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2512.12042
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: we synthetically generate user utterances accompanied by correct and modified failure-containing system responses
+  verified: true
+  notes: Habicht, Sorokin, Saydemir, Friedl, Stocco (BMW / TUM group behind CarExpert). 13 LLMs tested; DeepSeek-R1 F1 0.99. No data link on arXiv page. Part of the CarExpert evaluation family (with Giebisch 2025 and DeepTest 2026).
+- name: Vehicle Voice Command Authorization safety benchmark (Afroze et al. 2026)
+  aliases:
+  - From Intent to Action benchmark
+  section: G
+  subsection: Assistant evaluation
+  task_type: text classification
+  modality: text
+  language: English
+  domain_subtopic: LLM safety for vehicle voice-command authorization (execute / refuse decisions)
+  size: 202 scenarios with reference decisions under a seven-class taxonomy (161 non-execution)
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2609.19630
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: Large language models (LLMs) are increasingly integrated into vehicle voice assistants.
+  verified: true
+  notes: arXiv 2609.19630 (cs.AI/cs.CL/cs.RO). Scenario-level benchmark of voice commands that an in-vehicle LLM assistant should or should not act on. No data link on the abstract page.
+- name: InCarEmo
+  aliases:
+  - In-Cabin Emotion Recognition and Driver State Monitoring dataset
+  section: G
+  subsection: Assistant evaluation
+  task_type: text classification
+  modality: multimodal
+  language: Chinese
+  domain_subtopic: scripted in-cabin driver/assistant dialogue with RGB+IR video and audio for emotion and driver-state recognition
+  size: 'not stated on abstract page (search snippet: ~2,000 generated multi-turn driver-assistant dialogue scripts)'
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2607.14683
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: InCarEmo integrates RGB and infrared video, in-cabin audio, and dialogue text collected from scripted in-cabin scenarios
+  verified: true
+  notes: Yang et al. 2026 (HIT). Three tasks; borderline G (affective computing) but the dialogue-text component between drivers and an in-vehicle assistant makes it relevant to assistant research. Paper licence CC BY 4.0; dataset licence/location not on arXiv page.
+- name: AISHELL-5
+  aliases:
+  - OpenSLR SLR159
+  - ICMC-ASR corpus (released version)
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: Chinese
+  domain_subtopic: in-car multi-channel multi-speaker conversational speech (diarization + ASR)
+  size: '>100 hours multi-channel speech (train 54 GB, Dev 1.9 GB, Eval1 1.7 GB, Eval2 1.8 GB) + 40 hours in-car noise (13 GB); 60+ driving scenarios'
+  license: CC BY-SA 4.0
+  access: public
+  dataset_url: https://openslr.org/159/
+  paper_url: https://arxiv.org/abs/2505.23036
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: The First Open-Source In-Car Multi-Channel Multi-Speaker Speech Dataset
+  verified: true
+  notes: Dai et al., Interspeech 2025 (NWPU / AISHELL / Li Auto). Four far-field mics on car doors + near-field headsets; recorded in an electric (arXiv) / hybrid (Interspeech) vehicle. Open baseline with source separation. Same recording campaign as the ICASSP 2024 ICMC-ASR challenge data. The ICMC-ASR challenge (Wang et al. 2024, arXiv 2401.03473) distributed the same recordings.
+- name: CENSREC-2
+  aliases:
+  - Corpus and Environment for Noisy Speech RECognition 2
+  - IPSJ SIG-SLP in-car connected digits corpus
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: Japanese
+  domain_subtopic: continuous digit recognition in real car-driving environments (close-talk + remote microphones)
+  size: 14,687 utterances (7,492 close-talk, 7,195 remote); 4 in-car environments x vehicle speeds; 1 DVD
+  license: For research and development purposes only
+  access: request
+  dataset_url: https://research.nii.ac.jp/src/en/CENSREC-2.html
+  paper_url: null
+  year: 2005
+  cited_in: []
+  bibkey: null
+  source_quote: A database for the evaluation of continuous digit recognition in real car driving environments.
+  verified: true
+  notes: IPSJ SIG-SLP Noisy Speech Recognition Evaluation WG; distributed by NII-SRC at no fee; data DOI https://doi.org/10.32130/src.CENSREC-2. Sibling of CENSREC-3 (isolated words). Sequel series to AURORA-2J.
+- name: CENSREC-3
+  aliases:
+  - Corpus and Environment for Noisy Speech RECognition 3
+  - IPSJ SIG-SLP in-car isolated word corpus
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: Japanese
+  domain_subtopic: isolated-word recognition in real driving-car environments (close-talk + hands-free mics)
+  size: 293 speakers (202 m / 91 f); 14,050 utterances per microphone; 50 words; 16 conditions (3 speeds x 6 in-car environments); 1 DVD
+  license: For research and development purposes only
+  access: request
+  dataset_url: https://research.nii.ac.jp/src/en/CENSREC-3.html
+  paper_url: null
+  year: 2006
+  cited_in: []
+  bibkey: null
+  source_quote: 50 isolated word recognition in real driving car environments.
+  verified: true
+  notes: 'Produced by the IPSJ SIG-SLP Noisy Speech Recognition Evaluation WG; distributed by NII Speech Resources Consortium at no fee via contact form. Remote-mic training data (CIAIR recordings) sold separately by Nagoya Industrial Science Research Institute. Sibling CENSREC-2 (in-car connected digits) listed on same site, not fetched. Reference paper: Fujimoto, Takeda, Nakamura, IEICE Trans. E89-D(11) 2006.'
+- name: STAZKA - Speech recordings from vehicles
+  aliases:
+  - STAZKA
+  - LINDAT 11234/1-1510
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: Czech
+  domain_subtopic: 'Czech in-vehicle speech: long noisy cabin recordings with spontaneous speech (VAD tuning) + scripted prompts recorded parked and while driving (ASR)'
+  size: 26 speakers for the scripted prompts; hours not stated; files full_noises.zip + prompts (Transcriber .trs transcripts)
+  license: Creative Commons - Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
+  access: public
+  dataset_url: https://b2find.eudat.eu/dataset/9d65f782-5271-5cb9-afd0-5c0f28667403
+  paper_url: null
+  year: 2015
+  cited_in: []
+  bibkey: null
+  source_quote: The prompts were recorded by 26 different speakers.
+  verified: true
+  notes: Smidl, Stanislav, Radova; University of West Bohemia, Dept. of Cybernetics. Canonical handle http://hdl.handle.net/11234/1-1510 (LINDAT/CLARIAH-CZ); LINDAT page timed out this session so verification is via the EUDAT B2FIND metadata record that mirrors it. 'The recordings are accompanied with detailed transcripts in the Transcriber XML-based format (.trs).'
+- name: Guangzhou Cantonese Scripted Speech Corpus in the Vehicle
+  aliases:
+  - AlienKevin/guangzhou-cabin-speech
+  - MagicHub Guangzhou Cantonese in-vehicle speech
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: Cantonese
+  domain_subtopic: 'scripted in-vehicle Cantonese speech: digits, voice commands and queries'
+  size: 5 hours; 6,219 utterances; 10 speakers
+  license: CC BY-NC-ND 4.0
+  access: public
+  dataset_url: https://huggingface.co/datasets/AlienKevin/guangzhou-cabin-speech
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: This open-source dataset consists of 5 hours of transcribed Guangzhou Cantonese scripted speech in the vehicle
+  verified: true
+  notes: 'HF mirror of a MagicHub open dataset (source: https://magichub.com/datasets/guangzhou-cantonese-scripted-speech-corpus-in-the-vehicle/). Probably the same family as MagicHub ASR-SCCantCabSC. Small but openly licensed in-car command speech in a low-resource language.'
+- name: CI-AVSR
+  aliases:
+  - Cantonese In-car Audio-Visual Speech Recognition dataset
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: multimodal
+  language: Cantonese
+  domain_subtopic: audio-visual in-car voice command recognition (200 commands) with in-car noise augmentation
+  size: 4,984 samples (8.3 hours) of 200 in-car commands from 30 native Cantonese speakers; augmented set 10x larger
+  license: CC0-1.0 (repo)
+  access: public
+  dataset_url: https://github.com/HLTCHKUST/CI-AVSR
+  paper_url: https://arxiv.org/abs/2201.03804
+  year: 2022
+  cited_in: []
+  bibkey: null
+  source_quote: It consists of 4,984 samples (8.3 hours) of 200 in-car commands recorded by 30 native Cantonese speakers.
+  verified: true
+  notes: Dai, Cahyawijaya et al. (HKUST, Pascale Fung), LREC 2022 (2022.lrec-1.731). Repo README points to Kaggle (kaggle.com/c/ci-avsr/data) for processed audio, 25 fps image frames, annotations and augmentation; train/valid/test_clean.csv splits. Two multimodal baselines; noisy-audio accuracy remains low.
+- name: UTDrive
+  aliases:
+  - UTDrive Corpus Classical
+  - UTDrive Corpus Portable
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: multimodal
+  language: English
+  domain_subtopic: 'naturalistic driving with driver speech (6-channel audio: mic array + close-talk) while interacting with speech systems / secondary tasks; plus video, CAN-bus, GPS, pedals'
+  size: 37 female + 40 male drivers (at time of page); Toyota RAV4; Release 3.0 (Aug 2020)
+  license: unknown
+  access: public
+  dataset_url: https://utdrive.utdallas.edu/corpus
+  paper_url: null
+  year: 2007
+  cited_in: []
+  bibkey: null
+  source_quote: a TOYOTA RAV4 customized with a variety of input channels
+  verified: true
+  notes: CRSS UT Dallas (Hansen, Angkititrakul et al., Interspeech 2007; Takeda et al. IEEE T-ITS 2011 for international corpora). Page offers Dropbox download links for Classical and Portable corpora plus Release 3.0 documentation PDF; no licence text on page. Primary use is driver behaviour / distraction / stress from speech, but contains driver-speech-system interaction audio.
+- name: CU-Move
+  aliases:
+  - CU-Move in-vehicle speech corpus
+  - University of Colorado CU-Move
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: English
+  domain_subtopic: 'in-vehicle speech for route navigation: digits, navigation expressions, street/location sentences, phonetically balanced sentences, WOZ route-navigation dialogues'
+  size: target +1000 speakers across the US (Eurospeech 2001); ~500 speakers recorded in 2001 per later chapter; 14 noise conditions across 6 vehicles; 5-mic array
+  license: unknown
+  access: request
+  dataset_url: https://utdrive.utdallas.edu/corpus
+  paper_url: https://www.isca-archive.org/eurospeech_2001/hansen01b_eurospeech.html
+  year: 2001
+  cited_in: []
+  bibkey: null
+  source_quote: data collection consisting of +1000 speakers from across the United States
+  verified: true
+  notes: 'Hansen et al. (CSLR Colorado, now CRSS UT Dallas). Release 2.0b readme (Mar 2005) linked from the UTDrive corpus page; no direct download link (contact Hansen / CRSS). Only major English in-car corpus with WOZ navigation dialogue, making it a bridge between the speech and dialogue sub-groups. ACCESS: UTDrive page has documentation link but no download or terms; contact CRSS (inference). Access: no download link or terms on the corpus page; contact CRSS at UT Dallas.'
+- name: AVICAR
+  aliases:
+  - Audio-Visual Speech Corpus in a Car Environment
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: English
+  domain_subtopic: audio-visual in-car read speech (digits, letters, phone numbers, sentences) under driving-noise conditions
+  size: 100 speakers (50 male, 50 female); ~59,000 utterances; 8 mics + 4 cameras; 5 noise conditions
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://www.isca-archive.org/interspeech_2004/lee04m_interspeech.html
+  year: 2004
+  cited_in: []
+  bibkey: null
+  source_quote: We describe a large audio-visual speech corpus recorded in a car environment
+  verified: true
+  notes: 'Lee, Hasegawa-Johnson et al., Interspeech 2004 (UIUC). Conditions: idling, 35 mph and 55 mph with windows open/closed. Abstract says corpus ''is available through'' UIUC IFP site (link not on ISCA page); 2025 CAVEMOVE paper describes it as available upon request. Audio-visual ASR / lip-reading in car. ACCESS: ISCA abstract says corpus ''is available through'' a UIUC site (link missing); ''upon request'' comes only from a 2025 search snippet.'
+- name: CIAIR In-Car Speech Database
+  aliases:
+  - CIAIR in-car speech corpus
+  - Nagoya University in-car multimedia corpus
+  - Center for Integrated Acoustic Information Research corpus
+  section: G
+  subsection: In-car speech recognition
+  task_type: dialogue (task-oriented)
+  modality: multimodal
+  language: Japanese
+  domain_subtopic: in-car spoken dialogue with human operator, Wizard-of-Oz and ASR-based navigation systems, plus read speech; 16-ch audio, 3 cameras, vehicle signals
+  size: ~800 subjects, ~60-minute drive each (per IEICE 2005 abstract via search); 16 microphones, 3 cameras
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://www.isca-archive.org/interspeech_2004/kawaguchi04_interspeech.html
+  year: 2004
+  cited_in: []
+  bibkey: null
+  source_quote: 'each subject had conversations with three types of dialogue system: a human'
+  verified: true
+  notes: Kawaguchi, Matsubara, Yamaguchi, Takeda, Itakura, Interspeech 2004; also Takeda et al. 'Construction and Evaluation of a Large In-Car Speech Corpus', IEICE Trans. E88-D(3) 2005 (unreachable this session). Data Collection Vehicle (Toyota Regius). Remote-mic subset is sold via Nagoya Industrial Science Research Institute for CENSREC-3. Largest in-car dialogue speech collection; distribution status today unclear.
+- name: TAICAR
+  aliases:
+  - Taiwan in-CAR speech database
+  - TaiCar
+  section: G
+  subsection: In-car speech recognition
+  task_type: ASR
+  modality: speech
+  language: Chinese (Taiwan Mandarin)
+  domain_subtopic: in-car Mandarin read words/sentences and spontaneous vehicular-navigation queries, multi-channel, six recording sites
+  size: preliminary corpus from 192 speakers; more than 163,000 files, 16.8 GB
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://aclanthology.org/O05-3005/
+  year: 2005
+  cited_in: []
+  bibkey: null
+  source_quote: The database contains more than 163,000 files, occupying 16.8 gigabytes of disk space.
+  verified: true
+  notes: Wang, Yang, Wang, Wu, Chien, IJCLCLP 10(2) 2005 (abstract verified on https://aclclp.org.tw/clclp/v10n2.htm and in the Anthology PDF). Notebook-PC multi-mic array + clean reference channel; speakers sampled to Taiwan demographics. Paper's Table 1 surveys CSDC-MoTiV (1998, DE, 641 speakers), SpeechDat-Car, CU-Move, CIAIR-HCC, CMU (2001, 43), AVICAR. No distribution statement found.
+- name: CAVEMOVE
+  aliases:
+  - CAVEMOVE acoustic database for voice-enabled technologies inside moving vehicles
+  section: G
+  subsection: Cabin acoustics and noise
+  task_type: ASR
+  modality: speech
+  language: n/a (noise recordings)
+  domain_subtopic: in-car acoustic noise and multichannel responses for simulating voice-assistant speech inside moving vehicles
+  size: multichannel recordings in four cars across static and in-motion conditions; cavemove_dataset.zip 7.6 GB (v4, 2025-10-21) + Python API
+  license: Creative Commons Attribution 4.0 International
+  access: public
+  dataset_url: https://zenodo.org/doi/10.5281/zenodo.13594242
+  paper_url: https://arxiv.org/abs/2508.19691
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: We provide a collection of multichannel audio recordings obtained inside four different cars.
+  verified: true
+  notes: 'Stefanakis et al. (FORTH, Greece) 2025. Not speech per se: ''To produce the speech components, users must provide their own dry speech recordings''. Belongs with ASR-CabNois / AISHELL-5 noise set in an ''in-car acoustic conditions'' sub-group supporting in-car ASR simulation.'
+- name: ASR-CabNois (MagicHub in-vehicle noise dataset)
+  aliases:
+  - MagicHub ASR-CabNois
+  - A Cabin Noise Dataset
+  section: G
+  subsection: Cabin acoustics and noise
+  task_type: ASR
+  modality: speech
+  language: n/a (noise recordings)
+  domain_subtopic: in-vehicle cabin noise recordings for augmenting in-car ASR / voice assistant training
+  size: 5.08 hours of in-vehicle noise (seven noise pieces); WAV PCM 44.1 kHz 16-bit stereo
+  license: Magic Data open-source license / CC BY-NC-ND 4.0
+  access: public
+  dataset_url: https://magichub.com/datasets/in-vehicle-noise-dataset/
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: 5.08 hours of in-vehicle noise from multiple sources, where seven pieces of noise were contained.
+  verified: true
+  notes: 'Labelled ''Open Source'' but download requires MagicHub sign-in. Noise types: tire, engine, radio, human voice. Supporting resource for the in-car acoustic-conditions sub-group (with CAVEMOVE and the AISHELL-5 noise set).'
+- name: Talk2Car
+  aliases: []
+  section: H
+  subsection: Grounding, referring expressions and retrieval
+  task_type: grounding/referring expression
+  modality: multimodal
+  language: English
+  domain_subtopic: NL commands to a self-driving car grounded in nuScenes front-camera images
+  size: 11,959 commands (8,349 train / 1,163 val / 2,447 test)
+  license: unknown
+  access: public
+  dataset_url: https://talk2car.github.io/
+  paper_url: https://arxiv.org/abs/1909.10838
+  year: 2019
+  cited_in: []
+  bibkey: null
+  source_quote: Every command describes an action for the autonomous vehicle that is grounded in the visual plane
+  verified: true
+  notes: 'EMNLP-IJCNLP 2019. Built on nuScenes (360 RGB, LiDAR, RADAR, maps). Eval: AP on predicted 2D box of referred object. Code github.com/talk2car/Talk2Car. Sub-heading: grounding/referring.'
+- name: Refer-KITTI
+  aliases: []
+  section: H
+  subsection: Grounding, referring expressions and retrieval
+  task_type: grounding/referring expression (referring multi-object tracking)
+  modality: multimodal
+  language: English
+  domain_subtopic: language expressions referring to sets of tracked objects in KITTI video
+  size: 18 videos, 818 expressions, avg 10.7 objects per expression
+  license: unknown
+  access: public
+  dataset_url: https://referringmot.github.io/
+  paper_url: https://arxiv.org/abs/2303.03366
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: To push forward RMOT, we construct one benchmark with scalable expressions based on KITTI, named Refer-KITTI.
+  verified: true
+  notes: 'CVPR 2023 (Wu et al., TransRMOT). Google Drive download. Sub-heading: grounding/referring-tracking.'
+- name: NuPrompt
+  aliases:
+  - Prompt4Driving
+  - Language Prompt for Autonomous Driving
+  section: H
+  subsection: Grounding, referring expressions and retrieval
+  task_type: grounding/referring expression (prompt-based 3D multi-object tracking)
+  modality: multimodal
+  language: English
+  domain_subtopic: language prompts for sets of 3D objects in nuScenes video
+  size: 40,147 language prompts for 3D objects
+  license: repo Apache-2.0; dataset licence not stated
+  access: public
+  dataset_url: https://github.com/wudongming97/Prompt4Driving
+  paper_url: https://arxiv.org/abs/2309.04379
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: It is a large-scale dataset for language prompt in driving scenes, which contains 40,147 language prompts for 3D objects.
+  verified: true
+  notes: 'AAAI 2025. Data v1.0 released 2024-06-27 via GitHub releases. Sub-heading: grounding/referring-tracking.'
+- name: HAD
+  aliases:
+  - HRI Advice Dataset
+  - Honda Advice Dataset
+  section: H
+  subsection: Grounding, referring expressions and retrieval
+  task_type: grounding/referring expression (advice grounding) + captioning
+  modality: multimodal
+  language: English
+  domain_subtopic: human-to-vehicle natural-language advice over HDD driving video (SF Bay Area)
+  size: ~30 hours of driving video with natural-language advice
+  license: non-commercial use only
+  access: request
+  dataset_url: https://usa.honda-ri.com/HAD
+  paper_url: https://openaccess.thecvf.com/content_CVPR_2019/papers/Kim_Grounding_Human-To-Vehicle_Advice_for_Self-Driving_Vehicles_CVPR_2019_paper.pdf
+  year: 2019
+  cited_in: []
+  bibkey: null
+  source_quote: The HRI Advice Dataset (HAD) is driving data with natural language advices.
+  verified: true
+  notes: 'CVPR 2019. Goal-oriented vs stimulus-driven advice; CAN-bus included. Request form; university email required. Sub-heading: explanations/advice.'
+- name: CityFlow-NL
+  aliases: []
+  section: H
+  subsection: Grounding, referring expressions and retrieval
+  task_type: retrieval (NL-based vehicle track retrieval) / grounding
+  modality: multimodal
+  language: English
+  domain_subtopic: natural-language vehicle retrieval over CityFlow multi-camera traffic video (AI City Challenge)
+  size: 2,155 training tracks x 3 NL descriptions; 184 test tracks / 184 test queries (2023 release)
+  license: repo Apache-2.0; data licence not stated
+  access: public
+  dataset_url: https://github.com/fredfung007/cityflow-nl
+  paper_url: https://arxiv.org/abs/2101.04741
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: curated for the Natural Language (NL) Based Vehicle Retrieval Challenge Track of the 2023 AI City Workshop.
+  verified: true
+  notes: 'AI City Challenge NL retrieval track 2021-2023. Metrics MRR, Recall@5/10. Third-person traffic cameras. Sub-heading: NL vehicle retrieval.'
+- name: NuScenes-QA
+  aliases: []
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: VQA
+  modality: multimodal
+  language: English
+  domain_subtopic: 3D-aware VQA over nuScenes multi-view camera + LiDAR scenes
+  size: 460K QA pairs over 34K visual scenes (arXiv abstract)
+  license: repo MIT; dataset licence not stated
+  access: public
+  dataset_url: https://github.com/qiantianwen/NuScenes-QA
+  paper_url: https://arxiv.org/abs/2305.14836
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: encompassing 34K visual scenes and 460K question-answer pairs
+  verified: true
+  notes: 'AAAI 2024. v1.0 released 2023-09-04; QA annotations + CenterPoint features on Google Drive; needs raw nuScenes (own licence). Sub-heading: nuScenes-derived scene VQA.'
+- name: NuInstruct
+  aliases: []
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: 'VQA (instruction; 17 subtasks: perception, prediction, risk, planning with reasoning)'
+  modality: multimodal
+  language: English
+  domain_subtopic: multi-view video instruction QA over nuScenes
+  size: 91K multi-view video-QA pairs across 17 subtasks
+  license: unknown
+  access: public
+  dataset_url: https://github.com/xmed-lab/NuInstruct
+  paper_url: https://arxiv.org/abs/2401.00988
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: We introduce a new Dataset (NuInstruct), a novel dataset with 91K multi-view video-QA pairs across 17 subtasks
+  verified: true
+  notes: 'CVPR 2024 (BEV-InMLLM, Ding et al.). Annotations on Google Drive keyed by nuScenes sample tokens. Sub-heading: nuScenes-derived instruction VQA.'
+- name: NuScenes-MQA
+  aliases: []
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: VQA + captioning (Markup-QA)
+  modality: multimodal
+  language: English
+  domain_subtopic: captions with embedded markup-tagged QA over nuScenes scenes
+  size: not stated on fetched page
+  license: repo Apache-2.0; annotation licence not stated
+  access: public
+  dataset_url: https://github.com/turingmotors/NuScenes-MQA
+  paper_url: https://arxiv.org/abs/2312.06352
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: In this work, we introduce Markup-QA, a novel dataset annotation technique in which QAs are enclosed within markups.
+  verified: true
+  notes: 'LLVM-AD workshop, WACV 2024 (Turing Motors). Annotations on Google Drive. Sub-heading: nuScenes-derived VQA/captioning.'
+- name: Talk2BEV
+  aliases:
+  - Talk2BEV-Bench
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: VQA (spatial reasoning over BEV maps)
+  modality: multimodal
+  language: English
+  domain_subtopic: free-form queries over language-enhanced BEV maps from nuScenes
+  size: 1,000 human-annotated BEV scenarios; >20,000 questions
+  license: unknown
+  access: public
+  dataset_url: https://llmbev.github.io/talk2bev/
+  paper_url: https://arxiv.org/abs/2310.02251
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: we develop and release Talk2BEV-Bench, a benchmark encompassing 1000 human-annotated BEV scenarios
+  verified: true
+  notes: 'ICRA 2024. Code/bench under github.com/llmbev. Sub-heading: nuScenes-derived scene VQA.'
+- name: SURDS
+  aliases:
+  - DriveMLLM
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: VQA (spatial understanding and reasoning)
+  modality: multimodal
+  language: English
+  domain_subtopic: spatial-relation QA over nuScenes images
+  size: not stated on fetched page
+  license: academic use only (code); dataset licence not stated
+  access: public
+  dataset_url: https://github.com/XiandaGuo/Drive-MLLM
+  paper_url: null
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: We extracted and processed data from the nuScenes dataset to create our own SURDS dataset
+  verified: true
+  notes: 'First released Nov 2024 as DriveMLLM (v1 on separate branch); renamed SURDS, NeurIPS 2025. HF bonbon-rj/SURDS and bonbon-rj/SURDS_eval. Sub-heading: nuScenes-derived scene VQA.'
+- name: OmniDrive-nuScenes
+  aliases:
+  - OmniDrive
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: VQA (reasoning, planning, counterfactual)
+  modality: multimodal
+  language: English
+  domain_subtopic: holistic VQA incl. counterfactual planning reasoning over nuScenes
+  size: not stated on fetched pages
+  license: unknown (LICENSE file linked; not named on page)
+  access: public
+  dataset_url: https://github.com/NVlabs/OmniDrive
+  paper_url: https://arxiv.org/abs/2405.01533
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: OmniDrive, a holistic vision-language dataset that aligns agent models with 3D driving tasks
+  verified: true
+  notes: 'CVPR 2025 (NVIDIA). v1.0 released 2024-05-02 via GitHub release. Sub-heading: reasoning/planning-with-language.'
+- name: MAPLM
+  aliases: []
+  section: H
+  subsection: Scene question answering and instruction tuning
+  task_type: VQA (map and traffic-scene understanding)
+  modality: multimodal
+  language: English
+  domain_subtopic: QA over panoramic images + LiDAR BEV of road scenes (lane/road/feature level)
+  size: not stated on fetched page
+  license: repo MIT; dataset licence not stated
+  access: public
+  dataset_url: https://github.com/LLVM-AD/MAPLM
+  paper_url: https://openaccess.thecvf.com/content/CVPR2024/papers/Cao_MAPLM_A_Real-World_Large-Scale_Vision-Language_Benchmark_for_Map_and_Traffic_CVPR_2024_paper.pdf
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: MAPLM combines point cloud BEV (Bird's Eye View) and panoramic images to provide a rich collection of road scenario images.
+  verified: true
+  notes: 'CVPR 2024; LLVM-AD workshop (WACV 2024) challenge. First data 09/2023; HD-map data + captions added 01/2024. Google Drive zips. Sub-heading: scene VQA (map).'
+- name: BDD-X
+  aliases:
+  - Berkeley DeepDrive-eXplanation
+  section: H
+  subsection: Explanations, captions and risk narration
+  task_type: captioning (action description + justification)
+  modality: multimodal
+  language: English
+  domain_subtopic: textual explanations of ego-vehicle actions on BDD dashcam video
+  size: 6,970 videos, ~77 hours, >26K activities, >8.4M frames (5,597/717/656 split)
+  license: unknown (LICENSE file in repo; terms not shown on page)
+  access: public
+  dataset_url: https://github.com/JinkyuKimUCB/BDD-X-dataset
+  paper_url: https://openaccess.thecvf.com/content_ECCV_2018/papers/Jinkyu_Kim_Textual_Explanations_for_ECCV_2018_paper.pdf
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: Our dataset is composed of over 77 hours of driving within 6,970 videos.
+  verified: true
+  notes: 'ECCV 2018 (Kim, Rohrbach, Darrell, Canny, Akata). 3-4 actions/video, each with description + justification + timestamps; annotators wrote as driving instructors. CSV on Google Drive. Basis for DriveGPT4 evaluation. Sub-heading: explanations/captions.'
+- name: BDD-OIA
+  aliases: []
+  section: H
+  subsection: Explanations, captions and risk narration
+  task_type: text classification (action + explanation labels)
+  modality: multimodal
+  language: English
+  domain_subtopic: object-induced action decisions with explanation labels on BDD100K frames/videos
+  size: not stated on fetched page
+  license: unknown
+  access: public
+  dataset_url: https://github.com/Twizwei/bddoia_project
+  paper_url: null
+  year: 2020
+  cited_in: []
+  bibkey: null
+  source_quote: BDD-OIA also contains data for videos.
+  verified: true
+  notes: 'CVPR 2020 ''Explainable Object-induced Action Decision for Autonomous Vehicles'' (Xu et al.). Google Drive archive. 4 action / 21 explanation labels are from the paper, not on the fetched page. Sub-heading: explanations.'
+- name: DRAMA
+  aliases: []
+  section: H
+  subsection: Explanations, captions and risk narration
+  task_type: captioning + grounding (risk localisation) + VQA
+  modality: multimodal
+  language: English
+  domain_subtopic: risk-object localisation with free-form reasoning captions, Tokyo urban driving
+  size: 17,785 two-second clips (17,066 risk scenarios); 306,708 caption tokens, 992 unique words
+  license: non-commercial use only
+  access: request
+  dataset_url: https://usa.honda-ri.com/drama
+  paper_url: https://openaccess.thecvf.com/content/WACV2023/papers/Malla_DRAMA_Joint_Risk_Localization_and_Captioning_in_Driving_WACV_2023_paper.pdf
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: The DRAMA Dataset is captured from a moving vehicle on highly interactive urban traffic scenes in Tokyo.
+  verified: true
+  notes: 'WACV 2023. Two cameras + CAN + IMU; video- and object-level QA; ego intention, scene class, driver suggestion labels. Request form; university email. Sub-heading: risk/importance narration.'
+- name: Rank2Tell
+  aliases: []
+  section: H
+  subsection: Explanations, captions and risk narration
+  task_type: VQA + captioning (importance ranking + reasoning)
+  modality: multimodal
+  language: English
+  domain_subtopic: importance-ranked objects with reasons, SF Bay Area intersections
+  size: 116 clips of ~20 s at 10 FPS
+  license: unknown (not stated; arXiv paper under CC BY-NC-SA 4.0)
+  access: request
+  dataset_url: https://usa.honda-ri.com/rank2tell
+  paper_url: https://arxiv.org/abs/2309.06597
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: The Rank2Tell Dataset is captured from a moving vehicle on highly interactive traffic scenes in San Francisco Bay Area.
+  verified: true
+  notes: 'WACV 2024. 3 cameras + LiDAR + GPS + CAN; High/Medium/Low importance boxes; multiple free-form captions per object; 3D boxes with tracking. Release limited to university researchers via form. Sub-heading: risk/importance narration.'
+- name: CoVLA
+  aliases:
+  - CoVLA-Dataset
+  section: H
+  subsection: Explanations, captions and risk narration
+  task_type: 'captioning (vision-language-action: captions + trajectories)'
+  modality: multimodal
+  language: English
+  domain_subtopic: real-world driving video with auto-generated scene/maneuver captions and trajectories (Japan)
+  size: '>80 hours of real-world driving video'
+  license: released for academic use (no named licence on page)
+  access: public
+  dataset_url: https://turingmotors.github.io/covla-ad/
+  paper_url: https://arxiv.org/abs/2408.10845
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: an extensive dataset comprising real-world driving videos spanning more than 80 hours
+  verified: true
+  notes: 'WACV 2025 oral (Turing Inc.). Automated caption pipeline from sensor data. HF turing-motors/CoVLA-Dataset. Sub-heading: captions/VLA.'
+- name: DriveGPT4 instruction data
+  aliases: []
+  section: H
+  subsection: Explanations, captions and risk narration
+  task_type: VQA / visual instruction tuning
+  modality: multimodal
+  language: English
+  domain_subtopic: instruction-tuning conversations about ego driving video (BDD-X-based)
+  size: not stated on fetched page
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2310.01412
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: The code and dataset will be publicly available.
+  verified: true
+  notes: 'RA-L 2024. Abstract calls it ''a bespoke visual instruction tuning dataset''; BDD-X used for evaluation. Code link points to Tsinghua cloud; release status unclear. Sub-heading: instruction tuning.'
+- name: DriveLM
+  aliases:
+  - DriveLM-Data
+  - DriveLM-nuScenes
+  - DriveLM-CARLA
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: 'VQA (graph VQA: perception -> prediction -> planning)'
+  modality: multimodal
+  language: English
+  domain_subtopic: graph-structured QA over nuScenes and CARLA driving scenes
+  size: not stated on fetched pages
+  license: language data CC BY-NC-SA 4.0; code/assets Apache 2.0; nuScenes/CARLA keep own licences
+  access: public
+  dataset_url: https://github.com/OpenDriveLab/DriveLM
+  paper_url: https://arxiv.org/abs/2312.14150
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: DriveLM-Data is the first language-driving dataset facilitating the full stack of driving tasks
+  verified: true
+  notes: 'ECCV 2024 oral. v1.0 Dec 2023. DriveLM-nuScenes released; DriveLM-CARLA listed as TODO on README. Challenge devkit + HF leaderboard. Sub-heading: reasoning/planning-with-language.'
+- name: Reason2Drive
+  aliases: []
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: 'VQA (chain-based reasoning: perception, prediction, reasoning)'
+  modality: multimodal
+  language: English
+  domain_subtopic: long-text chain-of-reasoning QA over nuScenes, Waymo and ONCE video
+  size: '>600K video-text pairs'
+  license: unknown
+  access: public
+  dataset_url: https://github.com/fudan-zvg/Reason2Drive
+  paper_url: https://arxiv.org/abs/2312.03661
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: an autonomous driving benchmark with over 600K video-text pairs.
+  verified: true
+  notes: 'ECCV 2024. Templates filled from object metadata, verified/enriched with GPT-4 + manual. Only a mini version released (Google Drive/Baidu); full benchmark on TODO. Sub-heading: reasoning/planning-with-language.'
+- name: LingoQA
+  aliases: []
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: VQA (video QA)
+  modality: multimodal
+  language: English
+  domain_subtopic: free-form QA about ego driving video clips (Wayve, UK)
+  size: '419.9K QA pairs over ~28K clips: Scenery 3.5k videos/267.8k QA; Action 24.5k videos/152.5k QA; eval 100 videos/1,000 QA'
+  license: unknown (LICENCE file in repo; terms not shown on page)
+  access: public
+  dataset_url: https://github.com/wayveai/LingoQA
+  paper_url: https://arxiv.org/abs/2312.14115
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: presenting the LingoQA benchmark, dataset and baseline model for autonomous driving Visual Question Answering (VQA).
+  verified: true
+  notes: 'ECCV 2024. Lingo-Judge learned metric on HF wayveai/Lingo-Judge. Google Drive downloads. Sub-heading: scene VQA / reasoning.'
+- name: DriveBench
+  aliases: []
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: 'VQA (VLM reliability benchmark: MCQ / VQA / captioning over perception, prediction, planning, behavior)'
+  modality: multimodal
+  language: English
+  domain_subtopic: robustness benchmark for driving VLMs under corruptions
+  size: 19,200 frames; 20,498 QA pairs; 17 input settings
+  license: Apache-2.0 (work); some components under other licences
+  access: public
+  dataset_url: https://github.com/drive-bench/toolkit
+  paper_url: https://arxiv.org/abs/2501.04003
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: a benchmark dataset designed to evaluate VLM reliability across 17 settings
+  verified: true
+  notes: 'ICCV 2025 ''Are VLMs Ready for Autonomous Driving?''. Corruption groups: weather, external, sensor, motion, transmission, plus text-only. HF drive-bench/arena. Sub-heading: VLM evaluation benchmarks.'
+- name: V2V-QA
+  aliases:
+  - V2V-LLM
+  - V2V-GoT-QA
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: VQA (grounding, notable-object identification, planning; cooperative)
+  modality: multimodal
+  language: English
+  domain_subtopic: multi-vehicle cooperative driving QA (V2V-LLM)
+  size: not stated on fetched page
+  license: unknown
+  access: public
+  dataset_url: https://eddyhkchiu.github.io/v2vllm.github.io/
+  paper_url: https://arxiv.org/abs/2502.09980
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: Our V2V-QA is a question-answering dataset that supports multiple vehicles in real cooperative driving scenarios.
+  verified: true
+  notes: 'ICRA 2026. Five QA types. HF eddyhkchiu/V2V-GoT-QA; code github.com/eddyhkchiu/V2V-LLM. Sub-heading: reasoning/planning (cooperative).'
+- name: LaMPilot
+  aliases: []
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: semantic parsing / NL-to-program (instruction following via language-model programs)
+  modality: text
+  language: English
+  domain_subtopic: spontaneous driver instructions executed as code over highway-env simulator scenes
+  size: 32 driving scenarios; 4,900 test cases (DbLv1)
+  license: MIT
+  access: public
+  dataset_url: https://github.com/PurdueDigitalTwin/LaMPilot
+  paper_url: null
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: The benchmark includes 32 diverse driving scenarios, each with multiple samples and commands
+  verified: true
+  notes: 'CVPR 2024 (Ma et al.). Simulator-based (highway, intersection, ramp merge); NO camera/LiDAR data -- LLM generates code calling driving primitives. Kept in H because task named it; flag as simulator/program bucket. Sub-heading: planning-with-language (simulator).'
+- name: Driving-with-LLMs
+  aliases:
+  - LLM-Driver DrivingQA
+  section: H
+  subsection: Reasoning and planning with language
+  task_type: VQA (object-level vector input; action prediction, justification, DrivingQA)
+  modality: tabular+text
+  language: English
+  domain_subtopic: simulator object-vector scenes paired with QA and action explanations (Wayve)
+  size: ~10k train / 1k test VQA items (from bundled archive names; not stated in prose)
+  license: repo Apache-2.0; data licence not stated
+  access: public
+  dataset_url: https://github.com/wayveai/Driving-with-LLMs
+  paper_url: https://arxiv.org/abs/2310.01957
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: The LLM-Driver utilises object-level vector input from our driving simulator to predict explanable actions
+  verified: true
+  notes: 'ICRA 2024. Simulator vector modality, no images. DrivingQA re-collectable with scripts/collect_vqa.py (OpenAI key). Sub-heading: planning-with-language (simulator).'
+- name: DriveQA
+  aliases:
+  - Passing the Driving Knowledge Test
+  section: H
+  subsection: Traffic rules and driving-test QA
+  task_type: QA + VQA (traffic rules, signs, right-of-way; multiple choice)
+  modality: multimodal
+  language: English
+  domain_subtopic: 'driving-knowledge-test benchmark: regulations, 220 sign types, right-of-way scenes'
+  size: '474K QA pairs: ~26K text-based, ~448K vision-based'
+  license: unknown
+  access: public
+  dataset_url: https://driveqaiccv.github.io/
+  paper_url: https://arxiv.org/abs/2508.21824
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: an extensive open-source text and vision-based benchmark that exhaustively covers traffic regulations and scenarios
+  verified: true
+  notes: 'ICCV 2025 ''Passing the Driving Knowledge Test'' (Wei, Liu, Ohn-Bar). 19 categories / 5 domains; controlled lighting/weather/perspective variations; synthetic subset for sim-to-real. HF DriveQA/DriveQA_Dataset; code h2xlab/driveQA. Sub-heading: traffic-rule / theory-test QA.'
+- name: DrivingVQA
+  aliases: []
+  section: H
+  subsection: Traffic rules and driving-test QA
+  task_type: VQA (driving theory-exam MCQ with explanations and grounded entities)
+  modality: multimodal
+  language: English
+  domain_subtopic: driving theory test problems with expert explanations
+  size: 3,931 multiple-choice problems (80/20 split; 789 test)
+  license: unknown (paper CC BY 4.0)
+  access: public
+  dataset_url: https://vita-epfl.github.io/DrivingVQA/
+  paper_url: https://arxiv.org/abs/2501.04671
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: we introduce DrivingVQA, a visual question answering dataset derived from driving theory exams
+  verified: true
+  notes: 'EPFL (RIV-CoT). HF EPFL-DrivingVQA/DrivingVQA. Source country of exams not stated on fetched pages. Sub-heading: theory-test QA.'
+- name: DriveCombo
+  aliases: []
+  section: H
+  subsection: Traffic rules and driving-test QA
+  task_type: QA + VQA (compositional traffic-rule reasoning, multiple choice)
+  modality: multimodal
+  language: Multilingual
+  domain_subtopic: traffic-rule MCQs from handbooks/traffic laws of five nations, 5-level cognitive ladder
+  size: ~70K multiple-choice questions; 5 countries
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2603.01637
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: It contains about 70K multiple-choice questions (MCQs).
+  verified: true
+  notes: 'arXiv March 2026 (search result lists CVPR 2026; not on fetched page). L1 single rule -> L5 rule conflicts; four RGB frames per question; DriveCombo-Text variant. No download link on fetched page. Question language not stated on page; ''multi'' inferred from five source countries. Sub-heading: traffic-rule QA.'
+- name: Romanian Driving Laws QA
+  aliases:
+  - Do LLMs Understand Romanian Driving Laws?
+  section: H
+  subsection: Traffic rules and driving-test QA
+  task_type: QA + VQA with explanation generation
+  modality: multimodal
+  language: Romanian
+  domain_subtopic: Romanian driving-law exam-style questions
+  size: 1,208 questions (387 multimodal)
+  license: unknown (article CC BY-NC-ND 4.0)
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2509.23715
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: We release a 1{,}208-question dataset (387 multimodal)
+  verified: true
+  notes: 'Paper: ''Do LLMs Understand Romanian Driving Laws? A Study on Multimodal and Fine-Tuned Question Answering''. Non-English theory-test QA. Abstract says released; no link on fetched page. Sub-heading: theory-test QA (non-English).'
+- name: IDKB
+  aliases:
+  - Intelligent Driving Knowledge Base
+  section: H
+  subsection: Traffic rules and driving-test QA
+  task_type: QA + VQA (driving handbooks, theory tests, simulated road tests)
+  modality: multimodal
+  language: Multilingual
+  domain_subtopic: driving knowledge base for LVLMs across countries
+  size: '>1 million data items'
+  license: unknown
+  access: paper only (contact authors)
+  dataset_url: null
+  paper_url: https://arxiv.org/abs/2409.02914
+  year: 2024
+  cited_in: []
+  bibkey: null
+  source_quote: we propose IDKB, a large-scale dataset containing over one million data items collected from various countries
+  verified: true
+  notes: 'Project page (unfetched): 4dvlab.github.io/project_page/idkb.html. 15 LVLMs evaluated; fine-tuning data. Question language not stated on page; ''multi'' inferred from ''various countries''. Sub-heading: traffic-rule / theory-test QA.'
+- name: SUTD-TrafficQA
+  aliases: []
+  section: H
+  subsection: Roadside traffic-video QA
+  task_type: VQA (video QA over traffic events; 6 reasoning tasks)
+  modality: multimodal
+  language: English
+  domain_subtopic: causal/event reasoning QA over in-the-wild traffic videos
+  size: 10,080 in-the-wild videos; 62,535 QA pairs
+  license: unknown
+  access: request
+  dataset_url: https://github.com/sutdcv/SUTD-TrafficQA
+  paper_url: https://arxiv.org/abs/2103.15538
+  year: 2021
+  cited_in: []
+  bibkey: null
+  source_quote: based on the collected 10,080 in-the-wild videos and annotated 62,535 QA pairs.
+  verified: true
+  notes: 'CVPR 2021. Largely third-person/roadside traffic video rather than ego-driving. Download via request on project page (released July 2021). Sub-heading: roadside traffic video QA.'
+- name: TUMTraffic-VideoQA
+  aliases: []
+  section: H
+  subsection: Roadside traffic-video QA
+  task_type: VQA + captioning + grounding (video MCQ, referred-object captioning, spatio-temporal grounding)
+  modality: multimodal
+  language: English
+  domain_subtopic: roadside-camera traffic video QA (TUM), adverse weather and anomalies
+  size: 1,000 videos; 85,000 MCQ pairs; 2,300 object captions; 5,700 grounding annotations
+  license: CC BY-NC-SA 4.0
+  access: public
+  dataset_url: https://innovation-mobility.com/en/project-providentia/a9-dataset
+  paper_url: https://arxiv.org/abs/2502.02449
+  year: 2025
+  cited_in: []
+  bibkey: null
+  source_quote: The dataset comprises 1,000 videos, featuring 85,000 multiple-choice QA pairs,
+  verified: true
+  notes: 'Roadside/infrastructure cameras, not ego-driving. Project site (unfetched): traffix-videoqa.com. Sub-heading: roadside traffic video QA. Project page traffix-videoqa.github.io fetched 2026-10-25: ''The TUMTraf VideoQA Dataset is licensed under CC BY-NC-SA 4.0.'''
+- name: Spider (car_1 database)
+  aliases:
+  - Spider 1.0
+  - car_1
+  section: I
+  subsection: ''
+  task_type: semantic parsing / NL-to-query (text-to-SQL)
+  modality: text
+  language: English
+  domain_subtopic: 'cross-domain text-to-SQL; includes a car database (car_1: cars_data, car_makers, model_list, continents, countries)'
+  size: 10,181 questions, 5,693 unique SQL queries, 200 databases, 138 domains (whole benchmark); car_1 subset size not stated
+  license: unknown (CC BY-SA 4.0 commonly reported, not confirmed on fetched page)
+  access: public
+  dataset_url: https://yale-lily.github.io/spider
+  paper_url: https://arxiv.org/abs/1809.08887
+  year: 2018
+  cited_in: []
+  bibkey: null
+  source_quote: 'Spider: A Large-Scale Human-Labeled Dataset for Complex and Cross-Domain Semantic Parsing and Text-to-SQL Task'
+  verified: true
+  notes: 'EMNLP 2018 (Yu et al.). Paper fetched. car_1 confirmed this session: raw.githubusercontent.com/taoyds/spider/master/evaluation_examples/gold_example.txt contains 92 gold SQL lines tagged car_1 (e.g. ''SELECT count(*) FROM CONTINENTS;\tcar_1''); car_1 is in the dev split. Only the car_1 schema is automotive; the rest of Spider is unrelated. HF datasets-server check returned HTTP 500 (auth outage) this session.'
+- name: COVESA Vehicle Signal Specification (VSS)
+  aliases:
+  - VSS
+  - GENIVI VSS
+  section: K
+  subsection: Standards and schemas
+  task_type: KG/ontology (signal taxonomy / data model)
+  modality: text
+  language: English
+  domain_subtopic: standardised tree of vehicle signals/attributes (.vspec)
+  size: not stated on README
+  license: MPL-2.0
+  access: public
+  dataset_url: https://github.com/COVESA/vehicle_signal_specification
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: Vehicle Signal Specification - standardized way to describe automotive data
+  verified: true
+  notes: 'Docs: https://covesa.github.io/vehicle_signal_specification/. Source .vspec files transformable to JSON/CSV/YAML etc. Useful as a canonical vocabulary for vehicle attributes/specs; not an annotated NLP corpus.'
+- name: schema.org Automotive extension (auto.schema.org) / Car & Vehicle types
+  aliases:
+  - Markup for Autos
+  - GAO - Generic Automotive Ontology (W3C Automotive Ontology Community Group)
+  section: K
+  subsection: Standards and schemas
+  task_type: KG/ontology (web vocabulary)
+  modality: text
+  language: English
+  domain_subtopic: vehicle/car vocabulary for structured web markup (Vehicle, Car, Motorcycle, BusOrCoach, engine/fuel/body properties)
+  size: Vehicle/Car types plus ~15 extension properties and 3 enumerations
+  license: unknown (schema.org terms not stated on fetched pages)
+  access: public
+  dataset_url: https://schema.org/docs/automotive.html
+  paper_url: null
+  year: 2016
+  cited_in: []
+  bibkey: null
+  source_quote: This page provides background Information on the use of schema.org for marking up automobiles.
+  verified: true
+  notes: Also fetched https://schema.org/Car (v30.1, 2026-09-16; properties bodyType, fuelType, vehicleEngine, vehicleIdentificationNumber, vehicleTransmission, etc.) and https://www.w3.org/community/gao/ (Automotive Ontology Community Group; extension proposals for schema.org, announced 2018-06-18). Contributors Hepp, Kuzinski, Trypuz, Szczepanski (MakoLab). Maps directly onto AutoSpecNER label set.
+- name: NHTSA vPIC (Vehicle Product Information Catalog) VIN decoder API & standalone database
+  aliases:
+  - vPIC
+  section: K
+  subsection: Make, model and VIN catalogues
+  task_type: VIN decoding / vehicle identification lookup (structured)
+  modality: text
+  language: English
+  domain_subtopic: VIN decoding; makes, models, manufacturers (US)
+  size: not stated
+  license: unknown
+  access: public
+  dataset_url: https://vpic.nhtsa.dot.gov/api/
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: The Decode VIN API will decode the VIN and the decoded output will be made available in the format of Key-value pairs.
+  verified: true
+  notes: US government reference resource, not an annotated corpus. API endpoints for DecodeVIN (incl. partial VINs, flat file), GetAllMakes, GetModelsForMake(Year), manufacturers. Standalone database download offered on page (format not stated). Useful as gazetteer/normalisation target for make/model NER.
+- name: vehiclesdb
+  aliases: []
+  section: K
+  subsection: Make, model and VIN catalogues
+  task_type: reference table / gazetteer (make-model catalogue)
+  modality: text
+  language: English
+  domain_subtopic: make/model catalogue reconciled from official vehicle registers (cars, motorcycles, mopeds, vans, trucks, buses)
+  size: '19,282 models, 933 makes, 6 kinds (page header); v2026.10.3 table: 15,068 models, 934 makes, 18 countries'
+  license: CC BY 4.0 (data; upstream sources OGL v3 / CC0 / CC BY noted)
+  access: public
+  dataset_url: https://github.com/vehiclesdb/vehiclesdb
+  paper_url: null
+  year: 2026
+  cited_in: []
+  bibkey: null
+  source_quote: 'Official, openly-licensed sources only: vehicle registers, type-approval catalogues, and government statistics.'
+  verified: true
+  notes: Formats CSV, Parquet, JSON, SQLite; fields incl. kind, make_name, model_name, body_types, countries, aliases, popularity deciles. Monthly releases (built 2026-10-10). Counts on page are inconsistent (19,282 vs 15,068). Candidate catalogue for linking MAKE/MODEL spans (A/K overlap).
+- name: vehicle-makes-models
+  aliases:
+  - vehicle-makes-models (gor3a)
+  section: K
+  subsection: Make, model and VIN catalogues
+  task_type: reference table (make -> model -> generation -> engine specs)
+  modality: text
+  language: English
+  domain_subtopic: car makes/models/generations/engine specifications
+  size: 164 makes, 2,621 models, 7,169 generations, 30,390 engines
+  license: ODbL 1.0 (data); MIT (code)
+  access: public
+  dataset_url: https://github.com/gor3a/vehicle-makes-models
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: Free, open dataset of car makes → models → generations → engine specs (164 makes, 30k+ engines).
+  verified: true
+  notes: JSON/CSV/SQLite; regenerated weekly; sourced from autoevolution.com plus Egyptian-market additions. Spec-sheet style data (engine codes, power) relevant to ENGINE_SPEC/TRIM normalisation.
+- name: us-car-models-data
+  aliases: []
+  section: K
+  subsection: Make, model and VIN catalogues
+  task_type: reference table (US car models by year)
+  modality: text
+  language: English
+  domain_subtopic: US car make/model list 1992-2026
+  size: over 15,000 car models (one CSV per year)
+  license: unknown (LICENSE file linked; terms not shown)
+  access: public
+  dataset_url: https://github.com/AbhiOnlyOne/us-car-models-data
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: A comprehensive dataset featuring over 15,000 car models spanning from 1992 to 2026.
+  verified: true
+  notes: 'Access detail: public (free tier; paid tier for extended specs). Maintainer states the free version will no longer be updated. Fields of free tier not stated. Gazetteer use only.'
+- name: VehicleName - multilingual automotive name database
+  aliases: []
+  section: K
+  subsection: Make, model and VIN catalogues
+  task_type: lexicon / gazetteer (models, brands, terms with cross-market aliases)
+  modality: text
+  language: English, Chinese (Simplified and Traditional), Japanese
+  domain_subtopic: vehicle model and brand names across markets, segment classes, terminology
+  size: 3,030 vehicle models, 164 brands, 72 terms (data v1.2.0)
+  license: CC BY-SA 4.0
+  access: public
+  dataset_url: https://github.com/ixiehao/VehicleName
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: 面向 AI 与人类的 4 语言(en / zh-CN / zh-TW / ja)汽车名词资料库:车型、品牌、术语、级别分类与跨市场异名。
+  verified: true
+  notes: JSON + Markdown builds. Directly useful for MAKE/MODEL normalisation across English/Chinese/Japanese (A/K overlap).
+- name: Wikidata 'car model' class (Q3231690) and vehicle subgraph
+  aliases: []
+  section: K
+  subsection: Make, model and VIN catalogues
+  task_type: KG (SPARQL-queryable)
+  modality: text
+  language: Multilingual
+  domain_subtopic: automobile models/brands/manufacturers in Wikidata
+  size: not stated (instance count not shown on item page)
+  license: unknown (Wikidata structured data is CC0 per site policy; not captured on fetched page)
+  access: public
+  dataset_url: https://www.wikidata.org/wiki/Q3231690
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: industrial car model associated with a brand, defined usually from an engineering point of view by a combination of chassis/bodywork
+  verified: true
+  notes: Subclass of 'vehicle model' (Q29048322); aliases 'automobile model', 'model of car'. No packaged Wikidata vehicle subset found on Kaggle/Zenodo/GitHub; derive via query.wikidata.org (P31=Q3231690).
+- name: Italian Automotive Glossary
+  aliases:
+  - Italian Automotive Glossary (DealerMax)
+  section: K
+  subsection: Glossaries and knowledge graphs
+  task_type: lexicon / glossary (schema.org DefinedTerm)
+  modality: text
+  language: Italian
+  domain_subtopic: 'automotive terminology: vehicle technology, finance/contract, aftersales, regulation'
+  size: 212 terms (JSON Lines, ~324 KB)
+  license: CC BY 4.0
+  access: public
+  dataset_url: https://huggingface.co/datasets/DealerMax/italian-automotive-glossary
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: 212 Italian-language automotive glossary terms used in the DealerMax network of car dealer websites.
+  verified: true
+  notes: 'Fields: language, category (motore, garanzie, finanziamento, documenti, aftermarket...), term, slug, definition. Small but clean lexicon.'
+- name: EVKG - Electric Vehicle Knowledge Graph
+  aliases: []
+  section: K
+  subsection: Glossaries and knowledge graphs
+  task_type: KG/ontology
+  modality: text
+  language: English
+  domain_subtopic: EV adoption, charging infrastructure, electricity network, EV specifications (geospatial KG)
+  size: not stated on fetched pages (83 classes / 69 properties reported in search snippet, unverified)
+  license: MIT (GitHub repository)
+  access: public
+  dataset_url: https://github.com/EVKG/evkg
+  paper_url: https://arxiv.org/abs/2304.04893
+  year: 2023
+  cited_in: []
+  bibkey: null
+  source_quote: As a flexible and extensible platform, the EVKG is capable of accommodating a wide range of data sources
+  verified: true
+  notes: 'Qi, Zhu, Mai, Zhang; arXiv Apr 2023 (Transactions in GIS 27(4) per search, not fetched). RDF graph generated by Python scripts from Atlas EV Hub, HIFLD, EV Specifications, KnowWhereGraph, AFDC. Org page README: ''Meanwhile, this work will provide an ontology for various EV-related knowledge.'''
+- name: Car-identification - Autohome car knowledge graph & QA
+  aliases:
+  - Car-identification (LongxingHu) - Autohome car knowledge graph & QA
+  section: K
+  subsection: Glossaries and knowledge graphs
+  task_type: KG construction + simple QA (plus image classification)
+  modality: multimodal
+  language: Chinese
+  domain_subtopic: Chinese car brands/series knowledge graph built from Autohome text
+  size: 'text: 284 brands, 2,058 car series; images: 55,945 (155 brands, 900 series)'
+  license: unknown
+  access: public
+  dataset_url: https://github.com/LongxingHu/Car-identification
+  paper_url: null
+  year: null
+  cited_in: []
+  bibkey: null
+  source_quote: 准备好数据集后，使用文本数据集构建汽车知识图谱以及搭建一个简单的汽车问答系统。
+  verified: true
+  notes: 'Access detail: public (Baidu Pan download). Hobby/learning project; data not in repo. The only fetchable Chinese automotive KG with released data; chenjj9527/Car_Knowledge_Graph (207 brands/1,519 series/31,768 models per blog) has no README.'

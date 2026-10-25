@@ -7,6 +7,7 @@ body:
       value: |
         Thanks for proposing an entry. Please read the inclusion and verification rules in CONTRIBUTING.md first.
         A corpus is listed only if it is freely downloadable **or** described in a public paper; fee-based commercial catalogues are excluded.
+        Each section may carry a short note under its heading (for example, why a section is empty); if your entry makes a note out of date, say so in Notes.
   - type: input
     id: name
     attributes:
@@ -38,6 +39,11 @@ body:
     validations:
       required: true
   - type: input
+    id: subsection
+    attributes:
+      label: Sub-heading
+      description: Optional. An existing sub-heading within the section, copied exactly from data/corpora.yaml (e.g. "Consumer and expert reviews"), or a new one. Leave empty for none.
+  - type: input
     id: task_type
     attributes:
       label: Task type
@@ -60,7 +66,7 @@ body:
     id: language
     attributes:
       label: Language
-      description: e.g. English, Chinese, German; "Multi" for multilingual.
+      description: e.g. English, Chinese, German; several separated by ", " (e.g. "English, Korean"); "Multilingual" for many; "n/a (images)" for non-linguistic data.
     validations:
       required: true
   - type: input
@@ -115,7 +121,7 @@ body:
     id: cited_in
     attributes:
       label: Cited in
-      description: Which of our papers cite it (AutoSpecNER, Auto-AdvER, Auto-Features, journal, text2solr, MSc), if any.
+      description: Which of our public papers cite it (AutoSpecNER, Auto-AdvER, Auto-Features, Useful Diversity (text2solr)), if any.
   - type: input
     id: bibkey
     attributes:
