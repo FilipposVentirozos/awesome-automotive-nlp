@@ -1,0 +1,56 @@
+[
+  {
+    "name": "CarExpert",
+    "aliases": [
+      "CarExpert in-car RAG QA"
+    ],
+    "section": "G",
+    "subsection": "",
+    "ours": false,
+    "authors": null,
+    "task_type": "QA",
+    "task_short": "QA",
+    "modality": "text",
+    "language": "English",
+    "domain_subtopic": "in-car retrieval-augmented QA over vehicle manuals (BMW)",
+    "size": "not stated",
+    "size_short": "not stated",
+    "license": "unknown",
+    "access": "paper only (contact authors)",
+    "dataset_url": null,
+    "paper_url": "https://aclanthology.org/2023.emnlp-industry.56/",
+    "year": 2023,
+    "cited_in": [],
+    "bibkey": null,
+    "source_quote": "CarExpert outperforms state-of-the-art LLMs in generating natural, safe and car-specific answers.",
+    "verified": true,
+    "notes": "System paper (Rony et al., EMNLP 2023 Industry Track) describing 'CarExpert, an in-car retrieval-augmented conversational question-answering system'. ACL Anthology page lists no code or data link; dataset release not stated. Parent of the Giebisch 2025 / Habicht 2025 / DeepTest 2026 evaluation sets."
+  },
+  {
+    "name": "DeepTest 2026 LLM Testing Competition: automotive manual assistant benchmark",
+    "aliases": [
+      "DeepTest Tool Competition 2026"
+    ],
+    "section": "G",
+    "subsection": "",
+    "ours": false,
+    "authors": null,
+    "task_type": "QA",
+    "task_short": "QA",
+    "modality": "text",
+    "language": "English",
+    "domain_subtopic": "testing an LLM car-manual retrieval assistant for missed safety warnings",
+    "size": "not stated on abstract page",
+    "size_short": "not stated",
+    "license": "unknown",
+    "access": "paper only (contact authors)",
+    "dataset_url": null,
+    "paper_url": "https://arxiv.org/abs/2604.12615",
+    "year": 2026,
+    "cited_in": [],
+    "bibkey": null,
+    "source_quote": "Four tools competed in benchmarking an LLM-based car manual information retrieval application",
+    "verified": true,
+    "notes": "Competition report (Sorokin, Vasilev, Pasini; DeepTest@ICSE 2026), not a corpus per se: a RAG car-manual assistant is the system under test and tools generate failure-revealing user inputs. Included as an evaluation-set lead in the CarExpert family; low priority for the list."
+  }
+]

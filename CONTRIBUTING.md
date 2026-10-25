@@ -1,6 +1,6 @@
 # Contributing
 
-Thank you for helping to grow the list. Everything in `README.md` is generated from two YAML files, so a contribution is an edit to `data/corpora.yaml` or `data/papers.yaml` followed by one command.
+Thank you for helping to grow the list. `README.md`, the `modalities/` pages and the CSV and JSON downloads in `data/` are all generated from two YAML files, so a contribution is an edit to `data/corpora.yaml` or `data/papers.yaml` followed by one command.
 
 ## Inclusion rule
 
@@ -30,6 +30,29 @@ The primary axis is the application area, bucket codes `A` to `K` (listed in the
 - **Section notes.** Every bucket is rendered, even when it has no entries. A section may carry one short italic note under its heading, kept in `SECTION_NOTES` in `scripts/build_readme.py`, which explains a gap (for example, why section J is empty) or points to where related corpora are listed. Propose a change to a note in the pull request that makes it necessary.
 - **Merging.** No buckets are merged (`MERGE_INTO` in `scripts/build_readme.py` is empty). Adding a pair such as `"J": "B"` would fold a bucket with fewer than three entries into its neighbour, with a line saying so.
 
+## Short Task and Size columns
+
+The tables show `task_short` and `size_short` so that they stay narrow; the full `task_type` and `size` stay in the YAML and in the downloads. If you leave them out of an issue, the maintainer fills them in.
+
+**`task_short`** is one label, or two joined by `" + "` (for example `QA + VQA`), at most 22 characters, using exactly these labels (case matters). The renderer rejects any other label and names the entry. To add a label, add it to `TASK_LABELS` in `scripts/build_readme.py` and to this list in the same pull request.
+
+- Text extraction: `NER`, `fine-grained NER`, `span labelling`, `entity linking`, `relation extraction`
+- Opinion and classification: `ABSA`, `sentiment`, `summarisation`, `classification`
+- Question answering and vision-language: `QA`, `VQA`, `video QA`, `captioning`, `explanation`, `grounding`, `retrieval`, `hallucination`
+- Dialogue and speech: `dialogue`, `tool calling`, `SLU`, `ASR`, `audio-visual ASR`, `noise / acoustics`
+- Images: `image classification`, `re-identification`, `damage detection`
+- Queries: `semantic parsing`, `text-to-SQL`
+- Safety records: `complaint text`, `recall text`, `investigation text`, `service bulletins`, `crash narratives`, `incident reports`
+- Knowledge resources: `KG / ontology`, `gazetteer`, `lexicon`, `schema / standard`, `VIN decoding`
+- Documents and listings: `patents`, `requirements`, `listings`
+
+**`size_short`** is the headline figure and its unit, at most 26 characters, with no prose: for example `659 adverts`, `42.3k descriptions`, `16,185 images`, `460k QA pairs`, `20.0M reviews`, `100+ h speech`. Rules:
+
+- Every number in `size_short` must appear in that entry's `size`. Exact figures may be shortened with `k` (thousand) or `M` (million), rounding only, as in 42,300 -> `42.3k`. Never add or derive figures: two stated figures may sit side by side (`3,381/225/903 comments`), but a sum that the source does not state may not.
+- Keep the source's hedges: `~` for approximately, `N+` for "more than" or "over".
+- Use `h` for hours, `GB` and `MB` for file sizes, lower-case `k` and upper-case `M`.
+- Write `not stated` when the source does not give a size, or gives one only for a larger collection whose automotive part is not counted (for example the whole of Spider or Yelp).
+
 ## Adding an entry
 
 Add one mapping to the `entries:` list. Every key must be present; use `null` where allowed. Keep free text in British English.
@@ -41,10 +64,12 @@ Add one mapping to the `entries:` list. Every key must be present; use `null` wh
 | `section` | `A`..`K` | bucket code |
 | `subsection` | string | sub-heading within the section (see above); `""` for none |
 | `task_type` | string | e.g. NER, span labelling, entity linking, attribute-value extraction, ABSA, sentiment, text classification, dialogue (task-oriented), SLU/intent+slot, ASR, TTS, QA, VQA, captioning, grounding/referring expression, semantic parsing / NL-to-query, summarisation, NLG (ad generation), fact verification, KG/ontology, image classification |
-| `modality` | `text` / `speech` / `multimodal` / `image` / `tabular+text` | |
-| `language` | string | e.g. English, Chinese, German; several languages separated by ", " (e.g. `English, Korean`); `Multilingual` for many; `n/a (images)` for non-linguistic data. The README's Languages line counts each tag |
+| `task_short` | string | the Task column: one or two labels from the vocabulary below, joined by " + " (at most 22 characters) |
+| `modality` | `text` / `speech` / `multimodal` / `image` / `tabular+text` | also decides the `modalities/` page the row appears on |
+| `language` | string | e.g. English, Chinese, German; several languages separated by ", " (e.g. `English, Korean`); `Multilingual` for many; `n/a (images)` for non-linguistic data. The Languages line counts base languages ("Chinese (Taiwan Mandarin)" counts as Chinese); `Multilingual`, `n/a (...)` and `unknown` are listed but not counted |
 | `domain_subtopic` | string | short phrase, e.g. "used-car listings", "in-car navigation dialogue" |
-| `size` | string | as stated by the source, with unit (documents, utterances, hours, images) |
+| `size` | string | as stated by the source, with unit (documents, utterances, hours, images); kept in full in the downloads |
+| `size_short` | string | the Size column: the headline figure and unit (at most 26 characters); see below |
 | `license` | string | as stated, or `unknown`. The Licence column shows a short form (the text before the first " (" or ";", at most 40 characters); keep the full terms here |
 | `access` | `public` / `request` / `paper only (contact authors)` / `forthcoming` / `unreleased` / `unknown` | `public` requires a `dataset_url`; `paper only (contact authors)` and `forthcoming` require `dataset_url: null`. The Access column shows `open`, `on request`, `paper only` and `forthcoming` for the first four |
 | `dataset_url` | http(s) URL or `null` | |
@@ -55,8 +80,8 @@ Add one mapping to the `entries:` list. Every key must be present; use `null` wh
 | `source_quote` | string | verbatim sentence from the paper or page (see above) |
 | `verified` | boolean | see the verification rule |
 | `notes` | string | splits, annotation scheme, known issues, relation to our work; may be empty |
-| `ours` | boolean, optional | `true` only for the list author's own corpora |
-| `authors` | string, optional | short form shown after the name, e.g. `Hu and Ma`; useful when `name` is a paper title |
+| `ours` | boolean, optional | `true` only for the list author's own corpora (AutoSpecNER, Auto-AdvER, Auto-Features); exported, not rendered separately. Missing means `false` in the downloads |
+| `authors` | string, optional | short form shown after the name, e.g. `Hu and Ma`; useful when `name` is a paper title. Missing means `null` (an empty cell in the CSV) |
 
 Example:
 
@@ -66,10 +91,12 @@ Example:
     section: D
     subsection: Consumer and expert reviews
     task_type: ABSA
+    task_short: ABSA
     modality: text
     language: English
     domain_subtopic: car reviews
     size: "2,000 reviews; 12,400 aspect annotations"
+    size_short: "2,000 reviews"
     license: CC BY-NC 4.0
     access: public
     dataset_url: https://example.org/example-car-reviews
@@ -82,16 +109,26 @@ Example:
     notes: "Train/dev/test split shipped with the release."
 ```
 
-## Rendering the README
+## Generated files
 
-`README.md` is generated; never edit it by hand. Install PyYAML once, then run the renderer from the repository root:
+Never edit these by hand; they are rewritten on every run and must be committed together with the YAML change:
+
+- `README.md`;
+- `modalities/README.md` and one page per modality (`text.md`, `speech.md`, `multimodal.md`, `image.md`, `tabular-text.md`), which repeat the main list's sections and sub-headings with only that modality's rows;
+- `data/corpora.json`, `data/corpora.csv`, `data/papers.json` and `data/papers.csv`: every field of every entry, in YAML field order. JSON is UTF-8 with two-space indentation; CSV is UTF-8 with a header row, lists (`aliases`, `cited_in`) joined with `"; "`, booleans as `true`/`false` and `null` as an empty cell.
+
+Install PyYAML once, then run the renderer from the repository root:
 
 ```sh
 pip install pyyaml
 python scripts/build_readme.py
 ```
 
-The script validates every entry (required fields, bucket code, access value, URL shape, cross-field consistency, duplicate names) and checks that every in-page link in the generated README resolves; it exits non-zero naming the offending entry or link if anything is wrong. `python scripts/build_readme.py --check` validates without writing. Commit the regenerated `README.md` together with the YAML change.
+The script validates every entry (required fields, bucket code, access value, `task_short` vocabulary and length, `size_short` length, URL shape, cross-field consistency, duplicate names) and checks every link on every generated page: relative links must reach a file, and every `#anchor` must match a heading (GitHub's rules: the heading emoji drops out, a following space becomes a leading `-`, and a variation selector U+FE0F is kept). It exits non-zero naming the offending entry or link.
+
+`python scripts/build_readme.py --check` writes nothing and fails if any generated file is out of date with the YAML (README.md is compared without its "Generated on" date line), or if `modalities/` holds a page the renderer did not generate. Run it before opening a pull request.
+
+Section and top-level headings carry one emoji each, set in `HEADING_EMOJI` in `scripts/build_readme.py`; sub-headings carry none.
 
 ## Pull-request checklist
 
@@ -99,6 +136,7 @@ The script validates every entry (required fields, bucket code, access value, UR
 - [ ] Corpus rows are in `data/corpora.yaml`; papers with no public data are in `data/papers.yaml`.
 - [ ] `source_quote` is verbatim from the paper or page; `verified` is set honestly; no invented URLs.
 - [ ] `section` is a bucket code `A`..`K`, `subsection` reuses an existing sub-heading string where one fits, and `access` is one of the allowed values.
-- [ ] `python scripts/build_readme.py` exits 0 and the regenerated `README.md` is committed.
+- [ ] `task_short` uses the vocabulary above; every number in `size_short` appears in `size`.
+- [ ] `python scripts/build_readme.py` exits 0, and the regenerated `README.md`, `modalities/` pages and `data/` exports are committed (`python scripts/build_readme.py --check` passes).
 - [ ] Free text is in British English (licence, catalogue, labelled).
 - [ ] One corpus or paper per pull request where practical.

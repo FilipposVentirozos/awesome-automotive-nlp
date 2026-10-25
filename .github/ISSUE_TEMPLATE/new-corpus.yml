@@ -50,6 +50,11 @@ body:
       description: e.g. NER, span labelling, ABSA, SLU/intent+slot, ASR, VQA, semantic parsing / NL-to-query.
     validations:
       required: true
+  - type: input
+    id: task_short
+    attributes:
+      label: Task (short)
+      description: Optional; the maintainer will fill it if blank. One or two labels from the vocabulary in CONTRIBUTING.md joined by " + " (e.g. "QA + VQA"), at most 22 characters.
   - type: dropdown
     id: modality
     attributes:
@@ -83,6 +88,11 @@ body:
       description: As stated by the source, with unit (documents, utterances, hours, images).
     validations:
       required: true
+  - type: input
+    id: size_short
+    attributes:
+      label: Size (short)
+      description: Optional; the maintainer will fill it if blank. Headline figure and unit, at most 26 characters (e.g. "659 adverts", "42.3k descriptions"); every number must appear in Size.
   - type: input
     id: license
     attributes:

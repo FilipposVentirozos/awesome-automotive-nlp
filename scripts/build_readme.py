@@ -1,22 +1,31 @@
 #!/usr/bin/env python3
-"""Render README.md for awesome-automotive-nlp from data/corpora.yaml and data/papers.yaml.
+"""Render README.md, the modalities/ pages and the CSV/JSON exports for awesome-automotive-nlp.
+
+Sources: data/corpora.yaml and data/papers.yaml (the single source of truth).
 
 Usage:
-    python scripts/build_readme.py           validate both YAML files and write README.md
-    python scripts/build_readme.py --check   validate only; do not write
+    python scripts/build_readme.py           validate the YAML, then write README.md, modalities/*.md and
+                                             data/{corpora,papers}.{json,csv}
+    python scripts/build_readme.py --check   validate and render in memory; write nothing; fail if any
+                                             committed output is out of date (README.md is compared
+                                             without its "Generated on" date line)
 
-Exit status: 0 on success; 1 if any entry fails validation (every failure is printed
-to stderr with the entry name) or if a Contents link would not resolve; 2 if a file
-cannot be read or parsed.
+Exit status: 0 on success; 1 on a validation error (printed with the entry name), a broken link or
+anchor, or (with --check) an out-of-date output; 2 if a file cannot be read or parsed.
 
 Dependencies: Python 3.9+ and PyYAML (pip install pyyaml). Nothing else.
 """
 from __future__ import annotations
 
 import argparse
+import csv
 import datetime as dt
+import io
+import json
+import posixpath
 import re
 import sys
+import unicodedata
 from collections import Counter, OrderedDict
 from pathlib import Path
 
@@ -30,7 +39,6 @@ ROOT = Path(__file__).resolve().parent.parent
 CORPORA_FILE = ROOT / "data" / "corpora.yaml"
 PAPERS_FILE = ROOT / "data" / "papers.yaml"
 TEMPLATE_FILE = ROOT / "scripts" / "README.template.md"
-README_FILE = ROOT / "README.md"
 
 # Taxonomy: bucket code -> (name as decided in TAXONOMY.md, one-line definition from SCHEMA.md).
 BUCKETS: "OrderedDict[str, tuple[str, str]]" = OrderedDict([
@@ -58,6 +66,27 @@ BUCKETS: "OrderedDict[str, tuple[str, str]]" = OrderedDict([
            "automotive ontologies (e.g. VSS), KGs, taxonomies, lexicons")),
 ])
 
+# One emoji at the start of each section and top-level heading (sub-headings get none). In the anchor GitHub
+# drops the emoji, keeps the following space as a leading "-", and KEEPS a variation selector (U+FE0F, a
+# combining mark): "🗂️ Taxonomy" -> "#\uFE0F-taxonomy" (checked against the GitHub Markdown API).
+HEADING_EMOJI = {
+    "A": "\U0001F697", "B": "\U0001F3F7\uFE0F", "C": "\U0001F9E9", "D": "\u2B50", "E": "\u26A0\uFE0F",
+    "F": "\U0001F527", "G": "\U0001F5E3\uFE0F", "H": "\U0001F6E3\uFE0F", "I": "\U0001F50E", "J": "\U0001F4B7",
+    "K": "\U0001F578\uFE0F",
+    "Taxonomy": "\U0001F5C2\uFE0F", "Related papers (no public data)": "\U0001F4C4",
+    "How to cite": "\U0001F4DD", "Contributing": "\U0001F91D", "Contents": "\U0001F4D1",
+}
+
+# Modality pages: YAML value -> (file stem, emoji, page title). Order is the order of the "Browse by modality" line.
+MODALITY_PAGES = OrderedDict([
+    ("text", ("text", "\U0001F4DD", "Text")),
+    ("speech", ("speech", "\U0001F399\uFE0F", "Speech")),
+    ("multimodal", ("multimodal", "\U0001F3AC", "Multimodal")),
+    ("image", ("image", "\U0001F5BC\uFE0F", "Images")),
+    ("tabular+text", ("tabular-text", "\U0001F4CA", "Tabular + text")),
+])
+MODALITY_DIR = "modalities"
+
 # Optional merging of thin buckets into a neighbour, e.g. {"J": "B"}. Empty: every bucket renders on its own.
 MERGE_INTO: dict = {}
 MIN_ROWS = 3
@@ -65,7 +94,7 @@ MIN_ROWS = 3
 # One italic line rendered directly under a section heading (explains a gap or points elsewhere).
 SECTION_NOTES = {
     "C": ("No public automotive-specific attribute-extraction or catalogue-linking corpus was found. "
-          "Auto-Features (forthcoming, under Our corpora) is built for this task; the general product-attribute "
+          "Auto-Features (forthcoming, listed below) is built for this task; the general product-attribute "
           "sets MAVE, OA-Mine and AE-110K contain no automotive category."),
     "H": ("For papers and models on language in autonomous driving, see "
           "[Awesome-LLM4AD](https://github.com/Thinklab-SJTU/Awesome-LLM4AD), which this section complements; "
@@ -76,11 +105,27 @@ SECTION_NOTES = {
           "Listing corpora with free text are in section B."),
 }
 
+# Controlled vocabulary for task_short (documented in CONTRIBUTING.md). One label, or two joined by " + ".
+TASK_LABELS = (
+    "NER", "fine-grained NER", "span labelling", "entity linking", "relation extraction",
+    "ABSA", "sentiment", "summarisation", "classification",
+    "QA", "VQA", "video QA", "captioning", "explanation", "grounding", "retrieval", "hallucination",
+    "dialogue", "tool calling", "SLU", "ASR", "audio-visual ASR", "noise / acoustics",
+    "image classification", "re-identification", "damage detection",
+    "semantic parsing", "text-to-SQL",
+    "complaint text", "recall text", "investigation text", "service bulletins", "crash narratives",
+    "incident reports",
+    "KG / ontology", "gazetteer", "lexicon", "schema / standard", "VIN decoding",
+    "patents", "requirements", "listings",
+)
+TASK_SHORT_MAX = 22
+SIZE_SHORT_MAX = 26
+
 ACCESS_VALUES = ("public", "request", "paper only (contact authors)", "forthcoming", "unreleased", "unknown")
 # Labels shown in the Access column; the YAML keeps the values above.
 ACCESS_LABELS = {"public": "open", "request": "on request",
                  "paper only (contact authors)": "paper only", "forthcoming": "forthcoming"}
-MODALITY_VALUES = ("text", "speech", "multimodal", "image", "tabular+text")
+MODALITY_VALUES = tuple(MODALITY_PAGES)
 LICENCE_MAX = 40
 
 NoneType = type(None)
@@ -90,11 +135,13 @@ REQUIRED_FIELDS = {
     "aliases": (list,),
     "section": (str,),
     "subsection": (str,),   # "" allowed: rows without a sub-heading
-    "task_type": (str,),
+    "task_type": (str,),    # full description (exports)
+    "task_short": (str,),   # Task column
     "modality": (str,),
     "language": (str,),
     "domain_subtopic": (str,),
-    "size": (str,),
+    "size": (str,),         # as stated by the source (exports)
+    "size_short": (str,),   # Size column
     "license": (str,),
     "access": (str,),
     "dataset_url": (str, NoneType),
@@ -107,14 +154,21 @@ REQUIRED_FIELDS = {
     "notes": (str,),
 }
 OPTIONAL_FIELDS = {
-    "ours": (bool,),    # the list author's own corpora; rendered first under "Our corpora"
-    "authors": (str,),  # short form, e.g. "Hu and Ma"; shown after the name
+    "ours": (bool,),    # the list author's own corpora (exported; false when absent)
+    "authors": (str,),  # short form, e.g. "Hu and Ma"; shown after the name (exported; null when absent)
 }
-NON_EMPTY_STRINGS = ("name", "task_type", "modality", "language", "domain_subtopic",
-                     "size", "license", "access", "source_quote")
+OPTIONAL_DEFAULTS = {"ours": False, "authors": None}
+# Column order of the CSV and JSON exports (the YAML field order).
+EXPORT_FIELDS = ["name", "aliases", "section", "subsection", "ours", "authors", "task_type", "task_short",
+                 "modality", "language", "domain_subtopic", "size", "size_short", "license", "access",
+                 "dataset_url", "paper_url", "year", "cited_in", "bibkey", "source_quote", "verified", "notes"]
+NON_EMPTY_STRINGS = ("name", "task_type", "task_short", "modality", "language", "domain_subtopic",
+                     "size", "size_short", "license", "access", "source_quote")
 URL_RE = re.compile(r"^https?://\S+$")
 DASH = "\u2014"
+DOT = " \u00b7 "
 ELLIPSIS = "\u2026"
+DATE_LINE = "_Generated on "
 
 
 # --------------------------------------------------------------------------- loading / validation
@@ -180,6 +234,19 @@ def validate(entries: list, label: str, *, papers: bool = False) -> list:
         modality = e.get("modality")
         if isinstance(modality, str) and modality not in MODALITY_VALUES:
             err(e, i, f"modality '{modality}' is not one of {list(MODALITY_VALUES)}")
+        task_short = e.get("task_short")
+        if isinstance(task_short, str) and task_short.strip():
+            if len(task_short) > TASK_SHORT_MAX:
+                err(e, i, f"task_short '{task_short}' is {len(task_short)} characters (max {TASK_SHORT_MAX})")
+            parts = task_short.split(" + ")
+            if len(parts) > 2:
+                err(e, i, f"task_short '{task_short}' joins more than two labels")
+            for part in parts:
+                if part not in TASK_LABELS:
+                    err(e, i, f"task_short label '{part}' is not in the vocabulary (CONTRIBUTING.md)")
+        size_short = e.get("size_short")
+        if isinstance(size_short, str) and len(size_short) > SIZE_SHORT_MAX:
+            err(e, i, f"size_short '{size_short}' is {len(size_short)} characters (max {SIZE_SHORT_MAX})")
         for field in ("dataset_url", "paper_url"):
             value = e.get(field)
             if isinstance(value, str) and not URL_RE.match(value):
@@ -231,9 +298,27 @@ def esc(text) -> str:
 
 
 def slug(heading: str) -> str:
-    """GitHub-style anchor for a Markdown heading (before duplicate suffixing)."""
-    s = re.sub(r"[^\w\- ]", "", heading.strip().lower())
-    return s.replace(" ", "-")
+    """GitHub-style anchor for a Markdown heading (before duplicate suffixing), as github-slugger does it:
+    lower-case; keep letters, combining marks, numbers, "_", "-" and spaces; drop everything else (punctuation,
+    emoji); spaces become "-". So "🚗 A. Cars & vans" -> "-a-cars--vans" and "🗂️ Taxonomy" -> "\uFE0F-taxonomy"."""
+    kept = [ch for ch in heading.strip().lower()
+            if ch in " -" or unicodedata.category(ch)[0] in "LMN" or unicodedata.category(ch) == "Pc"]
+    return "".join(kept).replace(" ", "-")
+
+
+def title(key: str, text: str = None) -> str:
+    """Heading text with its emoji, e.g. title("Taxonomy") -> "🗂️ Taxonomy"."""
+    text = key if text is None else text
+    emoji = HEADING_EMOJI.get(key)
+    return f"{emoji} {text}" if emoji else text
+
+
+def section_title(code: str) -> str:
+    return title(code, f"{code}. {BUCKETS[code][0]}")
+
+
+def anchor(key: str, text: str = None) -> str:
+    return "#" + slug(title(key, text))
 
 
 def by_name(entries: list) -> list:
@@ -270,7 +355,7 @@ def links_cell(e: dict) -> str:
         parts.append("paper only")
     if e["paper_url"]:
         parts.append(f"[paper]({e['paper_url']})")
-    return " \u00b7 ".join(parts) if parts else DASH
+    return DOT.join(parts) if parts else DASH
 
 
 def year_cell(e: dict) -> str:
@@ -282,44 +367,38 @@ def cited_cell(e: dict) -> str:
 
 
 def name_cell(e: dict) -> str:
-    # Aliases stay in the YAML (for search); they are not rendered.
+    # Aliases stay in the YAML and the exports (for search); they are not rendered.
     name = esc(e["name"])
     if e.get("authors"):
         name += f" ({esc(e['authors'])})"
     return name
 
 
-CORPUS_HEADER = ("| Corpus | Task | Modality | Lang | Size | Licence | Access | Year | Links | Cited in |\n"
-                 "|---|---|---|---|---|---|---|---|---|---|")
-PAPER_HEADER = ("| Paper | Task | Lang | Year | Link | Cited in |\n"
-                "|---|---|---|---|---|---|")
-
-
-def corpus_row(e: dict) -> str:
-    cells = [name_cell(e), esc(e["task_type"]), esc(e["modality"]), esc(e["language"]), esc(e["size"]),
-             esc(licence_short(e["license"])), esc(ACCESS_LABELS.get(e["access"], e["access"])),
-             year_cell(e), links_cell(e), cited_cell(e)]
-    return "| " + " | ".join(cells) + " |"
-
-
-def paper_row(e: dict) -> str:
-    link = f"[paper]({e['paper_url']})" if e["paper_url"] else DASH
-    cells = [name_cell(e), esc(e["task_type"]), esc(e["language"]), year_cell(e), link, cited_cell(e)]
-    return "| " + " | ".join(cells) + " |"
-
-
-def corpus_table(entries: list) -> str:
-    return "\n".join([CORPUS_HEADER] + [corpus_row(e) for e in entries])
+def corpus_table(entries: list, *, with_modality: bool = True) -> str:
+    cols = ["Corpus", "Task"] + (["Modality"] if with_modality else []) + \
+           ["Lang", "Size", "Licence", "Access", "Year", "Links", "Cited in"]
+    lines = ["| " + " | ".join(cols) + " |", "|" + "---|" * len(cols)]
+    for e in entries:
+        cells = [name_cell(e), esc(e["task_short"])] + ([esc(e["modality"])] if with_modality else []) + \
+                [esc(e["language"]), esc(e["size_short"]), esc(licence_short(e["license"])),
+                 esc(ACCESS_LABELS.get(e["access"], e["access"])), year_cell(e), links_cell(e), cited_cell(e)]
+        lines.append("| " + " | ".join(cells) + " |")
+    return "\n".join(lines)
 
 
 def paper_table(entries: list) -> str:
-    return "\n".join([PAPER_HEADER] + [paper_row(e) for e in entries])
+    lines = ["| Paper | Task | Lang | Year | Link | Cited in |", "|---|---|---|---|---|---|"]
+    for e in entries:
+        link = f"[paper]({e['paper_url']})" if e["paper_url"] else DASH
+        lines.append("| " + " | ".join([name_cell(e), esc(e["task_short"]), esc(e["language"]),
+                                         year_cell(e), link, cited_cell(e)]) + " |")
+    return "\n".join(lines)
 
 
 # --------------------------------------------------------------------------- sections
 
 def group_sections(corpora: list) -> list:
-    """Return [(code, heading, entries, notes, subsections)] for every bucket A-K, in order.
+    """Return [(code, entries, notes, subsections)] for every bucket A-K, in order.
 
     subsections is [(subsection, entries)]: the "" group first, then named sub-headings in
     first-appearance order from the YAML; rows within each group are sorted by name.
@@ -334,7 +413,7 @@ def group_sections(corpora: list) -> list:
             merged_from[dst].append(src)
             groups[src] = []
     sections = []
-    for code, (name, _definition) in BUCKETS.items():
+    for code in BUCKETS:
         entries = groups[code]
         notes = [SECTION_NOTES[code]] if code in SECTION_NOTES else []
         notes += [f"Bucket {src} ({BUCKETS[src][0]}) has fewer than {MIN_ROWS} entries and is merged into this section."
@@ -345,17 +424,16 @@ def group_sections(corpora: list) -> list:
                 order.append(e["subsection"])
         order.sort(key=lambda s: s != "")  # stable: the "" group first, named ones keep their order
         subsections = [(s, by_name([e for e in entries if e["subsection"] == s])) for s in order]
-        sections.append((code, f"{code}. {name}", entries, notes, subsections))
+        sections.append((code, entries, notes, subsections))
     return sections
 
 
-def render_summary(corpora: list) -> str:
-    total = len({e["name"].strip().casefold() for e in corpora})
-    modalities = Counter(e["modality"] for e in corpora)
-    mod_text = ", ".join(f"{n} {m}" for m, n in sorted(modalities.items(), key=lambda kv: (-kv[1], kv[0])))
+def language_counts(corpora: list):
+    """(languages, others): ranked (tag, count) pairs. Base languages are counted, so
+    "Chinese (Taiwan Mandarin)" counts as Chinese; Cantonese stays separate. 'n/a ...', 'unknown' and
+    'Multilingual' are listed last and not counted as languages."""
     tags = Counter()
     for e in corpora:
-        # Count base languages: "Chinese (Taiwan Mandarin)" counts as Chinese. Cantonese stays separate.
         tags.update({t.strip() if t.strip().startswith("n/a") else t.split(" (")[0].strip()
                      for t in e["language"].split(", ") if t.strip()})
 
@@ -368,38 +446,70 @@ def render_summary(corpora: list) -> str:
 
     languages = rank([(t, n) for t, n in tags.items() if not not_a_language(t)])
     others = rank([(t, n) for t, n in tags.items() if not_a_language(t)])
-    summary = f"**{total} corpora** ({mod_text}) in {len(languages)} languages."
-    langs = "**Languages:** " + " \u00b7 ".join(f"{esc(t)} {n}" for t, n in languages + others)
-    return summary + "\n\n" + langs
+    return languages, others
 
 
-def render_contents(ours: list, sections: list, papers: list) -> str:
-    lines = []
-    if ours:
-        lines.append(f"- [Our corpora](#{slug('Our corpora')}) ({len(ours)})")
-    lines.append(f"- [Corpora by application area](#{slug('Corpora by application area')})")
-    for _code, heading, entries, _notes, _subs in sections:
-        lines.append(f"  - [{heading}](#{slug(heading)}) ({len(entries)})")
-    lines.append(f"- [Related papers (no public data)](#{slug('Related papers (no public data)')}) ({len(papers)})")
-    lines += ["- [Taxonomy](#taxonomy)", "- [How to cite](#how-to-cite)", "- [Contributing](#contributing)"]
-    return "\n".join(lines)
+def unique_count(corpora: list) -> int:
+    return len({e["name"].strip().casefold() for e in corpora})
 
 
-def render_our_corpora(ours: list) -> str:
-    if not ours:
-        return ""
-    return "\n".join([
-        "## Our corpora", "",
-        "The Auto Trader UK advertisement corpora this list grew out of. "
-        "They are also listed under their application areas below.", "",
-        corpus_table(ours),
+def languages_line(corpora: list) -> str:
+    languages, others = language_counts(corpora)
+    return "**Languages:** " + DOT.join(f"{esc(t)} {n}" for t, n in languages + others)
+
+
+def render_summary(corpora: list) -> str:
+    modalities = Counter(e["modality"] for e in corpora)
+    mod_text = ", ".join(f"{n} {m}" for m, n in sorted(modalities.items(), key=lambda kv: (-kv[1], kv[0])))
+    languages, _others = language_counts(corpora)
+    summary = f"**{unique_count(corpora)} corpora** ({mod_text}) in {len(languages)} languages."
+    return summary + "\n\n" + languages_line(corpora)
+
+
+def render_badges(corpora: list) -> str:
+    n_languages = len(language_counts(corpora)[0])
+    return " ".join([
+        "[![Awesome](https://awesome.re/badge.svg)](https://awesome.re)",
+        "[![Licence: CC BY 4.0](https://img.shields.io/badge/licence-CC%20BY%204.0-lightgrey.svg)](LICENSE)",
+        f"![Corpora: {unique_count(corpora)}](https://img.shields.io/badge/corpora-{unique_count(corpora)}-blue.svg)",
+        f"![Languages: {n_languages}](https://img.shields.io/badge/languages-{n_languages}-blue.svg)",
     ])
 
 
-def render_sections(sections: list) -> str:
+def by_modality(corpora: list) -> "OrderedDict[str, list]":
+    return OrderedDict((m, [e for e in corpora if e["modality"] == m]) for m in MODALITY_PAGES)
+
+
+def render_browse(corpora: list) -> str:
+    groups = by_modality(corpora)
+    assert sum(len(v) for v in groups.values()) == len(corpora)
+    parts = [f"[{label}]({MODALITY_DIR}/{stem}.md) ({len(groups[m])})"
+             for m, (stem, _emoji, label) in MODALITY_PAGES.items()]
+    return "**Browse by modality:** " + DOT.join(parts)
+
+
+def contents_section_lines(sections: list, *, indent: str = "  ") -> list:
+    return [f"{indent}- [{section_title(code)}]({anchor(code, f'{code}. {BUCKETS[code][0]}')}) ({len(entries)})"
+            for code, entries, _notes, _subs in sections]
+
+
+def render_contents(sections: list, papers: list) -> str:
+    lines = [f"- [{title('Taxonomy')}]({anchor('Taxonomy')})",
+             "- [Corpora by application area](#corpora-by-application-area)"]
+    lines += contents_section_lines(sections)
+    lines.append(f"- [Browse by modality]({MODALITY_DIR}/README.md)")
+    lines.append(f"- [{title('Related papers (no public data)')}]({anchor('Related papers (no public data)')}) ({len(papers)})")
+    lines.append(f"- [{title('How to cite')}]({anchor('How to cite')})")
+    lines.append(f"- [{title('Contributing')}]({anchor('Contributing')})")
+    return "\n".join(lines)
+
+
+def render_sections(sections: list, *, with_modality: bool = True, keep_empty: bool = True) -> str:
     out = ["## Corpora by application area", ""]
-    for _code, heading, entries, notes, subsections in sections:
-        out += [f"### {heading}", ""]
+    for code, entries, notes, subsections in sections:
+        if not entries and not keep_empty:
+            continue
+        out += [f"### {section_title(code)}", ""]
         for note in notes:
             out += [f"*{note}*", ""]
         if not entries and not notes:
@@ -407,12 +517,12 @@ def render_sections(sections: list) -> str:
         for subsection, rows in subsections:
             if subsection:
                 out += [f"#### {subsection}", ""]
-            out += [corpus_table(rows), ""]
+            out += [corpus_table(rows, with_modality=with_modality), ""]
     return "\n".join(out).rstrip()
 
 
 def render_papers(papers: list) -> str:
-    out = ["## Related papers (no public data)", "",
+    out = [f"## {title('Related papers (no public data)')}", "",
            "Automotive NLP papers with no public corpus: each describes a system, benchmark or evaluation whose "
            "data has not been released. They are listed with the academic reference so that readers can contact "
            "the authors.", ""]
@@ -424,7 +534,7 @@ def render_papers(papers: list) -> str:
 
 
 def render_taxonomy() -> str:
-    lines = [f"- **{code}. {name}**: {definition}" for code, (name, definition) in BUCKETS.items()]
+    lines = [f"- **{section_title(code)}**: {definition}" for code, (_name, definition) in BUCKETS.items()]
     if MERGE_INTO:
         merges = "; ".join(f"{src} into {dst}" for src, dst in MERGE_INTO.items())
         lines += ["", f"A bucket with fewer than {MIN_ROWS} entries is merged into its named neighbour by the "
@@ -432,22 +542,106 @@ def render_taxonomy() -> str:
     return "\n".join(lines)
 
 
-def check_anchors(markdown: str) -> list:
-    """Every in-page link must resolve; every Contents link must land on the heading it names."""
-    headings, link_lines, in_code = [], [], False
+def render_readme(template: str, corpora: list, papers: list, sections: list) -> str:
+    replacements = {
+        "{{BADGES}}": render_badges(corpora),
+        "{{SUMMARY}}": render_summary(corpora),
+        "{{BROWSE}}": render_browse(corpora),
+        "{{CONTENTS}}": render_contents(sections, papers),
+        "{{TAXONOMY}}": render_taxonomy(),
+        "{{SECTIONS}}": render_sections(sections),
+        "{{PAPERS}}": render_papers(papers),
+        "{{DATE}}": dt.date.today().isoformat(),
+    }
+    output = template
+    for token, text in replacements.items():
+        output = output.replace(token, text)  # plain replace: the BibTeX braces must survive untouched
+    # {{H2:Name}} -> "## <emoji> Name"; {{A:Name}} -> its anchor (e.g. "-contributing").
+    output = re.sub(r"\{\{H2:([^}]+)\}\}", lambda m: f"## {title(m.group(1))}", output)
+    output = re.sub(r"\{\{A:([^}]+)\}\}", lambda m: slug(title(m.group(1))), output)
+    leftover = re.findall(r"\{\{[A-Z0-9_]+(?::[^}]*)?\}\}", output)
+    if leftover:
+        raise ValueError(f"unreplaced template token(s): {leftover}")
+    return re.sub(r"\n{3,}", "\n\n", output).rstrip() + "\n"
+
+
+def render_modality_page(modality: str, rows: list) -> str:
+    stem, emoji, label = MODALITY_PAGES[modality]
+    sections = group_sections(rows)
+    present = [s for s in sections if s[1]]
+    languages, _ = language_counts(rows)
+    out = [f"# {emoji} {label}", "",
+           f"Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: see "
+           f"[Taxonomy](../README.md{anchor('Taxonomy')}).", "",
+           f"**{unique_count(rows)} corpora** in {len(languages)} languages.", "",
+           languages_line(rows), "",
+           f"## {title('Contents')}", "",
+           "- [Corpora by application area](#corpora-by-application-area)"]
+    out += contents_section_lines(present)
+    out += ["", render_sections(present, with_modality=False, keep_empty=False), "", "---", "",
+            f"_Generated by `python scripts/build_readme.py` from `data/corpora.yaml`. "
+            f"Do not edit this page by hand._"]
+    return re.sub(r"\n{3,}", "\n\n", "\n".join(out)).rstrip() + "\n"
+
+
+def render_modality_index(corpora: list) -> str:
+    groups = by_modality(corpora)
+    out = ["# Browse by modality", "",
+           "Part of [awesome-automotive-nlp](../README.md). Each page lists the corpora of one modality under the "
+           "same taxonomy, sections and sub-headings as the main list.", "",
+           "| Modality | Corpora | Languages | Page |", "|---|---|---|---|"]
+    for m, (stem, emoji, label) in MODALITY_PAGES.items():
+        rows = groups[m]
+        out.append(f"| {emoji} {label} | {len(rows)} | {len(language_counts(rows)[0])} | [{stem}.md]({stem}.md) |")
+    out += ["", "---", "",
+            "_Generated by `python scripts/build_readme.py` from `data/corpora.yaml`. Do not edit this page by hand._"]
+    return "\n".join(out) + "\n"
+
+
+# --------------------------------------------------------------------------- exports
+
+def export_records(entries: list) -> list:
+    return [{f: (e[f] if f in e else OPTIONAL_DEFAULTS[f]) for f in EXPORT_FIELDS} for e in entries]
+
+
+def to_json(entries: list) -> str:
+    return json.dumps(export_records(entries), ensure_ascii=False, indent=2) + "\n"
+
+
+def to_csv(entries: list) -> str:
+    def cell(value):
+        if value is None:
+            return ""
+        if isinstance(value, bool):
+            return "true" if value else "false"
+        if isinstance(value, list):
+            return "; ".join(value)
+        return str(value)
+
+    buf = io.StringIO()
+    writer = csv.writer(buf, quoting=csv.QUOTE_MINIMAL, lineterminator="\n")
+    writer.writerow(EXPORT_FIELDS)
+    for record in export_records(entries):
+        writer.writerow([cell(record[f]) for f in EXPORT_FIELDS])
+    return buf.getvalue()
+
+
+# --------------------------------------------------------------------------- link and anchor checks
+
+def heading_targets(markdown: str):
+    """Return ({anchor: heading text} after GitHub's -1, -2 suffixing, Counter of raw slugs)."""
+    headings, in_code = [], False
     for line in markdown.splitlines():
         if line.startswith("```"):
             in_code = not in_code
             continue
-        if in_code:
-            continue
-        m = re.match(r"^#{1,6}\s+(.+?)\s*$", line)
-        if m:
-            headings.append(m.group(1))
-        link_lines.append(line)
-    raw_count = Counter(slug(h) for h in headings)
+        if not in_code:
+            m = re.match(r"^#{1,6}\s+(.+?)\s*$", line)
+            if m:
+                headings.append(m.group(1))
+    raw = Counter(slug(h) for h in headings)
     seen, target_of = {}, {}
-    for h in headings:  # GitHub suffixes repeated slugs with -1, -2, ... in document order
+    for h in headings:
         s = slug(h)
         if s in seen:
             seen[s] += 1
@@ -455,26 +649,62 @@ def check_anchors(markdown: str) -> list:
         else:
             seen[s] = 0
         target_of[s] = h
-    errors, in_contents = [], False
-    for line in link_lines:
-        if line.startswith("## "):
-            in_contents = line == "## Contents"
-        for text, target in re.findall(r"\[([^\]]+)\]\(#([^)\s]+)\)", line):
-            if target not in target_of:
-                errors.append(f"README: link '[{text}](#{target})' has no matching heading")
-            elif in_contents and target_of[target] != text:
-                errors.append(f"README: Contents link '[{text}](#{target})' lands on heading '{target_of[target]}'")
-            elif in_contents and raw_count[target] > 1:
-                errors.append(f"README: Contents target '#{target}' is shared by {raw_count[target]} headings; "
-                              f"rename the sub-heading that repeats '{text}'")
+    return target_of, raw
+
+
+def check_links(pages: dict, extra_files: set) -> list:
+    """pages: {repo-relative path: markdown}. Every relative link must reach a file that exists (on disk,
+    generated now, or in extra_files); every #anchor must match a heading of the target page; every
+    Contents link must land on the heading it names, and on no other."""
+    targets = {path: heading_targets(md) for path, md in pages.items()}
+    errors = []
+    for path, md in pages.items():
+        base = posixpath.dirname(path)
+        in_code, in_contents = False, False
+        for line in md.splitlines():
+            if line.startswith("```"):
+                in_code = not in_code
+                continue
+            if in_code:
+                continue
+            if line.startswith("## "):
+                in_contents = line == f"## {title('Contents')}"
+            for target in re.findall(r"\]\(([^)\s]+)\)", line):
+                if re.match(r"^(https?:|mailto:)", target):
+                    continue
+                file_part, _, frag = target.partition("#")
+                dest = posixpath.normpath(posixpath.join(base, file_part)) if file_part else path
+                if dest.startswith(".."):
+                    errors.append(f"{path}: link '{target}' points outside the repository")
+                    continue
+                if dest not in pages and dest not in extra_files and not (ROOT / dest).exists():
+                    errors.append(f"{path}: link '{target}' points to a missing file '{dest}'")
+                    continue
+                if frag:
+                    if dest not in targets:
+                        errors.append(f"{path}: link '{target}' has an anchor into a non-generated file")
+                    elif frag not in targets[dest][0]:
+                        errors.append(f"{path}: link '{target}' has no matching heading in {dest}")
+            if in_contents:
+                for text, target in re.findall(r"\[([^\]]+)\]\(#([^)\s]+)\)", line):
+                    target_of, raw = targets[path]
+                    if target in target_of and target_of[target] != text:
+                        errors.append(f"{path}: Contents link '[{text}](#{target})' lands on '{target_of[target]}'")
+                    elif raw[target] > 1:
+                        errors.append(f"{path}: Contents target '#{target}' is shared by {raw[target]} headings")
     return errors
 
 
 # --------------------------------------------------------------------------- main
 
+def strip_date(text: str) -> str:
+    return "\n".join(l for l in text.splitlines() if not l.startswith(DATE_LINE))
+
+
 def main(argv=None) -> int:
-    parser = argparse.ArgumentParser(description="Validate data/*.yaml and render README.md.")
-    parser.add_argument("--check", action="store_true", help="validate only; do not write README.md")
+    parser = argparse.ArgumentParser(description="Validate data/*.yaml; render README.md, modalities/ and exports.")
+    parser.add_argument("--check", action="store_true",
+                        help="write nothing; fail if README.md, modalities/ or the exports are out of date")
     args = parser.parse_args(argv)
 
     corpora = load_entries(CORPORA_FILE)
@@ -485,57 +715,72 @@ def main(argv=None) -> int:
     if errors:
         for message in errors:
             print("ERROR " + message, file=sys.stderr)
-        print(f"build_readme.py: {len(errors)} validation error(s); README.md not written", file=sys.stderr)
+        print(f"build_readme.py: {len(errors)} validation error(s); nothing written", file=sys.stderr)
         return 1
     print(f"Validated {len(corpora)} corpora and {len(papers)} related paper(s): no errors.")
 
-    ours = sorted([e for e in corpora if e.get("ours")], key=lambda e: (e["section"], e["name"].casefold()))
-    sections = group_sections(corpora)
     try:
         template = TEMPLATE_FILE.read_text(encoding="utf-8")
     except OSError as exc:
         print(f"build_readme.py: cannot read template: {exc}", file=sys.stderr)
         return 2
-    replacements = {
-        "{{SUMMARY}}": render_summary(corpora),
-        "{{CONTENTS}}": render_contents(ours, sections, papers),
-        "{{OUR_CORPORA}}": render_our_corpora(ours),
-        "{{SECTIONS}}": render_sections(sections),
-        "{{PAPERS}}": render_papers(papers),
-        "{{TAXONOMY}}": render_taxonomy(),
-        "{{DATE}}": dt.date.today().isoformat(),
-    }
-    output = template
-    for token, text in replacements.items():
-        output = output.replace(token, text)  # plain replace: the BibTeX braces must survive untouched
-    leftover = re.findall(r"\{\{[A-Z_]+\}\}", output)
-    if leftover:
-        print(f"build_readme.py: unreplaced template token(s): {leftover}", file=sys.stderr)
+    sections = group_sections(corpora)
+    try:
+        readme = render_readme(template, corpora, papers, sections)
+    except ValueError as exc:
+        print(f"build_readme.py: {exc}", file=sys.stderr)
         return 2
-    output = re.sub(r"\n{3,}", "\n\n", output).rstrip() + "\n"
-    anchor_errors = check_anchors(output)
-    if anchor_errors:
-        for message in anchor_errors:
-            print("ERROR " + message, file=sys.stderr)
-        print("build_readme.py: README.md not written", file=sys.stderr)
-        return 1
-    if args.check:
-        print("Anchors resolve. --check: README.md not written.")
-        return 0
-    README_FILE.write_text(output, encoding="utf-8")
 
-    def sub_counts(subs):
-        named = [(s, len(rows)) for s, rows in subs if s]
-        flat = sum(len(rows) for s, rows in subs if not s)
-        parts = ([f"(no sub-heading) {flat}"] if flat else []) + [f"{s} {n}" for s, n in named]
-        return "; ".join(parts)
+    pages = {"README.md": readme, f"{MODALITY_DIR}/README.md": render_modality_index(corpora)}
+    for modality, rows in by_modality(corpora).items():
+        pages[f"{MODALITY_DIR}/{MODALITY_PAGES[modality][0]}.md"] = render_modality_page(modality, rows)
+    exports = {"data/corpora.json": to_json(corpora), "data/corpora.csv": to_csv(corpora),
+               "data/papers.json": to_json(papers), "data/papers.csv": to_csv(papers)}
+
+    link_errors = check_links(pages, set(exports))
+    if link_errors:
+        for message in link_errors:
+            print("ERROR " + message, file=sys.stderr)
+        print("build_readme.py: broken link(s); nothing written", file=sys.stderr)
+        return 1
+
+    outputs = {**pages, **exports}
+    if args.check:
+        stale = []
+        for path, text in outputs.items():
+            target = ROOT / path
+            current = target.read_text(encoding="utf-8") if target.exists() else None
+            same = (current is not None and
+                    (strip_date(current) == strip_date(text) if path == "README.md" else current == text))
+            if not same:
+                stale.append(path)
+        expected = {p for p in pages if p.startswith(MODALITY_DIR + "/")}
+        extra = sorted(f"{MODALITY_DIR}/{p.name}" for p in (ROOT / MODALITY_DIR).glob("*.md")
+                       if f"{MODALITY_DIR}/{p.name}" not in expected) if (ROOT / MODALITY_DIR).is_dir() else []
+        if stale or extra:
+            for path in stale:
+                print(f"ERROR out of date: {path} (run python scripts/build_readme.py and commit the result)",
+                      file=sys.stderr)
+            for path in extra:
+                print(f"ERROR not generated by the renderer: {path} (delete it)", file=sys.stderr)
+            return 1
+        print(f"Links and anchors resolve on {len(pages)} pages. --check: all {len(outputs)} outputs are up to date.")
+        return 0
+
+    for path, text in outputs.items():
+        target = ROOT / path
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(text, encoding="utf-8")
 
     print("Sections rendered (rows; sub-headings):")
-    for code, _heading, entries, notes, subs in sections:
-        flag = " [note]" if notes else ""
-        print(f"  {code} {len(entries):3d}{flag}  {sub_counts(subs)}")
-    print(f"Our corpora: {len(ours)}; related papers: {len(papers)}. All in-page anchors resolve.")
-    print(f"Wrote {README_FILE.relative_to(ROOT)} ({output.count(chr(10))} lines).")
+    for code, entries, notes, subs in sections:
+        named = "; ".join(f"{s} {len(r)}" for s, r in subs if s)
+        flat = sum(len(r) for s, r in subs if not s)
+        detail = "; ".join(([f"(no sub-heading) {flat}"] if flat else []) + ([named] if named else []))
+        print(f"  {code} {len(entries):3d}{' [note]' if notes else ''}  {detail}")
+    print("Modality pages: " + ", ".join(f"{MODALITY_PAGES[m][2]} {len(r)}" for m, r in by_modality(corpora).items()))
+    print(f"Links and anchors resolve on {len(pages)} pages.")
+    print(f"Wrote {len(outputs)} files: " + ", ".join(outputs))
     return 0
 
 

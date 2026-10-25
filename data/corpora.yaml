@@ -1,12 +1,14 @@
 # awesome-automotive-nlp: single source of truth for corpora.
 # One entry per corpus. Field reference, inclusion rule and verification rule: CONTRIBUTING.md.
-# Render README.md with: python scripts/build_readme.py
+# Render README.md (and the CSV/JSON exports and modalities/ pages) with: python scripts/build_readme.py
 #
 # section     bucket code A-K (see the Taxonomy section of README.md)
 # subsection  sub-heading within the section; "" for none. Sub-headings render in first-appearance order.
+# task_short  Task column: one or two labels from the vocabulary in CONTRIBUTING.md, joined by " + " (max 22 chars)
+# size_short  Size column: headline figure and unit, e.g. "659 adverts" or "not stated" (max 26 chars)
 # access      public | request | paper only (contact authors) | forthcoming | unreleased | unknown
 # verified    true ONLY if dataset_url or paper_url was fetched and the page matched
-# ours        true for the list author's own corpora (rendered first, under "Our corpora")
+# ours        true for the list author's own corpora (AutoSpecNER, Auto-AdvER, Auto-Features)
 
 entries:
 - name: AutoSpecNER
@@ -15,10 +17,12 @@ entries:
   subsection: 'Text: vehicle-domain NER'
   ours: true
   task_type: NER
+  task_short: NER
   modality: text
   language: English
   domain_subtopic: vehicle-specification extraction from used-car adverts
   size: 659 vehicle adverts; 15 entity types; 4,609 entity spans (public release); 100-document 3-annotator IAA study
+  size_short: 659 adverts
   license: CC BY 4.0
   access: public
   dataset_url: https://github.com/FilipposVentirozos/AutoSpecNER
@@ -35,10 +39,12 @@ entries:
   subsection: Listings and adverts
   ours: true
   task_type: span labelling
+  task_short: span labelling
   modality: text
   language: English
   domain_subtopic: used-car adverts (vehicle condition, history and commercial offers)
   size: 605 UK car adverts; 104,382 tokens; 3 span labels (Condition / Historic / Sales Options); 113-advert 3-annotator IAA subset; 3 cross-validation folds
+  size_short: 605 adverts
   license: CC BY 4.0 (data and guidelines); MIT (code)
   access: public
   dataset_url: https://github.com/FilipposVentirozos/Auto-AdvER
@@ -57,10 +63,12 @@ entries:
   subsection: ''
   ours: true
   task_type: feature-conditioned NER; entity linking
+  task_short: NER + entity linking
   modality: text
   language: English
   domain_subtopic: standard and optional car features in used-car adverts, linked to the vehicle's own catalogue
   size: 1,256 UK car adverts (430 human-gold + 925 LLM-silver, 99 overlap); 188,980 (advert, feature) instances per fold
+  size_short: 1,256 adverts
   license: to be announced at release
   access: forthcoming
   dataset_url: null
@@ -79,10 +87,12 @@ entries:
   section: A
   subsection: 'Text: vehicle-domain NER'
   task_type: NER (text side of natural-language vehicle retrieval; VehicleFinder is a keyword-based cross-modal retrieval system)
+  task_short: NER
   modality: text
   language: English
   domain_subtopic: 'traffic-surveillance vehicle retrieval: NL descriptions of vehicles on the road (UA-DETRAC-based test set); entities vehicle_color, vehicle_brand, vehicle_model, vehicle_type, vehicle_orientation, vehicle_location'
   size: 42.3k labelled natural-language descriptions of vehicle tracks (arXiv abstract); released as FindVehicle_train/test in CoNLL-style .txt and .jsonl (NER + relation labels), hosted on Google Drive / Baidu Cloud Disk
+  size_short: 42.3k descriptions
   license: unknown (no licence file shown in the GitHub repo)
   access: public
   dataset_url: https://github.com/GuanRunwei/FindVehicle
@@ -103,10 +113,12 @@ entries:
   section: A
   subsection: 'Text: vehicle-domain NER'
   task_type: fine-grained NER
+  task_short: fine-grained NER
   modality: text
   language: English
   domain_subtopic: Wikipedia sentences, automatically annotated (EWNERTC, Sahin et al. 2017); 'automotive' is one of 49 domains; the citing paper lists tags such as fuel, engine, dates, manufacturers, models, generation and vehicle types
   size: 'EWNERTC: ~7 million automatically annotated Wikipedia sentences in 49 domains; the ''automotive'' domain subset has 10,349 sentences (paper Table, row 12); entity types capped at the top 50 per domain for the experiments'
+  size_short: 10,349 sentences
   license: CC BY 4.0 (Mendeley Data record)
   access: public
   dataset_url: https://data.mendeley.com/datasets/cdcztymf4k/1
@@ -125,10 +137,12 @@ entries:
   section: F
   subsection: Manuals, FAQs & question answering
   task_type: NER (domain-adversarial multi-task training)
+  task_short: NER
   modality: text
   language: Korean, English
   domain_subtopic: automotive FAQ / conversational AI assistant utterances
   size: unknown (not stated in the citing papers)
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -148,10 +162,12 @@ entries:
   section: A
   subsection: 'Images: make, model and type recognition'
   task_type: image classification (fine-grained make/model/year)
+  task_short: image classification
   modality: image
   language: n/a (images)
   domain_subtopic: car make-model-year recognition from web photos
   size: 16,185 images, 196 classes (8,144 train / 8,041 test)
+  size_short: 16,185 images
   license: unknown
   access: public
   dataset_url: https://www.tensorflow.org/datasets/catalog/cars196
@@ -168,10 +184,12 @@ entries:
   section: A
   subsection: 'Images: make, model and type recognition'
   task_type: image classification + attribute prediction + car-model verification
+  task_short: image classification
   modality: image
   language: n/a (images)
   domain_subtopic: car make/model hierarchy with model-level attributes; web + surveillance images
   size: 163 makes, 1,716 models, 136,726 whole-car images + 27,618 part images (web); 50,000 surveillance images
+  size_short: 136,726 + 50,000 images
   license: non-commercial research only (MMLAB agreement); no redistribution
   access: request
   dataset_url: https://mmlab.ie.cuhk.edu.hk/datasets/comp_cars/index.html
@@ -188,10 +206,12 @@ entries:
   section: A
   subsection: 'Images: make, model and type recognition'
   task_type: image classification (make-model-year)
+  task_short: image classification
   modality: image
   language: n/a (images)
   domain_subtopic: crowd-sourced vehicle make/model/year recognition
   size: 291,752 images, 9,170 classes (model years 1950-2016)
+  size_short: 291,752 images
   license: MIT (as stated in repo licence section)
   access: public
   dataset_url: https://github.com/faezetta/VMMRdb
@@ -208,10 +228,12 @@ entries:
   section: A
   subsection: 'Images: make, model and type recognition'
   task_type: image classification (fine-grained, traffic surveillance) + verification
+  task_short: image classification
   modality: image
   language: n/a (images)
   domain_subtopic: surveillance-camera vehicle fine-grained recognition with 3D bounding boxes
   size: ~116k images grouped into tracks (one vehicle ID per track)
+  size_short: ~116k images
   license: research only (code); dataset licence not stated
   access: public
   dataset_url: https://github.com/JakubSochor/BoxCars
@@ -228,10 +250,12 @@ entries:
   section: A
   subsection: 'Images: make, model and type recognition'
   task_type: image classification / attribute prediction (filename-encoded specs)
+  task_short: image classification
   modality: image
   language: n/a (images)
   domain_subtopic: scraped car photos labelled with make, model, year, MSRP, horsepower, body style etc.
   size: ~60,000 exterior images (scraper collects ~297,000 pictures / ~198,000 unique URLs)
+  size_short: ~60k images
   license: unknown
   access: public
   dataset_url: https://github.com/nicolas-gervais/predicting-car-price-from-scraped-data/tree/master/picture-scraper
@@ -248,10 +272,12 @@ entries:
   section: A
   subsection: 'Images: make, model and type recognition'
   task_type: image classification (model variants) + attribute metadata
+  task_short: image classification
   modality: image
   language: n/a (images)
   domain_subtopic: scraped car model-variant images with 44-column spec metadata
   size: ~193k images (512x512); 3,778 model variants; 44-column metadata CSV; 7.58 GB
+  size_short: ~193k images
   license: other (as listed on Hugging Face)
   access: public
   dataset_url: https://huggingface.co/datasets/Unit293/car_models_3887
@@ -268,10 +294,12 @@ entries:
   section: A
   subsection: 'Images: re-identification and damage'
   task_type: re-identification
+  task_short: re-identification
   modality: image
   language: n/a (images)
   domain_subtopic: urban surveillance vehicle re-ID with type/colour/brand attributes
   size: '>50,000 images of 776 vehicles; 20 cameras; 1.0 km^2; 24 h'
+  size_short: 50k+ images
   license: non-commercial use only (no named licence)
   access: request
   dataset_url: https://vehiclereid.github.io/VeRi/
@@ -288,10 +316,12 @@ entries:
   section: A
   subsection: 'Images: re-identification and damage'
   task_type: re-identification (+ vehicle-model labels on subset)
+  task_short: re-identification
   modality: image
   language: n/a (images)
   domain_subtopic: surveillance vehicle re-ID with model labels (small Chinese city)
   size: 26,267 vehicles / 221,763 images; model labels for 10,319 vehicles (90,196 images)
+  size_short: 221,763 images
   license: academic use only; commercial use prohibited
   access: request
   dataset_url: https://www.pkuml.org/resources/pku-vehicleid.html
@@ -307,10 +337,12 @@ entries:
   section: A
   subsection: 'Images: re-identification and damage'
   task_type: re-identification
+  task_short: re-identification
   modality: image
   language: n/a (images)
   domain_subtopic: large-scale unconstrained CCTV vehicle re-ID
   size: 416,314 images of 40,671 vehicles; 174 cameras; 1 month
+  size_short: 416,314 images
   license: non-commercial (no formal licence stated)
   access: request
   dataset_url: https://github.com/PKU-IMRE/VERI-Wild
@@ -327,10 +359,12 @@ entries:
   section: A
   subsection: 'Images: re-identification and damage'
   task_type: damage detection / segmentation (image)
+  task_short: damage detection
   modality: image
   language: n/a (images)
   domain_subtopic: car body damage images (6 damage categories)
   size: 4,000 high-resolution images; >9,000 instances; 6 damage categories
+  size_short: 4,000 images
   license: unknown (licensing form required)
   access: request
   dataset_url: https://cardd-ustc.github.io/
@@ -348,10 +382,12 @@ entries:
   section: B
   subsection: Listings and adverts
   task_type: listing corpus (tables + images); image classification / price prediction
+  task_short: listings
   modality: multimodal
   language: English
   domain_subtopic: UK used-car advertisements with images, price, sales and trim tables
   size: 1,451,784 images; 899 UK-market car models; >0.25 million used-car adverts; Basic/Sales/Price/Trim/Ad/Image tables
+  size_short: 0.25M+ adverts
   license: CC BY-NC 4.0 (non-commercial research and education only)
   access: public
   dataset_url: https://deepvisualmarketing.github.io/
@@ -368,10 +404,12 @@ entries:
   section: B
   subsection: Listings and adverts
   task_type: price table with free-text listing description
+  task_short: listings
   modality: tabular+text
   language: English
   domain_subtopic: US Craigslist used-vehicle listings
   size: '~426,000 rows x 26 columns incl. free-text ''description'' (row count per derivative HF card Yoad22/craigslist-used-cars-eda; Kaggle page: 275 MB zip)'
+  size_short: ~426k rows
   license: 'CC0: Public Domain'
   access: public
   dataset_url: https://www.kaggle.com/datasets/austinreese/craigslist-carstrucks-data
@@ -389,10 +427,12 @@ entries:
   section: B
   subsection: Buyer-seller dialogue
   task_type: dialogue (buyer-seller price negotiation over marketplace listings)
+  task_short: dialogue
   modality: text
   language: English
   domain_subtopic: Craigslist listings (housing, furniture, electronics, and an unconfirmed car category); price negotiation
   size: more than 6K negotiation dialogues (5,247 train / 597 validation / 838 test) over six categories, one of which is cars
+  size_short: 6k+ dialogues
   license: unknown
   access: public
   dataset_url: https://huggingface.co/datasets/stanfordnlp/craigslist_bargains
@@ -410,10 +450,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: full-text car reviews (Edmunds) + hotel reviews (TripAdvisor)
   size: ~42,230 car reviews (model years 2007, 2008, 2009) + ~259,000 hotel reviews
+  size_short: ~42,230 car reviews
   license: CC BY 4.0
   access: public
   dataset_url: https://archive.ics.uci.edu/dataset/205/opinrank+review+dataset
@@ -431,10 +473,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: Amazon product reviews, Automotive category (parts & accessories)
   size: 'Automotive: 8.0M users, 2.0M items, 20.0M ratings/reviews, 824.9M review tokens, 1.7B metadata tokens (whole dataset 571.54M reviews)'
+  size_short: 20.0M reviews
   license: unknown (not stated on page)
   access: public
   dataset_url: https://amazon-reviews-2023.github.io/
@@ -453,10 +497,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: Amazon product reviews, Automotive category (parts & accessories), May 1996 - Oct 2018
   size: 'Automotive: 7,990,166 reviews (ratings-only 7,990,166), 932,019 product metadata records, 5-core subset 1,711,519 reviews (whole dataset 233.1 million reviews)'
+  size_short: 7,990,166 reviews
   license: unknown (not stated on page)
   access: public
   dataset_url: https://nijianmo.github.io/amazon/index.html
@@ -474,10 +520,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: local business reviews; Automotive is a business category filter (auto repair, dealers, body shops)
   size: 'whole dataset: 6,990,280 reviews, 150,346 businesses, 11 metropolitan areas; JSON tar 4.35 GB compressed / 8.65 GB uncompressed (Automotive subset not broken out)'
+  size_short: not stated
   license: intended for educational use (Yelp Dataset Terms of Use; not a standard open licence)
   access: public
   dataset_url: https://business.yelp.com/data/resources/open-dataset/
@@ -497,10 +545,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: 'consumer car reviews with 1-5 star rating (Edmunds-style: Vehicle_Title, Review_Title, Review, Rating)'
   size: 36,984 rows, 8 columns, 24.3 MB CSV; review dates 2003-2018 visible
+  size_short: 36,984 rows
   license: unknown (not stated; no dataset card)
   access: public
   dataset_url: https://huggingface.co/datasets/florentgbelidji/car-reviews
@@ -519,10 +569,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: Edmunds consumer reviews of new and used cars, popular US brands, 2000-2019
   size: not stated on page (Review.csv; one row per review with Company, Model, Year, Reviewer, Date, Title, Review, Rating)
+  size_short: not stated
   license: CC BY-SA 4.0
   access: public
   dataset_url: https://www.kaggle.com/datasets/shreemunpranav/edmunds-car-review
@@ -540,10 +592,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: summarisation
+  task_short: summarisation
   modality: tabular+text
   language: English
   domain_subtopic: Edmunds professional/expert car reviews with strengths, weaknesses, rating and specs
   size: not stated on page
+  size_short: not stated
   license: Other (specified in description)
   access: public
   dataset_url: https://www.kaggle.com/datasets/ademboukhris/expert-car-reviews-dataset
@@ -562,10 +616,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: owner reviews of electric two- and four-wheelers in India, scraped from CarDekho, CarWale and BikeWale
   size: not stated on page (multiple CSVs, one per site/vehicle type)
+  size_short: not stated
   license: 'CC0: Public Domain'
   access: public
   dataset_url: https://www.kaggle.com/datasets/deadprstkrish/ev-cars-user-reviews-india
@@ -583,10 +639,12 @@ entries:
   section: D
   subsection: Consumer and expert reviews
   task_type: sentiment
+  task_short: sentiment
   modality: tabular+text
   language: Chinese
   domain_subtopic: Chinese car-owner online reviews with per-aspect ratings and free-text advantages/disadvantages, plus sales, news and specs, 2016-2022
   size: 217,292 owner comments from 358 cities covering 13,039 models / 672 series / 127 brands; Reviews CSV 480 MB
+  size_short: 217,292 comments
   license: CC BY-NC 4.0
   access: public
   dataset_url: https://srni-car.github.io
@@ -605,10 +663,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: ABSA
+  task_short: ABSA
   modality: text
   language: English
   domain_subtopic: blog posts with opinions about automobiles (and digital cameras); entity mentions, sentiment expressions, targets, coreference
   size: 515 documents (blog posts), 19,322 sentences, 330,762 tokens (automobiles + cameras)
+  size_short: 515 documents
   license: (c) Copyright 2009-2010, J.D. Power and Associates, All rights reserved, no re-distribution; free for academic research after signed licence agreement
   access: request
   dataset_url: https://verbs.colorado.edu/jdpacorpus/README.txt
@@ -626,10 +686,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: ABSA
+  task_short: ABSA
   modality: text
   language: English, German
   domain_subtopic: forum posts on connecting and using cellphones in cars; phrase-level polarity with objects and features
   size: 1,000 forum posts per language (2,000 total), each annotated by at least four annotators
+  size_short: 2,000 forum posts
   license: unknown (described as publicly available)
   access: paper only (contact authors)
   dataset_url: null
@@ -648,10 +710,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: ABSA
+  task_short: ABSA
   modality: text
   language: Chinese
   domain_subtopic: Chinese car-forum user comments; 10 aspect topics (power, price, interior, configuration, safety, exterior, handling, fuel consumption, space, comfort) x 3 polarities
   size: training set + test set (counts not stated on fetched pages; community write-ups report ~9.9k training sentences)
+  size_short: not stated
   license: unknown (DataFountain competition agreement; download after registration)
   access: request
   dataset_url: https://www.datafountain.cn/competitions/310
@@ -670,10 +734,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: ABSA
+  task_short: ABSA
   modality: text
   language: Indonesian
   domain_subtopic: Indonesian car reviews from online automobile platforms; six aspects (fuel, machine, others, part, price, service) x pos/neg/neu
   size: 1,080 reviews (train 810 / valid 90 / test 180)
+  size_short: 1,080 reviews
   license: MIT (IndoNLU benchmark datasets)
   access: public
   dataset_url: https://huggingface.co/datasets/indonlp/indonlu
@@ -690,10 +756,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: ABSA
+  task_short: ABSA
   modality: text
   language: English, Korean
   domain_subtopic: user comments on automobiles, aspect-level sentiment
   size: 58,000+ comment-aspect pairs
+  size_short: 58k+ comment-aspect pairs
   license: research use only; redistribution prohibited
   access: request
   dataset_url: https://github.com/dmhyun/ALSAdata
@@ -711,10 +779,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: Chinese
   domain_subtopic: Chinese car review texts from Autohome and Dongchedi, 3-class polarity
   size: 9,947 reviews (3,670 positive / 3,661 neutral / 2,616 negative) per paper body; abstract page does not state size
+  size_short: 9,947 reviews
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -732,10 +802,12 @@ entries:
   section: D
   subsection: Sentiment and aspect-based gold standards
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: German
   domain_subtopic: German online news about the automotive sector annotated with sentiment, sentiment target (e.g. electromobility) and textual rationales
   size: 1,039 news articles (per paper; not stated on the Anthology abstract page)
+  size_short: 1,039 news articles
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -754,10 +826,12 @@ entries:
   section: D
   subsection: Social and video media
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English, Italian
   domain_subtopic: YouTube comments under car (and tablet) product videos annotated for polarity and informativeness/relatedness
   size: 'SenTube-A automobile subset: 3,381 train / 225 dev / 903 test comments (per Barnes et al. 2017); full corpus counts not stated on the Anthology page'
+  size_short: 3,381/225/903 comments
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -775,10 +849,12 @@ entries:
   section: D
   subsection: Social and video media
   task_type: sentiment
+  task_short: sentiment
   modality: multimodal
   language: English
   domain_subtopic: YouTube car review videos (video, audio, transcript) with continuous arousal/valence/trustworthiness and topic/entity annotations
   size: over 40 hours of user-generated video material; more than 350 reviews; 70 host speakers and 20 overdubbed narrators
+  size_short: 40+ h video
   license: EULA, academic use only
   access: request
   dataset_url: https://www.muse-challenge.org
@@ -795,10 +871,12 @@ entries:
   section: D
   subsection: Social and video media
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: English
   domain_subtopic: YouTube comments under autonomous-vehicle videos, for opinion mining about self-driving cars
   size: more than 50,000 YouTube comments plus metadata
+  size_short: 50k+ comments
   license: unknown (described as freely available)
   access: paper only (contact authors)
   dataset_url: null
@@ -816,10 +894,12 @@ entries:
   section: D
   subsection: Social and video media
   task_type: sentiment
+  task_short: sentiment
   modality: text
   language: unknown
   domain_subtopic: tweets about one automotive brand's vehicle models collected by brand/model keywords
   size: not stated on page
+  size_short: not stated
   license: CC BY 4.0
   access: public
   dataset_url: https://data.mendeley.com/datasets/hcc2h426h3/1
@@ -838,10 +918,12 @@ entries:
   section: E
   subsection: NHTSA defects, recalls and investigations (US)
   task_type: text classification
+  task_short: complaint text
   modality: tabular+text
   language: English
   domain_subtopic: NHTSA complaints
   size: all safety-related defect complaints received by NHTSA since January 1, 1995 (count not stated in dictionary; 2.2M total complaints per MORVS HF card; 51 fields)
+  size_short: 2.2M complaints
   license: unknown (US federal government work)
   access: public
   dataset_url: https://static.nhtsa.gov/odi/ffdd/cmpl/CMPL.txt
@@ -860,10 +942,12 @@ entries:
   section: E
   subsection: NHTSA defects, recalls and investigations (US)
   task_type: text classification
+  task_short: recall text
   modality: tabular+text
   language: English
   domain_subtopic: NHTSA recall campaign text
   size: all NHTSA safety-related defect and compliance campaigns since 1967 (29 fields; count not stated in dictionary)
+  size_short: not stated
   license: unknown (US federal government work)
   access: public
   dataset_url: https://static.nhtsa.gov/odi/ffdd/rcl/RCL.txt
@@ -882,10 +966,12 @@ entries:
   section: E
   subsection: NHTSA defects, recalls and investigations (US)
   task_type: text classification
+  task_short: investigation text
   modality: tabular+text
   language: English
   domain_subtopic: NHTSA defect investigation summaries
   size: all NHTSA safety-related defect investigations opened since 1972 (11 fields; count not stated)
+  size_short: not stated
   license: unknown (US federal government work)
   access: public
   dataset_url: https://static.nhtsa.gov/odi/ffdd/inv/INV.txt
@@ -904,10 +990,12 @@ entries:
   section: E
   subsection: NHTSA defects, recalls and investigations (US)
   task_type: text classification
+  task_short: service bulletins
   modality: tabular+text
   language: English
   domain_subtopic: technical service bulletins and manufacturer communications
   size: all manufacturer communications received by NHTSA since January 1, 1995, in 5-year chunks (14 fields; count not stated)
+  size_short: not stated
   license: unknown (US federal government work)
   access: public
   dataset_url: https://static.nhtsa.gov/odi/ffdd/tsbs/TSBS.txt
@@ -926,10 +1014,12 @@ entries:
   section: E
   subsection: NHTSA defects, recalls and investigations (US)
   task_type: text classification
+  task_short: complaint text
   modality: tabular+text
   language: English
   domain_subtopic: NHTSA complaints, safety ratings, recalls and investigations, 2016 onwards, refreshed daily
   size: not stated on page (version 2509 at fetch time, i.e. daily versions); complaints from 2016 onwards
+  size_short: not stated
   license: 'CC0: Public Domain'
   access: public
   dataset_url: https://www.kaggle.com/datasets/alshival/nhtsa-complaints
@@ -948,10 +1038,12 @@ entries:
   section: E
   subsection: NHTSA defects, recalls and investigations (US)
   task_type: text classification
+  task_short: complaint text
   modality: tabular+text
   language: English
   domain_subtopic: ODI consumer complaints since 1995 filtered to crash / fire / injury / death cases, with consumer narratives
   size: 213,093 records out of 2.2M total complaints
+  size_short: 213,093 records
   license: 'federal-works-and-cc0-card-metadata (card: ''CC0 1.0 applies only to MORVS-authored metadata in this card''; underlying data US federal work)'
   access: public
   dataset_url: https://huggingface.co/datasets/emperor-mew/nhtsa-complaints
@@ -970,10 +1062,12 @@ entries:
   section: E
   subsection: Recalls in other jurisdictions
   task_type: text classification
+  task_short: recall text
   modality: tabular+text
   language: English
   domain_subtopic: UK vehicle and equipment safety recalls
   size: all UK recalls since 1992, CSV ~5MB
+  size_short: ~5 MB CSV
   license: Open Government Licence v3.0
   access: public
   dataset_url: https://www.check-vehicle-recalls.service.gov.uk/
@@ -992,10 +1086,12 @@ entries:
   section: E
   subsection: Recalls in other jurisdictions
   task_type: text classification
+  task_short: recall text
   modality: tabular+text
   language: English, French
   domain_subtopic: Canadian safety recalls for vehicles, tires and child restraints (bilingual recall notice text)
   size: full database refreshed monthly (CSV/XML); count not stated on page
+  size_short: not stated
   license: Open Government Licence - Canada
   access: public
   dataset_url: https://open.canada.ca/data/en/dataset/1ec92326-47ef-4110-b7ca-959fab03f96d
@@ -1013,10 +1109,12 @@ entries:
   section: E
   subsection: Crash and automated-driving incident narratives
   task_type: text classification
+  task_short: crash narratives
   modality: multimodal
   language: English
   domain_subtopic: on-scene crash investigation cases with narratives, photos, diagrams and coded pre-crash factors (2005-2007)
   size: 6,949 investigated crashes Jan 2005 - Dec 2007 (5,470 nationally representative + 1,479 clinical cases) per NHTSA report DOT HS 811 059; data.gov page gives no count
+  size_short: 6,949 crashes
   license: 'unknown (data.gov rights: public; access level public)'
   access: public
   dataset_url: https://catalog.data.gov/dataset/national-motor-vehicle-crash-causation-survey-nmvccs-nmvccs-xml-case-viewer
@@ -1035,10 +1133,12 @@ entries:
   section: E
   subsection: Crash and automated-driving incident narratives
   task_type: text classification
+  task_short: crash narratives
   modality: tabular+text
   language: English
   domain_subtopic: manufacturer-reported crashes involving automated driving systems (ADS) and Level 2 ADAS, with a free-text Narrative field (Field 115) subject to CBI/PII redaction
   size: monthly CSV releases since June 2021, separate ADS and ADAS files; data dictionary 33 pages; latest change-log entry 10/15/2026 (reports received through September 15, 2026); row counts not stated in dictionary
+  size_short: not stated
   license: unknown (US federal government work)
   access: public
   dataset_url: https://static.nhtsa.gov/odi/ffdd/sgo-2021-01/SGO-2021-01_Data_Element_Definitions.pdf
@@ -1056,10 +1156,12 @@ entries:
   section: E
   subsection: Crash and automated-driving incident narratives
   task_type: text classification
+  task_short: incident reports
   modality: tabular+text
   language: English
   domain_subtopic: autonomous-vehicle test disengagements with free-text 'description of facts causing disengagement'
   size: annual CSVs 2020-2024 (standard, first-time filers, driverless); 2024 file ~634k characters of text, hundreds of rows per large filer; older years by request (AVarchive@dmv.ca.gov)
+  size_short: ~634k characters (2024)
   license: unknown (California public records)
   access: public
   dataset_url: https://www.dmv.ca.gov/portal/file/2024-autonomous-vehicle-disengagement-reports-csv/
@@ -1077,10 +1179,12 @@ entries:
   section: E
   subsection: Crash and automated-driving incident narratives
   task_type: text classification
+  task_short: crash narratives
   modality: text
   language: English
   domain_subtopic: police crash report narratives labelled intersection-related vs not (from coded fields)
   size: 173,512 crash records and 94,367 crash narrative records (2019-2020)
+  size_short: 94,367 narratives
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1096,10 +1200,12 @@ entries:
   section: F
   subsection: Manuals, FAQs & question answering
   task_type: QA / hallucination detection (RAG over car manual)
+  task_short: QA + hallucination
   modality: text
   language: English
   domain_subtopic: owner's-manual QA (Jeep 2023 Gladiator)
   size: 913 unique questions; 2,038 question-context-answer triples (513/100/300 train/dev/test questions + 240 excluded)
+  size_short: 913 questions
   license: CC BY 4.0 (data); AGPL-3.0 (code)
   access: public
   dataset_url: https://github.com/boschresearch/DelucionQA
@@ -1116,10 +1222,12 @@ entries:
   section: F
   subsection: Manuals, FAQs & question answering
   task_type: text-to-image / image-to-text retrieval over manuals
+  task_short: retrieval
   modality: multimodal
   language: English
   domain_subtopic: public car manuals and sales catalogue brochures
   size: not stated (archive ~7 GB incl. IKEA part)
+  size_short: not stated
   license: apache-2.0 (HF card tag); not stated in README_data
   access: public
   dataset_url: https://huggingface.co/datasets/alfassy/FETA_IKEA_CAR_MANUALS
@@ -1135,10 +1243,12 @@ entries:
   section: F
   subsection: Manuals, FAQs & question answering
   task_type: QA / FAQ classification from car manual
+  task_short: QA + classification
   modality: text
   language: Korean, English
   domain_subtopic: car-specific questions mapped to 1,526 FAQ categories derived from a car manual
   size: 45,641 questions in each of Korean and English; 1,526 FAQ categories
+  size_short: 45,641 questions
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1154,10 +1264,12 @@ entries:
   section: F
   subsection: Faults, repair and parts
   task_type: NER
+  task_short: NER
   modality: text
   language: Chinese
   domain_subtopic: automobile fault/repair texts (fault location, phenomenon, reason, repair strategy)
   size: 'three datasets: D1 ~4.5k, D2 ~5.5k, D3 ~4.0k sentences (train/test/dev splits)'
+  size_short: ~4.5k/5.5k/4.0k sentences
   license: unknown
   access: request
   dataset_url: null
@@ -1174,10 +1286,12 @@ entries:
   section: F
   subsection: Faults, repair and parts
   task_type: relation / triple extraction (instruction format)
+  task_short: relation extraction
   modality: text
   language: Chinese
   domain_subtopic: Chinese vehicle fault reports -> (component, relation, fault) triples; relations 性能故障/部件故障/组成/检测工具
   size: 1,441 instruction records (spo_0.json, 1.33 MB)
+  size_short: 1,441 records
   license: apache-2.0
   access: public
   dataset_url: https://huggingface.co/datasets/zhengr/Automotive_Industry_Fault_Data_Set
@@ -1193,10 +1307,12 @@ entries:
   section: F
   subsection: Faults, repair and parts
   task_type: NER + KG triples over repair/maintenance records
+  task_short: NER + KG / ontology
   modality: tabular+text
   language: Chinese
   domain_subtopic: real-world vehicle fleet maintenance records from Chinese repair facilities, 2020-2023, with NER annotations and fault-code causal triples
   size: 'not stated (files: fault_events.csv 33 fields, vehicle_fleet.csv 20 fields, ner_annotations.csv with 6 entity types, knowledge_graph_triples.csv)'
+  size_short: not stated
   license: CC BY 4.0
   access: public
   dataset_url: https://data.mendeley.com/datasets/r98g7g6k5t/1
@@ -1212,10 +1328,12 @@ entries:
   section: F
   subsection: Faults, repair and parts
   task_type: NER (incl. discontinuous/nested entities)
+  task_short: NER
   modality: text
   language: Chinese
   domain_subtopic: historical vehicle repair case texts -> automotive fault knowledge entities
   size: not stated in abstract
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1231,10 +1349,12 @@ entries:
   section: F
   subsection: Faults, repair and parts
   task_type: text classification / IE on service-call failure reports
+  task_short: classification
   modality: text
   language: English
   domain_subtopic: repair-order / service-department free-text failure reports
   size: not stated
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1251,10 +1371,12 @@ entries:
   subsection: Faults, repair and parts
   authors: Hu and Ma
   task_type: NER
+  task_short: NER
   modality: text
   language: Chinese
   domain_subtopic: automotive accessories and parts (accessory name, price, warranty period)
   size: unknown
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1274,10 +1396,12 @@ entries:
   section: F
   subsection: Requirements, standards and patents
   task_type: text classification (ASIL rating) / generation
+  task_short: requirements
   modality: text
   language: English
   domain_subtopic: synthetic automotive system requirements mapped to ISO 26262 ASIL levels
   size: ~1,000 samples
+  size_short: ~1,000 samples
   license: MIT
   access: public
   dataset_url: https://huggingface.co/datasets/Muhammmadd/iso26262-automotive-safety-requirements
@@ -1293,10 +1417,12 @@ entries:
   section: F
   subsection: Requirements, standards and patents
   task_type: patent corpus (classification, LM, summarisation); automotive via CPC filter
+  task_short: patents
   modality: text
   language: English
   domain_subtopic: USPTO utility patent applications 2004-2018; automotive subset obtainable by cpc_labels starting with B60
   size: full corpus 2004-2018 (abstract reports >4.5M documents); B60 subset size not stated
+  size_short: not stated
   license: cc-by-sa-4.0
   access: public
   dataset_url: https://huggingface.co/datasets/HUPD/hupd
@@ -1316,10 +1442,12 @@ entries:
   section: G
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
+  task_short: dialogue
   modality: text
   language: English
   domain_subtopic: 'in-car assistant dialogue: calendar scheduling, weather, point-of-interest navigation (KB-grounded)'
   size: 3,031 multi-turn dialogues (train 2,424 / validation 302 / test 304)
+  size_short: 3,031 dialogues
   license: 'unknown (ConvLab card: TODO)'
   access: public
   dataset_url: https://huggingface.co/datasets/ConvLab/kvret
@@ -1336,10 +1464,12 @@ entries:
   section: G
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
+  task_short: dialogue
   modality: text
   language: English
   domain_subtopic: synthetic multi-session in-car voice assistant conversations for long-term preference memory (extraction, retrieval, maintenance)
   size: 'per paper: 1,000 extraction conversations, 1,000 retrieval utterances, 3,000 maintenance utterances (not on fetched pages)'
+  size_short: 1,000 conversations
   license: unknown (no LICENSE file shown in repo)
   access: public
   dataset_url: https://github.com/johanneskirmayr/CarMem
@@ -1356,10 +1486,12 @@ entries:
   section: G
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
+  task_short: dialogue
   modality: text
   language: English
   domain_subtopic: multi-turn tool-using LLM agent benchmark for an in-car assistant (navigation, productivity, charging, vehicle control) with simulated user
   size: 254 tasks (Base 100 / Hallucination 98 / Disambiguation 56; README elsewhere says 248); 58 tools (27 set, 29 get, 2 no-op)
+  size_short: 254 tasks
   license: MIT (repo); paper CC BY-NC-ND 4.0
   access: public
   dataset_url: https://github.com/CAR-bench/car-bench
@@ -1376,10 +1508,12 @@ entries:
   section: G
   subsection: Task-oriented dialogue and tool use
   task_type: semantic parsing / NL-to-query
+  task_short: tool calling
   modality: text
   language: English
   domain_subtopic: driver utterances to in-vehicle assistant mapped to structured tool/function calls
   size: 43,087 rows + 65 held-out novel-tool rows; 25 intents, 6 domains, 30 tool schemas
+  size_short: 43,087 rows
   license: 'other (card: released for research use)'
   access: public
   dataset_url: https://huggingface.co/datasets/Senthi1Kumar/In-Vehicle-Tool-Calls-v0.2
@@ -1397,10 +1531,12 @@ entries:
   section: G
   subsection: Task-oriented dialogue and tool use
   task_type: SLU/intent+slot
+  task_short: SLU
   modality: multimodal
   language: English
   domain_subtopic: passenger commands to an in-cabin agent in autonomous vehicles (destination, route, speed, stop)
   size: 1331 utterances with commands to the AMIE agent (per paper; not on abstract page)
+  size_short: 1,331 utterances
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1417,10 +1553,12 @@ entries:
   section: G
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
+  task_short: dialogue
   modality: text
   language: Korean
   domain_subtopic: evaluation of in-vehicle assistants under fine-grained sociolinguistic control (e.g. Korean honorifics)
   size: not stated on abstract page
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1438,10 +1576,12 @@ entries:
   section: G
   subsection: Spoken commands and language understanding
   task_type: SLU/intent+slot
+  task_short: SLU
   modality: text
   language: Chinese
   domain_subtopic: 'multi-intent in-car cabin commands: music, vehicle control, map, video, radio, weather, playback, phone'
   size: 20.5k rows (train 18k / validation 1.39k / test 1.15k); 8 domains, 81 intents, 192 slots (paper); up to 5 intents per query
+  size_short: 20.5k rows
   license: apache-2.0
   access: public
   dataset_url: https://huggingface.co/datasets/Gatsby1984/MAC_SLU
@@ -1462,10 +1602,12 @@ entries:
   section: G
   subsection: Spoken commands and language understanding
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Korean
   domain_subtopic: in-car voice commands (weather, navigation, infotainment) audio+transcript
   size: 72,000 rows (train 57.6k / valid 7.2k / test 7.2k), 12.8 GB, clips 0.15-12.7 s
+  size_short: 72,000 rows
   license: apache-2.0 (tag on Angeriod/in_car_commands; not shown on _60 variant)
   access: public
   dataset_url: https://huggingface.co/datasets/Angeriod/in_car_commands_60
@@ -1482,10 +1624,12 @@ entries:
   section: G
   subsection: Assistant evaluation
   task_type: QA
+  task_short: QA
   modality: text
   language: English
   domain_subtopic: owner's-manual QA answers labelled for factual correctness (in-car assistant evaluation)
   size: not stated on abstract page
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1502,10 +1646,12 @@ entries:
   section: G
   subsection: Assistant evaluation
   task_type: text classification
+  task_short: classification
   modality: text
   language: English
   domain_subtopic: synthetic user utterances + correct/flawed in-car system responses (restaurant recommendation) for LLM-as-judge evaluation
   size: not stated on abstract page
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1522,10 +1668,12 @@ entries:
   section: G
   subsection: Assistant evaluation
   task_type: text classification
+  task_short: classification
   modality: text
   language: English
   domain_subtopic: LLM safety for vehicle voice-command authorization (execute / refuse decisions)
   size: 202 scenarios with reference decisions under a seven-class taxonomy (161 non-execution)
+  size_short: 202 scenarios
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1542,10 +1690,12 @@ entries:
   section: G
   subsection: Assistant evaluation
   task_type: text classification
+  task_short: classification
   modality: multimodal
   language: Chinese
   domain_subtopic: scripted in-cabin driver/assistant dialogue with RGB+IR video and audio for emotion and driver-state recognition
   size: 'not stated on abstract page (search snippet: ~2,000 generated multi-turn driver-assistant dialogue scripts)'
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1563,10 +1713,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Chinese
   domain_subtopic: in-car multi-channel multi-speaker conversational speech (diarization + ASR)
   size: '>100 hours multi-channel speech (train 54 GB, Dev 1.9 GB, Eval1 1.7 GB, Eval2 1.8 GB) + 40 hours in-car noise (13 GB); 60+ driving scenarios'
+  size_short: 100+ h speech
   license: CC BY-SA 4.0
   access: public
   dataset_url: https://openslr.org/159/
@@ -1584,10 +1736,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Japanese
   domain_subtopic: continuous digit recognition in real car-driving environments (close-talk + remote microphones)
   size: 14,687 utterances (7,492 close-talk, 7,195 remote); 4 in-car environments x vehicle speeds; 1 DVD
+  size_short: 14,687 utterances
   license: For research and development purposes only
   access: request
   dataset_url: https://research.nii.ac.jp/src/en/CENSREC-2.html
@@ -1605,10 +1759,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Japanese
   domain_subtopic: isolated-word recognition in real driving-car environments (close-talk + hands-free mics)
   size: 293 speakers (202 m / 91 f); 14,050 utterances per microphone; 50 words; 16 conditions (3 speeds x 6 in-car environments); 1 DVD
+  size_short: 14,050 utterances
   license: For research and development purposes only
   access: request
   dataset_url: https://research.nii.ac.jp/src/en/CENSREC-3.html
@@ -1626,10 +1782,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Czech
   domain_subtopic: 'Czech in-vehicle speech: long noisy cabin recordings with spontaneous speech (VAD tuning) + scripted prompts recorded parked and while driving (ASR)'
   size: 26 speakers for the scripted prompts; hours not stated; files full_noises.zip + prompts (Transcriber .trs transcripts)
+  size_short: 26 speakers
   license: Creative Commons - Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
   access: public
   dataset_url: https://b2find.eudat.eu/dataset/9d65f782-5271-5cb9-afd0-5c0f28667403
@@ -1647,10 +1805,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Cantonese
   domain_subtopic: 'scripted in-vehicle Cantonese speech: digits, voice commands and queries'
   size: 5 hours; 6,219 utterances; 10 speakers
+  size_short: 6,219 utterances (5 h)
   license: CC BY-NC-ND 4.0
   access: public
   dataset_url: https://huggingface.co/datasets/AlienKevin/guangzhou-cabin-speech
@@ -1667,10 +1827,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: audio-visual ASR
   modality: multimodal
   language: Cantonese
   domain_subtopic: audio-visual in-car voice command recognition (200 commands) with in-car noise augmentation
   size: 4,984 samples (8.3 hours) of 200 in-car commands from 30 native Cantonese speakers; augmented set 10x larger
+  size_short: 4,984 samples (8.3 h)
   license: CC0-1.0 (repo)
   access: public
   dataset_url: https://github.com/HLTCHKUST/CI-AVSR
@@ -1688,10 +1850,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: multimodal
   language: English
   domain_subtopic: 'naturalistic driving with driver speech (6-channel audio: mic array + close-talk) while interacting with speech systems / secondary tasks; plus video, CAN-bus, GPS, pedals'
   size: 37 female + 40 male drivers (at time of page); Toyota RAV4; Release 3.0 (Aug 2020)
+  size_short: 37 F + 40 M drivers
   license: unknown
   access: public
   dataset_url: https://utdrive.utdallas.edu/corpus
@@ -1709,10 +1873,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: English
   domain_subtopic: 'in-vehicle speech for route navigation: digits, navigation expressions, street/location sentences, phonetically balanced sentences, WOZ route-navigation dialogues'
   size: target +1000 speakers across the US (Eurospeech 2001); ~500 speakers recorded in 2001 per later chapter; 14 noise conditions across 6 vehicles; 5-mic array
+  size_short: ~500 speakers
   license: unknown
   access: request
   dataset_url: https://utdrive.utdallas.edu/corpus
@@ -1729,10 +1895,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: English
   domain_subtopic: audio-visual in-car read speech (digits, letters, phone numbers, sentences) under driving-noise conditions
   size: 100 speakers (50 male, 50 female); ~59,000 utterances; 8 mics + 4 cameras; 5 noise conditions
+  size_short: ~59k utterances
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1751,10 +1919,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: dialogue (task-oriented)
+  task_short: dialogue
   modality: multimodal
   language: Japanese
   domain_subtopic: in-car spoken dialogue with human operator, Wizard-of-Oz and ASR-based navigation systems, plus read speech; 16-ch audio, 3 cameras, vehicle signals
   size: ~800 subjects, ~60-minute drive each (per IEICE 2005 abstract via search); 16 microphones, 3 cameras
+  size_short: ~800 subjects
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1772,10 +1942,12 @@ entries:
   section: G
   subsection: In-car speech recognition
   task_type: ASR
+  task_short: ASR
   modality: speech
   language: Chinese (Taiwan Mandarin)
   domain_subtopic: in-car Mandarin read words/sentences and spontaneous vehicular-navigation queries, multi-channel, six recording sites
   size: preliminary corpus from 192 speakers; more than 163,000 files, 16.8 GB
+  size_short: 163k+ files (16.8 GB)
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -1792,10 +1964,12 @@ entries:
   section: G
   subsection: Cabin acoustics and noise
   task_type: ASR
+  task_short: noise / acoustics
   modality: speech
   language: n/a (noise recordings)
   domain_subtopic: in-car acoustic noise and multichannel responses for simulating voice-assistant speech inside moving vehicles
   size: multichannel recordings in four cars across static and in-motion conditions; cavemove_dataset.zip 7.6 GB (v4, 2025-10-21) + Python API
+  size_short: 7.6 GB recordings
   license: Creative Commons Attribution 4.0 International
   access: public
   dataset_url: https://zenodo.org/doi/10.5281/zenodo.13594242
@@ -1813,10 +1987,12 @@ entries:
   section: G
   subsection: Cabin acoustics and noise
   task_type: ASR
+  task_short: noise / acoustics
   modality: speech
   language: n/a (noise recordings)
   domain_subtopic: in-vehicle cabin noise recordings for augmenting in-car ASR / voice assistant training
   size: 5.08 hours of in-vehicle noise (seven noise pieces); WAV PCM 44.1 kHz 16-bit stereo
+  size_short: 5.08 h noise
   license: Magic Data open-source license / CC BY-NC-ND 4.0
   access: public
   dataset_url: https://magichub.com/datasets/in-vehicle-noise-dataset/
@@ -1832,10 +2008,12 @@ entries:
   section: H
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression
+  task_short: grounding
   modality: multimodal
   language: English
   domain_subtopic: NL commands to a self-driving car grounded in nuScenes front-camera images
   size: 11,959 commands (8,349 train / 1,163 val / 2,447 test)
+  size_short: 11,959 commands
   license: unknown
   access: public
   dataset_url: https://talk2car.github.io/
@@ -1851,10 +2029,12 @@ entries:
   section: H
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression (referring multi-object tracking)
+  task_short: grounding
   modality: multimodal
   language: English
   domain_subtopic: language expressions referring to sets of tracked objects in KITTI video
   size: 18 videos, 818 expressions, avg 10.7 objects per expression
+  size_short: 818 expressions
   license: unknown
   access: public
   dataset_url: https://referringmot.github.io/
@@ -1872,10 +2052,12 @@ entries:
   section: H
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression (prompt-based 3D multi-object tracking)
+  task_short: grounding
   modality: multimodal
   language: English
   domain_subtopic: language prompts for sets of 3D objects in nuScenes video
   size: 40,147 language prompts for 3D objects
+  size_short: 40,147 prompts
   license: repo Apache-2.0; dataset licence not stated
   access: public
   dataset_url: https://github.com/wudongming97/Prompt4Driving
@@ -1893,10 +2075,12 @@ entries:
   section: H
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression (advice grounding) + captioning
+  task_short: grounding + captioning
   modality: multimodal
   language: English
   domain_subtopic: human-to-vehicle natural-language advice over HDD driving video (SF Bay Area)
   size: ~30 hours of driving video with natural-language advice
+  size_short: ~30 h video
   license: non-commercial use only
   access: request
   dataset_url: https://usa.honda-ri.com/HAD
@@ -1912,10 +2096,12 @@ entries:
   section: H
   subsection: Grounding, referring expressions and retrieval
   task_type: retrieval (NL-based vehicle track retrieval) / grounding
+  task_short: retrieval + grounding
   modality: multimodal
   language: English
   domain_subtopic: natural-language vehicle retrieval over CityFlow multi-camera traffic video (AI City Challenge)
   size: 2,155 training tracks x 3 NL descriptions; 184 test tracks / 184 test queries (2023 release)
+  size_short: 2,155 train tracks
   license: repo Apache-2.0; data licence not stated
   access: public
   dataset_url: https://github.com/fredfung007/cityflow-nl
@@ -1931,10 +2117,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: VQA
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: 3D-aware VQA over nuScenes multi-view camera + LiDAR scenes
   size: 460K QA pairs over 34K visual scenes (arXiv abstract)
+  size_short: 460k QA pairs
   license: repo MIT; dataset licence not stated
   access: public
   dataset_url: https://github.com/qiantianwen/NuScenes-QA
@@ -1950,10 +2138,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: 'VQA (instruction; 17 subtasks: perception, prediction, risk, planning with reasoning)'
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: multi-view video instruction QA over nuScenes
   size: 91K multi-view video-QA pairs across 17 subtasks
+  size_short: 91k video-QA pairs
   license: unknown
   access: public
   dataset_url: https://github.com/xmed-lab/NuInstruct
@@ -1969,10 +2159,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: VQA + captioning (Markup-QA)
+  task_short: VQA + captioning
   modality: multimodal
   language: English
   domain_subtopic: captions with embedded markup-tagged QA over nuScenes scenes
   size: not stated on fetched page
+  size_short: not stated
   license: repo Apache-2.0; annotation licence not stated
   access: public
   dataset_url: https://github.com/turingmotors/NuScenes-MQA
@@ -1989,10 +2181,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: VQA (spatial reasoning over BEV maps)
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: free-form queries over language-enhanced BEV maps from nuScenes
   size: 1,000 human-annotated BEV scenarios; >20,000 questions
+  size_short: 20k+ questions
   license: unknown
   access: public
   dataset_url: https://llmbev.github.io/talk2bev/
@@ -2009,10 +2203,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: VQA (spatial understanding and reasoning)
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: spatial-relation QA over nuScenes images
   size: not stated on fetched page
+  size_short: not stated
   license: academic use only (code); dataset licence not stated
   access: public
   dataset_url: https://github.com/XiandaGuo/Drive-MLLM
@@ -2029,10 +2225,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: VQA (reasoning, planning, counterfactual)
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: holistic VQA incl. counterfactual planning reasoning over nuScenes
   size: not stated on fetched pages
+  size_short: not stated
   license: unknown (LICENSE file linked; not named on page)
   access: public
   dataset_url: https://github.com/NVlabs/OmniDrive
@@ -2048,10 +2246,12 @@ entries:
   section: H
   subsection: Scene question answering and instruction tuning
   task_type: VQA (map and traffic-scene understanding)
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: QA over panoramic images + LiDAR BEV of road scenes (lane/road/feature level)
   size: not stated on fetched page
+  size_short: not stated
   license: repo MIT; dataset licence not stated
   access: public
   dataset_url: https://github.com/LLVM-AD/MAPLM
@@ -2068,10 +2268,12 @@ entries:
   section: H
   subsection: Explanations, captions and risk narration
   task_type: captioning (action description + justification)
+  task_short: explanation
   modality: multimodal
   language: English
   domain_subtopic: textual explanations of ego-vehicle actions on BDD dashcam video
   size: 6,970 videos, ~77 hours, >26K activities, >8.4M frames (5,597/717/656 split)
+  size_short: 6,970 videos (~77 h)
   license: unknown (LICENSE file in repo; terms not shown on page)
   access: public
   dataset_url: https://github.com/JinkyuKimUCB/BDD-X-dataset
@@ -2087,10 +2289,12 @@ entries:
   section: H
   subsection: Explanations, captions and risk narration
   task_type: text classification (action + explanation labels)
+  task_short: classification
   modality: multimodal
   language: English
   domain_subtopic: object-induced action decisions with explanation labels on BDD100K frames/videos
   size: not stated on fetched page
+  size_short: not stated
   license: unknown
   access: public
   dataset_url: https://github.com/Twizwei/bddoia_project
@@ -2106,10 +2310,12 @@ entries:
   section: H
   subsection: Explanations, captions and risk narration
   task_type: captioning + grounding (risk localisation) + VQA
+  task_short: captioning + grounding
   modality: multimodal
   language: English
   domain_subtopic: risk-object localisation with free-form reasoning captions, Tokyo urban driving
   size: 17,785 two-second clips (17,066 risk scenarios); 306,708 caption tokens, 992 unique words
+  size_short: 17,785 clips
   license: non-commercial use only
   access: request
   dataset_url: https://usa.honda-ri.com/drama
@@ -2125,10 +2331,12 @@ entries:
   section: H
   subsection: Explanations, captions and risk narration
   task_type: VQA + captioning (importance ranking + reasoning)
+  task_short: VQA + captioning
   modality: multimodal
   language: English
   domain_subtopic: importance-ranked objects with reasons, SF Bay Area intersections
   size: 116 clips of ~20 s at 10 FPS
+  size_short: 116 clips
   license: unknown (not stated; arXiv paper under CC BY-NC-SA 4.0)
   access: request
   dataset_url: https://usa.honda-ri.com/rank2tell
@@ -2145,10 +2353,12 @@ entries:
   section: H
   subsection: Explanations, captions and risk narration
   task_type: 'captioning (vision-language-action: captions + trajectories)'
+  task_short: captioning
   modality: multimodal
   language: English
   domain_subtopic: real-world driving video with auto-generated scene/maneuver captions and trajectories (Japan)
   size: '>80 hours of real-world driving video'
+  size_short: 80+ h video
   license: released for academic use (no named licence on page)
   access: public
   dataset_url: https://turingmotors.github.io/covla-ad/
@@ -2164,10 +2374,12 @@ entries:
   section: H
   subsection: Explanations, captions and risk narration
   task_type: VQA / visual instruction tuning
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: instruction-tuning conversations about ego driving video (BDD-X-based)
   size: not stated on fetched page
+  size_short: not stated
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -2186,10 +2398,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: 'VQA (graph VQA: perception -> prediction -> planning)'
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: graph-structured QA over nuScenes and CARLA driving scenes
   size: not stated on fetched pages
+  size_short: not stated
   license: language data CC BY-NC-SA 4.0; code/assets Apache 2.0; nuScenes/CARLA keep own licences
   access: public
   dataset_url: https://github.com/OpenDriveLab/DriveLM
@@ -2205,10 +2419,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: 'VQA (chain-based reasoning: perception, prediction, reasoning)'
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: long-text chain-of-reasoning QA over nuScenes, Waymo and ONCE video
   size: '>600K video-text pairs'
+  size_short: 600k+ video-text pairs
   license: unknown
   access: public
   dataset_url: https://github.com/fudan-zvg/Reason2Drive
@@ -2224,10 +2440,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: VQA (video QA)
+  task_short: video QA
   modality: multimodal
   language: English
   domain_subtopic: free-form QA about ego driving video clips (Wayve, UK)
   size: '419.9K QA pairs over ~28K clips: Scenery 3.5k videos/267.8k QA; Action 24.5k videos/152.5k QA; eval 100 videos/1,000 QA'
+  size_short: 419.9k QA pairs
   license: unknown (LICENCE file in repo; terms not shown on page)
   access: public
   dataset_url: https://github.com/wayveai/LingoQA
@@ -2243,10 +2461,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: 'VQA (VLM reliability benchmark: MCQ / VQA / captioning over perception, prediction, planning, behavior)'
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: robustness benchmark for driving VLMs under corruptions
   size: 19,200 frames; 20,498 QA pairs; 17 input settings
+  size_short: 20,498 QA pairs
   license: Apache-2.0 (work); some components under other licences
   access: public
   dataset_url: https://github.com/drive-bench/toolkit
@@ -2264,10 +2484,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: VQA (grounding, notable-object identification, planning; cooperative)
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: multi-vehicle cooperative driving QA (V2V-LLM)
   size: not stated on fetched page
+  size_short: not stated
   license: unknown
   access: public
   dataset_url: https://eddyhkchiu.github.io/v2vllm.github.io/
@@ -2283,10 +2505,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: semantic parsing / NL-to-program (instruction following via language-model programs)
+  task_short: semantic parsing
   modality: text
   language: English
   domain_subtopic: spontaneous driver instructions executed as code over highway-env simulator scenes
   size: 32 driving scenarios; 4,900 test cases (DbLv1)
+  size_short: 4,900 test cases
   license: MIT
   access: public
   dataset_url: https://github.com/PurdueDigitalTwin/LaMPilot
@@ -2303,10 +2527,12 @@ entries:
   section: H
   subsection: Reasoning and planning with language
   task_type: VQA (object-level vector input; action prediction, justification, DrivingQA)
+  task_short: VQA
   modality: tabular+text
   language: English
   domain_subtopic: simulator object-vector scenes paired with QA and action explanations (Wayve)
   size: ~10k train / 1k test VQA items (from bundled archive names; not stated in prose)
+  size_short: ~10k/1k VQA items
   license: repo Apache-2.0; data licence not stated
   access: public
   dataset_url: https://github.com/wayveai/Driving-with-LLMs
@@ -2323,10 +2549,12 @@ entries:
   section: H
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA (traffic rules, signs, right-of-way; multiple choice)
+  task_short: QA + VQA
   modality: multimodal
   language: English
   domain_subtopic: 'driving-knowledge-test benchmark: regulations, 220 sign types, right-of-way scenes'
   size: '474K QA pairs: ~26K text-based, ~448K vision-based'
+  size_short: 474k QA pairs
   license: unknown
   access: public
   dataset_url: https://driveqaiccv.github.io/
@@ -2342,10 +2570,12 @@ entries:
   section: H
   subsection: Traffic rules and driving-test QA
   task_type: VQA (driving theory-exam MCQ with explanations and grounded entities)
+  task_short: VQA
   modality: multimodal
   language: English
   domain_subtopic: driving theory test problems with expert explanations
   size: 3,931 multiple-choice problems (80/20 split; 789 test)
+  size_short: 3,931 problems
   license: unknown (paper CC BY 4.0)
   access: public
   dataset_url: https://vita-epfl.github.io/DrivingVQA/
@@ -2361,10 +2591,12 @@ entries:
   section: H
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA (compositional traffic-rule reasoning, multiple choice)
+  task_short: QA + VQA
   modality: multimodal
   language: Multilingual
   domain_subtopic: traffic-rule MCQs from handbooks/traffic laws of five nations, 5-level cognitive ladder
   size: ~70K multiple-choice questions; 5 countries
+  size_short: ~70k questions
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -2381,10 +2613,12 @@ entries:
   section: H
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA with explanation generation
+  task_short: QA + VQA
   modality: multimodal
   language: Romanian
   domain_subtopic: Romanian driving-law exam-style questions
   size: 1,208 questions (387 multimodal)
+  size_short: 1,208 questions
   license: unknown (article CC BY-NC-ND 4.0)
   access: paper only (contact authors)
   dataset_url: null
@@ -2401,10 +2635,12 @@ entries:
   section: H
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA (driving handbooks, theory tests, simulated road tests)
+  task_short: QA + VQA
   modality: multimodal
   language: Multilingual
   domain_subtopic: driving knowledge base for LVLMs across countries
   size: '>1 million data items'
+  size_short: 1M+ data items
   license: unknown
   access: paper only (contact authors)
   dataset_url: null
@@ -2420,10 +2656,12 @@ entries:
   section: H
   subsection: Roadside traffic-video QA
   task_type: VQA (video QA over traffic events; 6 reasoning tasks)
+  task_short: video QA
   modality: multimodal
   language: English
   domain_subtopic: causal/event reasoning QA over in-the-wild traffic videos
   size: 10,080 in-the-wild videos; 62,535 QA pairs
+  size_short: 62,535 QA pairs
   license: unknown
   access: request
   dataset_url: https://github.com/sutdcv/SUTD-TrafficQA
@@ -2439,10 +2677,12 @@ entries:
   section: H
   subsection: Roadside traffic-video QA
   task_type: VQA + captioning + grounding (video MCQ, referred-object captioning, spatio-temporal grounding)
+  task_short: video QA + captioning
   modality: multimodal
   language: English
   domain_subtopic: roadside-camera traffic video QA (TUM), adverse weather and anomalies
   size: 1,000 videos; 85,000 MCQ pairs; 2,300 object captions; 5,700 grounding annotations
+  size_short: 85k MCQ pairs
   license: CC BY-NC-SA 4.0
   access: public
   dataset_url: https://innovation-mobility.com/en/project-providentia/a9-dataset
@@ -2460,10 +2700,12 @@ entries:
   section: I
   subsection: ''
   task_type: semantic parsing / NL-to-query (text-to-SQL)
+  task_short: text-to-SQL
   modality: text
   language: English
   domain_subtopic: 'cross-domain text-to-SQL; includes a car database (car_1: cars_data, car_makers, model_list, continents, countries)'
   size: 10,181 questions, 5,693 unique SQL queries, 200 databases, 138 domains (whole benchmark); car_1 subset size not stated
+  size_short: not stated
   license: unknown (CC BY-SA 4.0 commonly reported, not confirmed on fetched page)
   access: public
   dataset_url: https://yale-lily.github.io/spider
@@ -2481,10 +2723,12 @@ entries:
   section: K
   subsection: Standards and schemas
   task_type: KG/ontology (signal taxonomy / data model)
+  task_short: schema / standard
   modality: text
   language: English
   domain_subtopic: standardised tree of vehicle signals/attributes (.vspec)
   size: not stated on README
+  size_short: not stated
   license: MPL-2.0
   access: public
   dataset_url: https://github.com/COVESA/vehicle_signal_specification
@@ -2502,10 +2746,12 @@ entries:
   section: K
   subsection: Standards and schemas
   task_type: KG/ontology (web vocabulary)
+  task_short: schema / standard
   modality: text
   language: English
   domain_subtopic: vehicle/car vocabulary for structured web markup (Vehicle, Car, Motorcycle, BusOrCoach, engine/fuel/body properties)
   size: Vehicle/Car types plus ~15 extension properties and 3 enumerations
+  size_short: ~15 properties
   license: unknown (schema.org terms not stated on fetched pages)
   access: public
   dataset_url: https://schema.org/docs/automotive.html
@@ -2522,10 +2768,12 @@ entries:
   section: K
   subsection: Make, model and VIN catalogues
   task_type: VIN decoding / vehicle identification lookup (structured)
+  task_short: VIN decoding
   modality: text
   language: English
   domain_subtopic: VIN decoding; makes, models, manufacturers (US)
   size: not stated
+  size_short: not stated
   license: unknown
   access: public
   dataset_url: https://vpic.nhtsa.dot.gov/api/
@@ -2541,10 +2789,12 @@ entries:
   section: K
   subsection: Make, model and VIN catalogues
   task_type: reference table / gazetteer (make-model catalogue)
+  task_short: gazetteer
   modality: text
   language: English
   domain_subtopic: make/model catalogue reconciled from official vehicle registers (cars, motorcycles, mopeds, vans, trucks, buses)
   size: '19,282 models, 933 makes, 6 kinds (page header); v2026.10.3 table: 15,068 models, 934 makes, 18 countries'
+  size_short: 19,282 models
   license: CC BY 4.0 (data; upstream sources OGL v3 / CC0 / CC BY noted)
   access: public
   dataset_url: https://github.com/vehiclesdb/vehiclesdb
@@ -2561,10 +2811,12 @@ entries:
   section: K
   subsection: Make, model and VIN catalogues
   task_type: reference table (make -> model -> generation -> engine specs)
+  task_short: gazetteer
   modality: text
   language: English
   domain_subtopic: car makes/models/generations/engine specifications
   size: 164 makes, 2,621 models, 7,169 generations, 30,390 engines
+  size_short: 164 makes, 2,621 models
   license: ODbL 1.0 (data); MIT (code)
   access: public
   dataset_url: https://github.com/gor3a/vehicle-makes-models
@@ -2580,10 +2832,12 @@ entries:
   section: K
   subsection: Make, model and VIN catalogues
   task_type: reference table (US car models by year)
+  task_short: gazetteer
   modality: text
   language: English
   domain_subtopic: US car make/model list 1992-2026
   size: over 15,000 car models (one CSV per year)
+  size_short: 15k+ models
   license: unknown (LICENSE file linked; terms not shown)
   access: public
   dataset_url: https://github.com/AbhiOnlyOne/us-car-models-data
@@ -2599,10 +2853,12 @@ entries:
   section: K
   subsection: Make, model and VIN catalogues
   task_type: lexicon / gazetteer (models, brands, terms with cross-market aliases)
+  task_short: gazetteer
   modality: text
   language: English, Chinese (Simplified and Traditional), Japanese
   domain_subtopic: vehicle model and brand names across markets, segment classes, terminology
   size: 3,030 vehicle models, 164 brands, 72 terms (data v1.2.0)
+  size_short: 3,030 models, 164 brands
   license: CC BY-SA 4.0
   access: public
   dataset_url: https://github.com/ixiehao/VehicleName
@@ -2618,10 +2874,12 @@ entries:
   section: K
   subsection: Make, model and VIN catalogues
   task_type: KG (SPARQL-queryable)
+  task_short: KG / ontology
   modality: text
   language: Multilingual
   domain_subtopic: automobile models/brands/manufacturers in Wikidata
   size: not stated (instance count not shown on item page)
+  size_short: not stated
   license: unknown (Wikidata structured data is CC0 per site policy; not captured on fetched page)
   access: public
   dataset_url: https://www.wikidata.org/wiki/Q3231690
@@ -2638,10 +2896,12 @@ entries:
   section: K
   subsection: Glossaries and knowledge graphs
   task_type: lexicon / glossary (schema.org DefinedTerm)
+  task_short: lexicon
   modality: text
   language: Italian
   domain_subtopic: 'automotive terminology: vehicle technology, finance/contract, aftersales, regulation'
   size: 212 terms (JSON Lines, ~324 KB)
+  size_short: 212 terms
   license: CC BY 4.0
   access: public
   dataset_url: https://huggingface.co/datasets/DealerMax/italian-automotive-glossary
@@ -2657,10 +2917,12 @@ entries:
   section: K
   subsection: Glossaries and knowledge graphs
   task_type: KG/ontology
+  task_short: KG / ontology
   modality: text
   language: English
   domain_subtopic: EV adoption, charging infrastructure, electricity network, EV specifications (geospatial KG)
   size: not stated on fetched pages (83 classes / 69 properties reported in search snippet, unverified)
+  size_short: not stated
   license: MIT (GitHub repository)
   access: public
   dataset_url: https://github.com/EVKG/evkg
@@ -2677,10 +2939,12 @@ entries:
   section: K
   subsection: Glossaries and knowledge graphs
   task_type: KG construction + simple QA (plus image classification)
+  task_short: KG / ontology + QA
   modality: multimodal
   language: Chinese
   domain_subtopic: Chinese car brands/series knowledge graph built from Autohome text
   size: 'text: 284 brands, 2,058 car series; images: 55,945 (155 brands, 900 series)'
+  size_short: 284 brands, 2,058 series
   license: unknown
   access: public
   dataset_url: https://github.com/LongxingHu/Car-identification
