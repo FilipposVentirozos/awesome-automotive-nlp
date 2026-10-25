@@ -1,0 +1,84 @@
+# awesome-automotive-nlp: single source of truth for corpora.
+# One entry per corpus. Field reference and the inclusion rule: CONTRIBUTING.md.
+# Render README.md with: python scripts/build_readme.py
+#
+# section   bucket code A-K (see the Taxonomy section of README.md)
+# access    public | request | paper only (contact authors) | forthcoming | unreleased | unknown
+# verified  true ONLY if dataset_url or paper_url was fetched and the page matched
+# ours      true for the list author's own corpora (rendered first, under "Our corpora")
+
+entries:
+  - name: AutoSpecNER
+    aliases: []
+    section: A
+    ours: true
+    task_type: NER
+    modality: text
+    language: English
+    domain_subtopic: vehicle-specification extraction from used-car adverts
+    size: "659 vehicle adverts; 15 entity types; 4,609 entity spans (public release); 100-document 3-annotator IAA study"
+    license: CC BY 4.0
+    access: public
+    dataset_url: https://github.com/FilipposVentirozos/AutoSpecNER
+    paper_url: https://aclanthology.org/2026.icnlsp-1.8/
+    year: 2026
+    cited_in: []
+    bibkey: lee-etal-2026-autospecner
+    source_quote: "659 car listings annotated with 4,609 entity spans across 15 vehicle-specification types, plus a three-annotator inter-annotator agreement study on 100 documents."
+    verified: true
+    notes: >-
+      Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI
+      10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version).
+      Entity-count discrepancy: the public release contains 4,609 entity spans, whereas the paper reports
+      11,117 labelled entities; the two figures are not yet reconciled. Annotation guidelines are included
+      in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25.
+
+  - name: Auto-AdvER
+    aliases: []
+    section: B
+    ours: true
+    task_type: span labelling
+    modality: text
+    language: English
+    domain_subtopic: used-car adverts (vehicle condition, history and commercial offers)
+    size: "605 UK car adverts; 104,382 tokens; 3 span labels (Condition / Historic / Sales Options); 113-advert 3-annotator IAA subset; 3 cross-validation folds"
+    license: CC BY 4.0 (data and guidelines); MIT (code)
+    access: public
+    dataset_url: https://github.com/FilipposVentirozos/Auto-AdvER
+    paper_url: https://arxiv.org/abs/2412.05655
+    year: 2026
+    cited_in: ["AutoSpecNER", "Auto-Features"]
+    bibkey: ventirozos2026autoadver
+    source_quote: "Span-labelling corpus of 605 UK car adverts annotated for Condition, Historic and Sales Options"
+    verified: true
+    notes: >-
+      Ventirozos et al., AACL-IJCNLP 2026 (to appear). paper_url is the December 2024 arXiv preprint
+      "Shifting NER into High Gear: The Auto-AdvER Approach" (bibkey ventirozos2024shifting in the author's
+      .bib files); the camera-ready title differs. Folds f1-f3 are the paper's three cross-validation folds;
+      four further folds were cut but never used and are not shipped. Licence split read from the repository
+      page on 2026-10-25: code MIT, data, stored predictions and annotation guidelines CC BY 4.0.
+
+  - name: Auto-Features
+    aliases: []
+    section: C
+    ours: true
+    task_type: feature-conditioned NER; entity linking
+    modality: text
+    language: English
+    domain_subtopic: standard and optional car features in used-car adverts, linked to the vehicle's own catalogue
+    size: "1,256 UK car adverts (430 human-gold + 925 LLM-silver, 99 overlap); 188,980 (advert, feature) instances per fold"
+    license: to be announced at release
+    access: forthcoming
+    dataset_url: null
+    paper_url: null
+    year: 2026
+    cited_in: []
+    bibkey: null
+    source_quote: "The Auto-Features corpus: 1,256 adverts, ~189K (advert, feature) instances per fold, in two documented layers: a human-gold layer (430 adverts, screened annotators) and an LLM-silver layer (925 adverts, search-grounded auto-annotation), with grouped, advert-disjoint train/validation/test splits."
+    verified: false
+    notes: >-
+      Release pending; the paper is under review (anonymous submission) at the time of writing, so there is
+      no public page and verified is false. The source quote is taken from the manuscript. Task: given an
+      advert and one feature from the catalogue of that exact vehicle, extract the span(s) expressing it; the
+      set of catalogue features that received a span gives an entity-linking view at no extra cost. On
+      release, set dataset_url, change access to public and record the licence.

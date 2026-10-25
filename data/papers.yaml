@@ -1,0 +1,29 @@
+# awesome-automotive-nlp: related papers with NO public data.
+# Same fields as data/corpora.yaml (plus optional `authors`, short form). dataset_url must be null here;
+# a paper whose data becomes available moves to data/corpora.yaml.
+# Render README.md with: python scripts/build_readme.py
+
+entries:
+  - name: Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model
+    authors: Hu and Ma
+    aliases: []
+    section: F
+    task_type: NER
+    modality: text
+    language: Chinese
+    domain_subtopic: automotive accessories and parts (accessory name, price, warranty period)
+    size: unknown
+    license: unknown
+    access: paper only (contact authors)
+    dataset_url: null
+    paper_url: https://doi.org/10.1109/NNICE61279.2024.10499162
+    year: 2024
+    cited_in: ["AutoSpecNER", "Auto-Features"]
+    bibkey: hu2024named
+    source_quote: "Closest to our work, Hu et al. (2024) address NER for automotive accessories and parts in Chinese (e.g., brake discs) with entities such as accessory name, price, and warranty period"
+    verified: true
+    notes: >-
+      2024 4th International Conference on Neural Networks, Information and Communication Engineering (NNICE),
+      pp. 604-612. DOI metadata verified through the Crossref API on 2026-10-25 (title, authors, venue and
+      pages match the author's .bib entry); the IEEE Xplore landing page itself could not be fetched. The
+      description is quoted from the related-work section of Auto-Features; no dataset release is known.

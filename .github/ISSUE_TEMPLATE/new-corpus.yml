@@ -1,0 +1,150 @@
+name: New corpus
+description: Propose a corpus, or a related paper with no public data, for the list. The fields mirror data/corpora.yaml.
+title: "[corpus] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing an entry. Please read the inclusion and verification rules in CONTRIBUTING.md first.
+        A corpus is listed only if it is freely downloadable **or** described in a public paper; fee-based commercial catalogues are excluded.
+  - type: input
+    id: name
+    attributes:
+      label: Name
+      description: Canonical corpus (or paper) name.
+    validations:
+      required: true
+  - type: input
+    id: aliases
+    attributes:
+      label: Aliases
+      description: Other names, comma-separated. Leave empty if none.
+  - type: dropdown
+    id: section
+    attributes:
+      label: Section (bucket)
+      options:
+        - "A. Vehicle identification & specifications"
+        - "B. Listings, adverts & claims"
+        - "C. Features, attributes & catalogue linking"
+        - "D. Reviews, opinion & sentiment"
+        - "E. Complaints, safety, recalls & incidents"
+        - "F. Maintenance, repair, parts & technical documents"
+        - "G. In-car voice assistants & dialogue"
+        - "H. Driving-scene language & multimodal"
+        - "I. Search, queries & semantic parsing"
+        - "J. Market, pricing & listing tables with text"
+        - "K. Knowledge graphs, ontologies & lexicons"
+    validations:
+      required: true
+  - type: input
+    id: task_type
+    attributes:
+      label: Task type
+      description: e.g. NER, span labelling, ABSA, SLU/intent+slot, ASR, VQA, semantic parsing / NL-to-query.
+    validations:
+      required: true
+  - type: dropdown
+    id: modality
+    attributes:
+      label: Modality
+      options:
+        - text
+        - speech
+        - multimodal
+        - image
+        - tabular+text
+    validations:
+      required: true
+  - type: input
+    id: language
+    attributes:
+      label: Language
+      description: e.g. English, Chinese, German; "Multi" for multilingual.
+    validations:
+      required: true
+  - type: input
+    id: domain_subtopic
+    attributes:
+      label: Domain sub-topic
+      description: Short phrase, e.g. "used-car listings", "in-car navigation dialogue".
+    validations:
+      required: true
+  - type: input
+    id: size
+    attributes:
+      label: Size
+      description: As stated by the source, with unit (documents, utterances, hours, images).
+    validations:
+      required: true
+  - type: input
+    id: license
+    attributes:
+      label: Licence
+      description: As stated by the source, or "unknown".
+    validations:
+      required: true
+  - type: dropdown
+    id: access
+    attributes:
+      label: Access
+      options:
+        - public
+        - request
+        - paper only (contact authors)
+        - forthcoming
+        - unreleased
+        - unknown
+    validations:
+      required: true
+  - type: input
+    id: dataset_url
+    attributes:
+      label: Dataset URL
+      description: http(s) link to the download page. Leave empty if there is none (do not guess).
+  - type: input
+    id: paper_url
+    attributes:
+      label: Paper URL
+      description: http(s) link to the paper. Leave empty if there is none (do not guess).
+  - type: input
+    id: year
+    attributes:
+      label: Year
+  - type: input
+    id: cited_in
+    attributes:
+      label: Cited in
+      description: Which of our papers cite it (AutoSpecNER, Auto-AdvER, Auto-Features, journal, text2solr, MSc), if any.
+  - type: input
+    id: bibkey
+    attributes:
+      label: BibTeX key
+      description: Optional.
+  - type: textarea
+    id: source_quote
+    attributes:
+      label: Source quote
+      description: A verbatim sentence from the paper or dataset page proving the resource exists and what it is.
+    validations:
+      required: true
+  - type: checkboxes
+    id: verified
+    attributes:
+      label: Verification
+      options:
+        - label: I fetched the dataset or paper page myself and it matches this entry.
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Splits, annotation scheme, known issues, relation to our work.
+  - type: checkboxes
+    id: inclusion
+    attributes:
+      label: Inclusion rule
+      options:
+        - label: The resource is freely downloadable, or it is described in a public paper (access "paper only (contact authors)").
+          required: true
+        - label: It is not a fee-based commercial catalogue, and its evidence is more than a search snippet.
+          required: true

@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this list, please cite it as below. The datasets it describes keep their own licences and citations."
+type: software
+title: awesome-automotive-nlp
+authors:
+  - family-names: Ventirozos
+    given-names: Filippos
+date-released: 2026-10-25
+license: CC-BY-4.0
+abstract: "A curated list of corpora for natural language processing on automotive text, speech and driving scenes."
