@@ -108,7 +108,7 @@
     "bibkey": "guan2024findvehicle",
     "source_quote": "Datasets like FindVehicle target vehicle retrieval with entity types including vehicle colour, brand, model, and location, but lack the granularity needed for technical specification extraction.",
     "verified": true,
-    "notes": "Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024 (arXiv 2304.10893). 42.3k labelled natural-language descriptions of vehicle tracks; entity types include vehicle colour, brand, model, type, orientation and location. Companion retrieval system: github.com/GuanRunwei/VehicleFinder-CTIM. It could also sit in section H, because the descriptions refer to vehicles in traffic scenes. GitHub repository and arXiv record checked 2026-10-25."
+    "notes": "Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024 (arXiv 2304.10893). 42.3k labelled natural-language descriptions of vehicle tracks; entity types include vehicle colour, brand, model, type, orientation and location. Companion retrieval system: github.com/GuanRunwei/VehicleFinder-CTIM. It could also sit in section J, because the descriptions refer to vehicles in traffic scenes. GitHub repository and arXiv record checked 2026-10-25."
   },
   {
     "name": "EWNERTC (automotive subset)",
@@ -141,13 +141,13 @@
     "notes": "Lothritz et al., COLING 2020, pp. 3750-3760, evaluated fine-grained NER on EWNERTC (Sahin et al. 2017), whose automotive domain has 10,349 sentences. EWNERTC is on Mendeley Data (DOI 10.17632/cdcztymf4k.1, CC BY 4.0); per-domain statistics are at github.com/lothritz/FG-NER-data-statistics. Annotations are automatic (gazetteer-based) and the register is encyclopaedic, not advert text. ACL Anthology page, paper PDF and Mendeley record checked 2026-10-25."
   },
   {
-    "name": "ADMit automotive NER data",
+    "name": "ADMit",
     "aliases": [
-      "ADMit",
-      "ADMit: Improving NER in automotive domain with domain adversarial training and multi-task learning"
+      "ADMit: Improving NER in automotive domain with domain adversarial training and multi-task learning",
+      "ADMit automotive NER data"
     ],
     "section": "F",
-    "subsection": "Manuals, FAQs & question answering",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "NER (domain-adversarial multi-task training)",
@@ -466,7 +466,7 @@
     "bibkey": null,
     "source_quote": "Specifically, the created dataset contains 1.4 million images from 899 car models",
     "verified": true,
-    "notes": "Huang, Chen, Luo, Yue, Ounis, IEEE BigData 2022 (arXiv Aug 2021). DVM-CAR 1.0 Aug 2019, 2.0 May 2021. Download via Figshare (CSV tables; 13.6 GB images; 730 MB front-view). Ad table is structured fields (no free-text description observed on page) so B/J overlap: listing corpus without ad prose. Site states: 'Researcher shall use this dataset only for non-commercial research and educational purposes.' | TEXT-BEARING (ad table). v1.0 Aug 2019, v2.0 May 2021; paper Huang et al., IEEE BigData 2022. Figshare (13.6 GB full images, 730 MB front-view subset). Cross-list with bucket J (pricing tables)."
+    "notes": "Huang, Chen, Luo, Yue, Ounis, IEEE BigData 2022 (arXiv Aug 2021). DVM-CAR 1.0 Aug 2019, 2.0 May 2021. Download via Figshare (CSV tables; 13.6 GB images; 730 MB front-view). Ad table is structured fields (no free-text description observed on page) so B/L overlap: listing corpus without ad prose. Site states: 'Researcher shall use this dataset only for non-commercial research and educational purposes.' | TEXT-BEARING (ad table). v1.0 Aug 2019, v2.0 May 2021; paper Huang et al., IEEE BigData 2022. Figshare (13.6 GB full images, 730 MB front-view subset). Cross-list with bucket L (pricing tables)."
   },
   {
     "name": "Craigslist Used Cars",
@@ -1204,7 +1204,7 @@
     "bibkey": null,
     "source_quote": "The Manufacturer Communications files contains manufacturer communications received by NHTSA since January 1, 1995.",
     "verified": true,
-    "notes": "Free-text field 'Summary': 'Description of the communication's most pertinent information'. Also Communication Type, Make, Model, Model Year, NHTSA Components, Mfr Component System / Subsystem (manufacturer taxonomy labels). Bridges bucket E and F (repair/technical docs). Files split into 5-year chunks by date received."
+    "notes": "Free-text field 'Summary': 'Description of the communication's most pertinent information'. Also Communication Type, Make, Model, Model Year, NHTSA Components, Mfr Component System / Subsystem (manufacturer taxonomy labels). Bridges bucket E and G (faults and repair). Files split into 5-year chunks by date received."
   },
   {
     "name": "NHTSA Customer Complaints (Kaggle)",
@@ -1439,7 +1439,7 @@
     "name": "DelucionQA",
     "aliases": [],
     "section": "F",
-    "subsection": "Manuals, FAQs & question answering",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "QA / hallucination detection (RAG over car manual)",
@@ -1461,12 +1461,13 @@
     "notes": "EMNLP 2023 Findings (Bosch Research). Binary hallucinated/not labels from sentence-level supported/conflicted/neither annotations. Also redistributed as the 'delucionqa' subset of RAGBench (huggingface.co/datasets/rungalileo/ragbench, CC BY 4.0, fetched). Closest public 'car manual QA' set found."
   },
   {
-    "name": "FETA car manuals benchmark",
+    "name": "FETA (car manuals)",
     "aliases": [
-      "FETA_IKEA_CAR_MANUALS"
+      "FETA_IKEA_CAR_MANUALS",
+      "FETA car manuals benchmark"
     ],
     "section": "F",
-    "subsection": "Manuals, FAQs & question answering",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "text-to-image / image-to-text retrieval over manuals",
@@ -1488,10 +1489,12 @@
     "notes": "NeurIPS 2022 (per HF card). Data hosted as feta_data.tar.gz on HF; not loadable via datasets library. Human-curated annotations released; automatic annotation code 'upon acceptance'."
   },
   {
-    "name": "MaQA (Manual Question Answering)",
-    "aliases": [],
+    "name": "MaQA",
+    "aliases": [
+      "MaQA (Manual Question Answering)"
+    ],
     "section": "F",
-    "subsection": "Manuals, FAQs & question answering",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "QA / FAQ classification from car manual",
@@ -1513,10 +1516,12 @@
     "notes": "LEAD (demoted): paper_url (MDPI) returned HTTP 403 in this session; abstract confirmed verbatim via Crossref API only, which does not meet the fetch rule. Electronics 13(24):4972 (MDPI). Abstract retrieved verbatim via the Crossref API for this DOI because mdpi.com returned HTTP 403 in this session; data-availability statement not seen, so release status unknown. Largest car-manual QA set found. Verified through the Crossref metadata API (publisher-deposited abstract); the MDPI page blocked the fetcher."
   },
   {
-    "name": "Chinese automobile fault text NER datasets (Entropy 2025)",
-    "aliases": [],
-    "section": "F",
-    "subsection": "Faults, repair and parts",
+    "name": "Automobile fault text NER (Entropy 2025)",
+    "aliases": [
+      "Chinese automobile fault text NER datasets (Entropy 2025)"
+    ],
+    "section": "G",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "NER",
@@ -1538,12 +1543,13 @@
     "notes": "'Chinese Named Entity Recognition for Automobile Fault Texts Based on External Context Retrieving and Adversarial Training', Entropy 27(2):133. Entity types FL/FP/FR/RS. Data Availability Statement: 'The data presented in this study are available upon request from the corresponding author.' / 'The data are not publicly available due to copyright.' Source platform cited: autosaas.cn."
   },
   {
-    "name": "Automotive_Industry_Fault_Data_Set",
+    "name": "Automotive Industry Fault Data Set",
     "aliases": [
-      "Automotive_Industry_Fault_Data_Set (zhengr)"
+      "Automotive_Industry_Fault_Data_Set (zhengr)",
+      "Automotive_Industry_Fault_Data_Set"
     ],
-    "section": "F",
-    "subsection": "Faults, repair and parts",
+    "section": "G",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "relation / triple extraction (instruction format)",
@@ -1565,10 +1571,12 @@
     "notes": "Dataset card is empty; quote is the instruction field of every record (data file downloaded and line-counted this session). Inputs are repair-case narratives (e.g. '故障现象：发动机水温高...'), outputs 'part_relation_fault' triples. Origin not stated (format resembles a Chinese automotive fault-mode relation-extraction shared task; unconfirmed). Only openly downloadable Chinese fault-text set found."
   },
   {
-    "name": "Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University)",
-    "aliases": [],
-    "section": "F",
-    "subsection": "Faults, repair and parts",
+    "name": "Vehicle Fleet Fault Association Dataset",
+    "aliases": [
+      "Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University)"
+    ],
+    "section": "G",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "NER + KG triples over repair/maintenance records",
@@ -1587,13 +1595,15 @@
     "bibkey": null,
     "source_quote": "This is a dataset of real-world vehicle fleet maintenance records from some repair facilities in China",
     "verified": true,
-    "notes": "Mendeley Data v1, published 2026-06-03, DOI 10.17632/r98g7g6k5t.1. Entity type names and record counts not shown on landing page. The only openly licensed Chinese repair-record NER resource found; F/K overlap (triples)."
+    "notes": "Mendeley Data v1, published 2026-06-03, DOI 10.17632/r98g7g6k5t.1. Entity type names and record counts not shown on landing page. The only openly licensed Chinese repair-record NER resource found; G/M overlap (triples)."
   },
   {
-    "name": "Chinese vehicle fault repair case NER (Electronics 2025)",
-    "aliases": [],
-    "section": "F",
-    "subsection": "Faults, repair and parts",
+    "name": "Vehicle fault repair case NER (Electronics 2025)",
+    "aliases": [
+      "Chinese vehicle fault repair case NER (Electronics 2025)"
+    ],
+    "section": "G",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "NER (incl. discontinuous/nested entities)",
@@ -1615,10 +1625,12 @@
     "notes": "LEAD (demoted): paper_url (MDPI) returned HTTP 403 in this session; abstract confirmed verbatim via Crossref API only, which does not meet the fetch rule. 'A Named Entity Recognition Method for Chinese Vehicle Fault Repair Cases Based on a Combined Model', Electronics 14(7):1361. Abstract via Crossref API (mdpi.com 403). Data release not confirmed; treat as paper-only unless DAS says otherwise. Verified through the Crossref metadata API (publisher-deposited abstract); the MDPI page blocked the fetcher."
   },
   {
-    "name": "Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021)",
-    "aliases": [],
-    "section": "F",
-    "subsection": "Faults, repair and parts",
+    "name": "Customer failure reports (Khodadadi et al. 2021)",
+    "aliases": [
+      "Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021)"
+    ],
+    "section": "G",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "text classification / IE on service-call failure reports",
@@ -1640,10 +1652,12 @@
     "notes": "'A Natural Language Processing and Deep Learning based Model for Automated Vehicle Diagnostics using Free-Text Customer Service Reports'. Proprietary data; no release stated. Recorded as evidence that repair-order NER corpora are not public."
   },
   {
-    "name": "Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model",
-    "aliases": [],
-    "section": "F",
-    "subsection": "Faults, repair and parts",
+    "name": "Automotive parts NER",
+    "aliases": [
+      "Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model"
+    ],
+    "section": "G",
+    "subsection": "",
     "ours": false,
     "authors": "Hu and Ma",
     "task_type": "NER",
@@ -1669,12 +1683,13 @@
     "notes": "2024 4th International Conference on Neural Networks, Information and Communication Engineering (NNICE), pp. 604-612. DOI metadata verified through the Crossref API on 2026-10-25 (title, authors, venue and pages match the bibliographic record); the IEEE Xplore landing page itself could not be fetched. The description is quoted from the related-work section of Auto-Features; no dataset release is known. Cited in AutoSpecNER and Auto-Features as hu2024named and in Auto-AdvER under the BibTeX key 10499162."
   },
   {
-    "name": "Automotive ISO 26262 Safety Requirements Dataset",
+    "name": "ISO 26262 Safety Requirements",
     "aliases": [
-      "Automotive ISO 26262 Safety Requirements Dataset (Muhammmadd)"
+      "Automotive ISO 26262 Safety Requirements Dataset (Muhammmadd)",
+      "Automotive ISO 26262 Safety Requirements Dataset"
     ],
-    "section": "F",
-    "subsection": "Requirements, standards and patents",
+    "section": "H",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "text classification (ASIL rating) / generation",
@@ -1696,10 +1711,12 @@
     "notes": "Fully synthetic (generated by a 'deterministic generation engine'). Requirements-engineering NLP; no real OEM text."
   },
   {
-    "name": "Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable",
-    "aliases": [],
-    "section": "F",
-    "subsection": "Requirements, standards and patents",
+    "name": "HUPD patents (CPC B60, vehicles)",
+    "aliases": [
+      "Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable"
+    ],
+    "section": "H",
+    "subsection": "",
     "ours": false,
     "authors": null,
     "task_type": "patent corpus (classification, LM, summarisation); automotive via CPC filter",
@@ -1728,7 +1745,7 @@
       "In-Car Assistant dataset",
       "ConvLab/kvret"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Task-oriented dialogue and tool use",
     "ours": false,
     "authors": null,
@@ -1755,7 +1772,7 @@
     "aliases": [
       "CarMem long-term memory in-car voice assistant dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Task-oriented dialogue and tool use",
     "ours": false,
     "authors": null,
@@ -1782,7 +1799,7 @@
     "aliases": [
       "CAR-bench: Evaluating the Consistency and Limit-Awareness of LLM Agents under Real-World Uncertainty"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Task-oriented dialogue and tool use",
     "ours": false,
     "authors": null,
@@ -1809,7 +1826,7 @@
     "aliases": [
       "Senthi1Kumar/In-Vehicle-Tool-Calls-v0.2"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Task-oriented dialogue and tool use",
     "ours": false,
     "authors": null,
@@ -1837,7 +1854,7 @@
       "AMIE",
       "Intel in-cabin intent/slot dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Task-oriented dialogue and tool use",
     "ours": false,
     "authors": null,
@@ -1864,7 +1881,7 @@
     "aliases": [
       "Localization-Aware Evaluation of In-Vehicle Assistants"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Task-oriented dialogue and tool use",
     "ours": false,
     "authors": null,
@@ -1892,7 +1909,7 @@
       "Multi-Intent Automotive Cabin Spoken Language Understanding Benchmark",
       "Gatsby1984/MAC_SLU"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Spoken commands and language understanding",
     "ours": false,
     "authors": null,
@@ -1923,7 +1940,7 @@
       "Angeriod/in_car_commands_26_prepro",
       "Angeriod in_car_commands (Korean in-car voice commands)"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Spoken commands and language understanding",
     "ours": false,
     "authors": null,
@@ -1950,7 +1967,7 @@
     "aliases": [
       "Automated Factual Benchmarking for In-Car Conversational Systems dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Assistant evaluation",
     "ours": false,
     "authors": null,
@@ -1977,7 +1994,7 @@
     "aliases": [
       "Benchmarking Contextual Understanding for In-Car Conversational Systems dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Assistant evaluation",
     "ours": false,
     "authors": null,
@@ -2004,7 +2021,7 @@
     "aliases": [
       "From Intent to Action benchmark"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Assistant evaluation",
     "ours": false,
     "authors": null,
@@ -2031,7 +2048,7 @@
     "aliases": [
       "In-Cabin Emotion Recognition and Driver State Monitoring dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Assistant evaluation",
     "ours": false,
     "authors": null,
@@ -2059,7 +2076,7 @@
       "OpenSLR SLR159",
       "ICMC-ASR corpus (released version)"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2087,7 +2104,7 @@
       "Corpus and Environment for Noisy Speech RECognition 2",
       "IPSJ SIG-SLP in-car connected digits corpus"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2115,7 +2132,7 @@
       "Corpus and Environment for Noisy Speech RECognition 3",
       "IPSJ SIG-SLP in-car isolated word corpus"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2143,7 +2160,7 @@
       "STAZKA",
       "LINDAT 11234/1-1510"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2171,7 +2188,7 @@
       "AlienKevin/guangzhou-cabin-speech",
       "MagicHub Guangzhou Cantonese in-vehicle speech"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2198,7 +2215,7 @@
     "aliases": [
       "Cantonese In-car Audio-Visual Speech Recognition dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2226,7 +2243,7 @@
       "UTDrive Corpus Classical",
       "UTDrive Corpus Portable"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2254,7 +2271,7 @@
       "CU-Move in-vehicle speech corpus",
       "University of Colorado CU-Move"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2281,7 +2298,7 @@
     "aliases": [
       "Audio-Visual Speech Corpus in a Car Environment"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2310,7 +2327,7 @@
       "Nagoya University in-car multimedia corpus",
       "Center for Integrated Acoustic Information Research corpus"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2338,7 +2355,7 @@
       "Taiwan in-CAR speech database",
       "TaiCar"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "In-car speech recognition",
     "ours": false,
     "authors": null,
@@ -2365,7 +2382,7 @@
     "aliases": [
       "CAVEMOVE acoustic database for voice-enabled technologies inside moving vehicles"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Cabin acoustics and noise",
     "ours": false,
     "authors": null,
@@ -2393,7 +2410,7 @@
       "MagicHub ASR-CabNois",
       "A Cabin Noise Dataset"
     ],
-    "section": "G",
+    "section": "I",
     "subsection": "Cabin acoustics and noise",
     "ours": false,
     "authors": null,
@@ -2418,7 +2435,7 @@
   {
     "name": "Talk2Car",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Grounding, referring expressions and retrieval",
     "ours": false,
     "authors": null,
@@ -2443,7 +2460,7 @@
   {
     "name": "Refer-KITTI",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Grounding, referring expressions and retrieval",
     "ours": false,
     "authors": null,
@@ -2471,7 +2488,7 @@
       "Prompt4Driving",
       "Language Prompt for Autonomous Driving"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Grounding, referring expressions and retrieval",
     "ours": false,
     "authors": null,
@@ -2499,7 +2516,7 @@
       "HRI Advice Dataset",
       "Honda Advice Dataset"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Grounding, referring expressions and retrieval",
     "ours": false,
     "authors": null,
@@ -2524,7 +2541,7 @@
   {
     "name": "CityFlow-NL",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Grounding, referring expressions and retrieval",
     "ours": false,
     "authors": null,
@@ -2549,7 +2566,7 @@
   {
     "name": "NuScenes-QA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2574,7 +2591,7 @@
   {
     "name": "NuInstruct",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2599,7 +2616,7 @@
   {
     "name": "NuScenes-MQA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2626,7 +2643,7 @@
     "aliases": [
       "Talk2BEV-Bench"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2653,7 +2670,7 @@
     "aliases": [
       "DriveMLLM"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2680,7 +2697,7 @@
     "aliases": [
       "OmniDrive"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2705,7 +2722,7 @@
   {
     "name": "MAPLM",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Scene question answering and instruction tuning",
     "ours": false,
     "authors": null,
@@ -2732,7 +2749,7 @@
     "aliases": [
       "Berkeley DeepDrive-eXplanation"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Explanations, captions and risk narration",
     "ours": false,
     "authors": null,
@@ -2757,7 +2774,7 @@
   {
     "name": "BDD-OIA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Explanations, captions and risk narration",
     "ours": false,
     "authors": null,
@@ -2782,7 +2799,7 @@
   {
     "name": "DRAMA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Explanations, captions and risk narration",
     "ours": false,
     "authors": null,
@@ -2807,7 +2824,7 @@
   {
     "name": "Rank2Tell",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Explanations, captions and risk narration",
     "ours": false,
     "authors": null,
@@ -2834,7 +2851,7 @@
     "aliases": [
       "CoVLA-Dataset"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Explanations, captions and risk narration",
     "ours": false,
     "authors": null,
@@ -2859,7 +2876,7 @@
   {
     "name": "DriveGPT4 instruction data",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Explanations, captions and risk narration",
     "ours": false,
     "authors": null,
@@ -2888,7 +2905,7 @@
       "DriveLM-nuScenes",
       "DriveLM-CARLA"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -2913,7 +2930,7 @@
   {
     "name": "Reason2Drive",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -2938,7 +2955,7 @@
   {
     "name": "LingoQA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -2963,7 +2980,7 @@
   {
     "name": "DriveBench",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -2991,7 +3008,7 @@
       "V2V-LLM",
       "V2V-GoT-QA"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -3016,7 +3033,7 @@
   {
     "name": "LaMPilot",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -3036,14 +3053,14 @@
     "bibkey": null,
     "source_quote": "The benchmark includes 32 diverse driving scenarios, each with multiple samples and commands",
     "verified": true,
-    "notes": "CVPR 2024 (Ma et al.). Simulator-based (highway, intersection, ramp merge); NO camera/LiDAR data -- LLM generates code calling driving primitives. Kept in H because task named it; flag as simulator/program bucket. Sub-heading: planning-with-language (simulator)."
+    "notes": "CVPR 2024 (Ma et al.). Simulator-based (highway, intersection, ramp merge); NO camera/LiDAR data -- LLM generates code calling driving primitives. Kept in J because task named it; flag as simulator/program bucket. Sub-heading: planning-with-language (simulator)."
   },
   {
     "name": "Driving-with-LLMs",
     "aliases": [
       "LLM-Driver DrivingQA"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Reasoning and planning with language",
     "ours": false,
     "authors": null,
@@ -3070,7 +3087,7 @@
     "aliases": [
       "Passing the Driving Knowledge Test"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Traffic rules and driving-test QA",
     "ours": false,
     "authors": null,
@@ -3095,7 +3112,7 @@
   {
     "name": "DrivingVQA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Traffic rules and driving-test QA",
     "ours": false,
     "authors": null,
@@ -3120,7 +3137,7 @@
   {
     "name": "DriveCombo",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Traffic rules and driving-test QA",
     "ours": false,
     "authors": null,
@@ -3147,7 +3164,7 @@
     "aliases": [
       "Do LLMs Understand Romanian Driving Laws?"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Traffic rules and driving-test QA",
     "ours": false,
     "authors": null,
@@ -3174,7 +3191,7 @@
     "aliases": [
       "Intelligent Driving Knowledge Base"
     ],
-    "section": "H",
+    "section": "J",
     "subsection": "Traffic rules and driving-test QA",
     "ours": false,
     "authors": null,
@@ -3199,7 +3216,7 @@
   {
     "name": "SUTD-TrafficQA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Roadside traffic-video QA",
     "ours": false,
     "authors": null,
@@ -3224,7 +3241,7 @@
   {
     "name": "TUMTraffic-VideoQA",
     "aliases": [],
-    "section": "H",
+    "section": "J",
     "subsection": "Roadside traffic-video QA",
     "ours": false,
     "authors": null,
@@ -3252,7 +3269,7 @@
       "Spider 1.0",
       "car_1"
     ],
-    "section": "I",
+    "section": "K",
     "subsection": "",
     "ours": false,
     "authors": null,
@@ -3280,7 +3297,7 @@
       "VSS",
       "GENIVI VSS"
     ],
-    "section": "K",
+    "section": "M",
     "subsection": "Standards and schemas",
     "ours": false,
     "authors": null,
@@ -3308,7 +3325,7 @@
       "Markup for Autos",
       "GAO - Generic Automotive Ontology (W3C Automotive Ontology Community Group)"
     ],
-    "section": "K",
+    "section": "M",
     "subsection": "Standards and schemas",
     "ours": false,
     "authors": null,
@@ -3335,7 +3352,7 @@
     "aliases": [
       "vPIC"
     ],
-    "section": "K",
+    "section": "M",
     "subsection": "Make, model and VIN catalogues",
     "ours": false,
     "authors": null,
@@ -3360,7 +3377,7 @@
   {
     "name": "vehiclesdb",
     "aliases": [],
-    "section": "K",
+    "section": "M",
     "subsection": "Make, model and VIN catalogues",
     "ours": false,
     "authors": null,
@@ -3380,14 +3397,14 @@
     "bibkey": null,
     "source_quote": "Official, openly-licensed sources only: vehicle registers, type-approval catalogues, and government statistics.",
     "verified": true,
-    "notes": "Formats CSV, Parquet, JSON, SQLite; fields incl. kind, make_name, model_name, body_types, countries, aliases, popularity deciles. Monthly releases (built 2026-10-10). Counts on page are inconsistent (19,282 vs 15,068). Candidate catalogue for linking MAKE/MODEL spans (A/K overlap)."
+    "notes": "Formats CSV, Parquet, JSON, SQLite; fields incl. kind, make_name, model_name, body_types, countries, aliases, popularity deciles. Monthly releases (built 2026-10-10). Counts on page are inconsistent (19,282 vs 15,068). Candidate catalogue for linking MAKE/MODEL spans (A/M overlap)."
   },
   {
     "name": "vehicle-makes-models",
     "aliases": [
       "vehicle-makes-models (gor3a)"
     ],
-    "section": "K",
+    "section": "M",
     "subsection": "Make, model and VIN catalogues",
     "ours": false,
     "authors": null,
@@ -3412,7 +3429,7 @@
   {
     "name": "us-car-models-data",
     "aliases": [],
-    "section": "K",
+    "section": "M",
     "subsection": "Make, model and VIN catalogues",
     "ours": false,
     "authors": null,
@@ -3437,7 +3454,7 @@
   {
     "name": "VehicleName - multilingual automotive name database",
     "aliases": [],
-    "section": "K",
+    "section": "M",
     "subsection": "Make, model and VIN catalogues",
     "ours": false,
     "authors": null,
@@ -3457,12 +3474,12 @@
     "bibkey": null,
     "source_quote": "面向 AI 与人类的 4 语言(en / zh-CN / zh-TW / ja)汽车名词资料库:车型、品牌、术语、级别分类与跨市场异名。",
     "verified": true,
-    "notes": "JSON + Markdown builds. Directly useful for MAKE/MODEL normalisation across English/Chinese/Japanese (A/K overlap)."
+    "notes": "JSON + Markdown builds. Directly useful for MAKE/MODEL normalisation across English/Chinese/Japanese (A/M overlap)."
   },
   {
     "name": "Wikidata 'car model' class (Q3231690) and vehicle subgraph",
     "aliases": [],
-    "section": "K",
+    "section": "M",
     "subsection": "Make, model and VIN catalogues",
     "ours": false,
     "authors": null,
@@ -3489,7 +3506,7 @@
     "aliases": [
       "Italian Automotive Glossary (DealerMax)"
     ],
-    "section": "K",
+    "section": "M",
     "subsection": "Glossaries and knowledge graphs",
     "ours": false,
     "authors": null,
@@ -3514,7 +3531,7 @@
   {
     "name": "EVKG - Electric Vehicle Knowledge Graph",
     "aliases": [],
-    "section": "K",
+    "section": "M",
     "subsection": "Glossaries and knowledge graphs",
     "ours": false,
     "authors": null,
@@ -3541,7 +3558,7 @@
     "aliases": [
       "Car-identification (LongxingHu) - Autohome car knowledge graph & QA"
     ],
-    "section": "K",
+    "section": "M",
     "subsection": "Glossaries and knowledge graphs",
     "ours": false,
     "authors": null,

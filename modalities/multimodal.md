@@ -12,10 +12,10 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
   - [🏷️ B. Listings, adverts & claims](#️-b-listings-adverts--claims) (1)
   - [⭐ D. Reviews, opinion & sentiment](#-d-reviews-opinion--sentiment) (1)
   - [⚠️ E. Complaints, safety, recalls & incidents](#️-e-complaints-safety-recalls--incidents) (1)
-  - [🔧 F. Maintenance, repair, parts & technical documents](#-f-maintenance-repair-parts--technical-documents) (1)
-  - [🗣️ G. In-car voice assistants & dialogue](#️-g-in-car-voice-assistants--dialogue) (5)
-  - [🛣️ H. Driving-scene language & multimodal](#️-h-driving-scene-language--multimodal) (30)
-  - [🕸️ K. Knowledge graphs, ontologies & lexicons](#️-k-knowledge-graphs-ontologies--lexicons) (1)
+  - [📘 F. Owner's manuals & technical QA](#-f-owners-manuals--technical-qa) (1)
+  - [🗣️ I. In-car voice assistants & dialogue](#️-i-in-car-voice-assistants--dialogue) (5)
+  - [🛣️ J. Driving-scene language & multimodal](#️-j-driving-scene-language--multimodal) (30)
+  - [🕸️ M. Knowledge graphs, ontologies & lexicons](#️-m-knowledge-graphs-ontologies--lexicons) (1)
 
 ## Corpora by application area
 
@@ -43,15 +43,13 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 |---|---|---|---|---|---|---|---|---|
 | NMVCCS - National Motor Vehicle Crash Causation Survey | crash narratives | English | 6,949 crashes | unknown | open | 2008 | [data](https://catalog.data.gov/dataset/national-motor-vehicle-crash-causation-survey-nmvccs-nmvccs-xml-case-viewer) | — |
 
-### 🔧 F. Maintenance, repair, parts & technical documents
-
-#### Manuals, FAQs & question answering
+### 📘 F. Owner's manuals & technical QA
 
 | Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|
-| FETA car manuals benchmark | retrieval | English | not stated | apache-2.0 | open | 2022 | [data](https://huggingface.co/datasets/alfassy/FETA_IKEA_CAR_MANUALS) · [paper](https://arxiv.org/abs/2209.03648) | — |
+| FETA (car manuals) | retrieval | English | not stated | apache-2.0 | open | 2022 | [data](https://huggingface.co/datasets/alfassy/FETA_IKEA_CAR_MANUALS) · [paper](https://arxiv.org/abs/2209.03648) | — |
 
-### 🗣️ G. In-car voice assistants & dialogue
+### 🗣️ I. In-car voice assistants & dialogue
 
 #### Task-oriented dialogue and tool use
 
@@ -73,7 +71,7 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 | CIAIR In-Car Speech Database | dialogue | Japanese | \~800 subjects | unknown | paper only | 2004 | paper only · [paper](https://www.isca-archive.org/interspeech_2004/kawaguchi04_interspeech.html) | — |
 | UTDrive | ASR | English | 37 F + 40 M drivers | unknown | open | 2007 | [data](https://utdrive.utdallas.edu/corpus) | — |
 
-### 🛣️ H. Driving-scene language & multimodal
+### 🛣️ J. Driving-scene language & multimodal
 
 *For papers and models on language in autonomous driving, see [Awesome-LLM4AD](https://github.com/Thinklab-SJTU/Awesome-LLM4AD), which this section complements; it lists corpora only.*
 
@@ -137,7 +135,7 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 | SUTD-TrafficQA | video QA | English | 62,535 QA pairs | unknown | on request | 2021 | [data](https://github.com/sutdcv/SUTD-TrafficQA) · [paper](https://arxiv.org/abs/2103.15538) | — |
 | TUMTraffic-VideoQA | video QA + captioning | English | 85k MCQ pairs | CC BY-NC-SA 4.0 | open | 2025 | [data](https://innovation-mobility.com/en/project-providentia/a9-dataset) · [paper](https://arxiv.org/abs/2502.02449) | — |
 
-### 🕸️ K. Knowledge graphs, ontologies & lexicons
+### 🕸️ M. Knowledge graphs, ontologies & lexicons
 
 #### Glossaries and knowledge graphs
 

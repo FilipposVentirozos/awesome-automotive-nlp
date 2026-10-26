@@ -7,7 +7,7 @@ entries:
 - name: CarExpert
   aliases:
   - CarExpert in-car RAG QA
-  section: G
+  section: I
   subsection: ''
   task_type: QA
   task_short: QA
@@ -29,7 +29,7 @@ entries:
 - name: 'DeepTest 2026 LLM Testing Competition: automotive manual assistant benchmark'
   aliases:
   - DeepTest Tool Competition 2026
-  section: G
+  section: I
   subsection: ''
   task_type: QA
   task_short: QA

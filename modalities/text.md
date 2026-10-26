@@ -14,11 +14,13 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
   - [🧩 C. Features, attributes & catalogue linking](#-c-features-attributes--catalogue-linking) (1)
   - [⭐ D. Reviews, opinion & sentiment](#-d-reviews-opinion--sentiment) (17)
   - [⚠️ E. Complaints, safety, recalls & incidents](#️-e-complaints-safety-recalls--incidents) (1)
-  - [🔧 F. Maintenance, repair, parts & technical documents](#-f-maintenance-repair-parts--technical-documents) (10)
-  - [🗣️ G. In-car voice assistants & dialogue](#️-g-in-car-voice-assistants--dialogue) (9)
-  - [🛣️ H. Driving-scene language & multimodal](#️-h-driving-scene-language--multimodal) (1)
-  - [🔎 I. Search, queries & semantic parsing](#-i-search-queries--semantic-parsing) (1)
-  - [🕸️ K. Knowledge graphs, ontologies & lexicons](#️-k-knowledge-graphs-ontologies--lexicons) (10)
+  - [📘 F. Owner's manuals & technical QA](#-f-owners-manuals--technical-qa) (3)
+  - [🔧 G. Faults, diagnostics & repair](#-g-faults-diagnostics--repair) (5)
+  - [📐 H. Engineering documents](#-h-engineering-documents) (2)
+  - [🗣️ I. In-car voice assistants & dialogue](#️-i-in-car-voice-assistants--dialogue) (9)
+  - [🛣️ J. Driving-scene language & multimodal](#️-j-driving-scene-language--multimodal) (1)
+  - [🔎 K. Search, queries & semantic parsing](#-k-search-queries--semantic-parsing) (1)
+  - [🕸️ M. Knowledge graphs, ontologies & lexicons](#️-m-knowledge-graphs-ontologies--lexicons) (10)
 
 ## Corpora by application area
 
@@ -96,34 +98,32 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 |---|---|---|---|---|---|---|---|---|
 | Iowa DOT crash report narratives (as used in Bhagat et al. 2025) | crash narratives | English | 94,367 narratives | unknown | paper only | 2025 | paper only · [paper](https://arxiv.org/abs/2504.13068) | — |
 
-### 🔧 F. Maintenance, repair, parts & technical documents
-
-#### Manuals, FAQs & question answering
+### 📘 F. Owner's manuals & technical QA
 
 | Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|
-| ADMit automotive NER data | NER | Korean, English | not stated | unknown | paper only | 2023 | paper only · [paper](https://doi.org/10.1016/j.eswa.2023.120007) | AutoSpecNER, Auto-AdvER |
+| ADMit | NER | Korean, English | not stated | unknown | paper only | 2023 | paper only · [paper](https://doi.org/10.1016/j.eswa.2023.120007) | AutoSpecNER, Auto-AdvER |
 | DelucionQA | QA + hallucination | English | 913 questions | CC BY 4.0 | open | 2023 | [data](https://github.com/boschresearch/DelucionQA) · [paper](https://aclanthology.org/2023.findings-emnlp.59.pdf) | — |
-| MaQA (Manual Question Answering) | QA + classification | Korean, English | 45,641 questions | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.3390/electronics13244972) | — |
+| MaQA | QA + classification | Korean, English | 45,641 questions | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.3390/electronics13244972) | — |
 
-#### Faults, repair and parts
-
-| Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
-|---|---|---|---|---|---|---|---|---|
-| Automotive_Industry_Fault_Data_Set | relation extraction | Chinese | 1,441 records | apache-2.0 | open | 2023 | [data](https://huggingface.co/datasets/zhengr/Automotive_Industry_Fault_Data_Set) | — |
-| Chinese automobile fault text NER datasets (Entropy 2025) | NER | Chinese | \~4.5k/5.5k/4.0k sentences | unknown | on request | 2025 | [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11854445/) | — |
-| Chinese vehicle fault repair case NER (Electronics 2025) | NER | Chinese | not stated | unknown | paper only | 2025 | paper only · [paper](https://doi.org/10.3390/electronics14071361) | — |
-| Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021) | classification | English | not stated | unknown | paper only | 2021 | paper only · [paper](https://arxiv.org/abs/2111.14977) | — |
-| Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model (Hu and Ma) | NER | Chinese | not stated | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.1109/NNICE61279.2024.10499162) | AutoSpecNER, Auto-AdvER, Auto-Features |
-
-#### Requirements, standards and patents
+### 🔧 G. Faults, diagnostics & repair
 
 | Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|
-| Automotive ISO 26262 Safety Requirements Dataset | requirements | English | \~1,000 samples | MIT | open | — | [data](https://huggingface.co/datasets/Muhammmadd/iso26262-automotive-safety-requirements) | — |
-| Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable | patents | English | not stated | cc-by-sa-4.0 | open | 2022 | [data](https://huggingface.co/datasets/HUPD/hupd) · [paper](https://arxiv.org/abs/2207.04043) | — |
+| Automobile fault text NER (Entropy 2025) | NER | Chinese | \~4.5k/5.5k/4.0k sentences | unknown | on request | 2025 | [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11854445/) | — |
+| Automotive Industry Fault Data Set | relation extraction | Chinese | 1,441 records | apache-2.0 | open | 2023 | [data](https://huggingface.co/datasets/zhengr/Automotive_Industry_Fault_Data_Set) | — |
+| Automotive parts NER (Hu and Ma) | NER | Chinese | not stated | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.1109/NNICE61279.2024.10499162) | AutoSpecNER, Auto-AdvER, Auto-Features |
+| Customer failure reports (Khodadadi et al. 2021) | classification | English | not stated | unknown | paper only | 2021 | paper only · [paper](https://arxiv.org/abs/2111.14977) | — |
+| Vehicle fault repair case NER (Electronics 2025) | NER | Chinese | not stated | unknown | paper only | 2025 | paper only · [paper](https://doi.org/10.3390/electronics14071361) | — |
 
-### 🗣️ G. In-car voice assistants & dialogue
+### 📐 H. Engineering documents
+
+| Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
+|---|---|---|---|---|---|---|---|---|
+| HUPD patents (CPC B60, vehicles) | patents | English | not stated | cc-by-sa-4.0 | open | 2022 | [data](https://huggingface.co/datasets/HUPD/hupd) · [paper](https://arxiv.org/abs/2207.04043) | — |
+| ISO 26262 Safety Requirements | requirements | English | \~1,000 samples | MIT | open | — | [data](https://huggingface.co/datasets/Muhammmadd/iso26262-automotive-safety-requirements) | — |
+
+### 🗣️ I. In-car voice assistants & dialogue
 
 #### Task-oriented dialogue and tool use
 
@@ -149,7 +149,7 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 | In-car contextual-understanding benchmark (Habicht et al. 2025) | classification | English | not stated | unknown | paper only | 2025 | paper only · [paper](https://arxiv.org/abs/2512.12042) | — |
 | Vehicle Voice Command Authorization safety benchmark (Afroze et al. 2026) | classification | English | 202 scenarios | unknown | paper only | 2026 | paper only · [paper](https://arxiv.org/abs/2609.19630) | — |
 
-### 🛣️ H. Driving-scene language & multimodal
+### 🛣️ J. Driving-scene language & multimodal
 
 *For papers and models on language in autonomous driving, see [Awesome-LLM4AD](https://github.com/Thinklab-SJTU/Awesome-LLM4AD), which this section complements; it lists corpora only.*
 
@@ -159,7 +159,7 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 |---|---|---|---|---|---|---|---|---|
 | LaMPilot | semantic parsing | English | 4,900 test cases | MIT | open | 2024 | [data](https://github.com/PurdueDigitalTwin/LaMPilot) | — |
 
-### 🔎 I. Search, queries & semantic parsing
+### 🔎 K. Search, queries & semantic parsing
 
 *Spider's car_1 database is the only public automotive slice found. No open corpus maps natural-language car-search queries to structured filters.*
 
@@ -167,7 +167,7 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 |---|---|---|---|---|---|---|---|---|
 | Spider (car_1 database) | text-to-SQL | English | not stated | unknown | open | 2018 | [data](https://yale-lily.github.io/spider) · [paper](https://arxiv.org/abs/1809.08887) | — |
 
-### 🕸️ K. Knowledge graphs, ontologies & lexicons
+### 🕸️ M. Knowledge graphs, ontologies & lexicons
 
 #### Standards and schemas
 

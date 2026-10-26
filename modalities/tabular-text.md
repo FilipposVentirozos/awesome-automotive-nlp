@@ -12,8 +12,8 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
   - [🏷️ B. Listings, adverts & claims](#️-b-listings-adverts--claims) (1)
   - [⭐ D. Reviews, opinion & sentiment](#-d-reviews-opinion--sentiment) (2)
   - [⚠️ E. Complaints, safety, recalls & incidents](#️-e-complaints-safety-recalls--incidents) (10)
-  - [🔧 F. Maintenance, repair, parts & technical documents](#-f-maintenance-repair-parts--technical-documents) (1)
-  - [🛣️ H. Driving-scene language & multimodal](#️-h-driving-scene-language--multimodal) (1)
+  - [🔧 G. Faults, diagnostics & repair](#-g-faults-diagnostics--repair) (1)
+  - [🛣️ J. Driving-scene language & multimodal](#️-j-driving-scene-language--multimodal) (1)
 
 ## Corpora by application area
 
@@ -61,15 +61,13 @@ Part of [awesome-automotive-nlp](../README.md). Same taxonomy as the main list: 
 | California DMV Autonomous Vehicle Disengagement Reports | incident reports | English | \~634k characters (2024) | unknown | open | 2015 | [data](https://www.dmv.ca.gov/portal/file/2024-autonomous-vehicle-disengagement-reports-csv/) | — |
 | NHTSA Standing General Order 2021-01 Crash Reports (ADS and Level 2 ADAS) | crash narratives | English | not stated | unknown | open | 2021 | [data](https://static.nhtsa.gov/odi/ffdd/sgo-2021-01/SGO-2021-01_Data_Element_Definitions.pdf) | — |
 
-### 🔧 F. Maintenance, repair, parts & technical documents
-
-#### Faults, repair and parts
+### 🔧 G. Faults, diagnostics & repair
 
 | Corpus | Task | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|
-| Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University) | NER + KG / ontology | Chinese | not stated | CC BY 4.0 | open | 2026 | [data](https://data.mendeley.com/datasets/r98g7g6k5t/1) | — |
+| Vehicle Fleet Fault Association Dataset | NER + KG / ontology | Chinese | not stated | CC BY 4.0 | open | 2026 | [data](https://data.mendeley.com/datasets/r98g7g6k5t/1) | — |
 
-### 🛣️ H. Driving-scene language & multimodal
+### 🛣️ J. Driving-scene language & multimodal
 
 *For papers and models on language in autonomous driving, see [Awesome-LLM4AD](https://github.com/Thinklab-SJTU/Awesome-LLM4AD), which this section complements; it lists corpora only.*
 

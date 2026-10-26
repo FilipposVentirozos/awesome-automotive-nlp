@@ -30,12 +30,14 @@ body:
         - "C. Features, attributes & catalogue linking"
         - "D. Reviews, opinion & sentiment"
         - "E. Complaints, safety, recalls & incidents"
-        - "F. Maintenance, repair, parts & technical documents"
-        - "G. In-car voice assistants & dialogue"
-        - "H. Driving-scene language & multimodal"
-        - "I. Search, queries & semantic parsing"
-        - "J. Market, pricing & listing tables with text"
-        - "K. Knowledge graphs, ontologies & lexicons"
+        - "F. Owner's manuals & technical QA"
+        - "G. Faults, diagnostics & repair"
+        - "H. Engineering documents"
+        - "I. In-car voice assistants & dialogue"
+        - "J. Driving-scene language & multimodal"
+        - "K. Search, queries & semantic parsing"
+        - "L. Market, pricing & listing tables with text"
+        - "M. Knowledge graphs, ontologies & lexicons"
     validations:
       required: true
   - type: input

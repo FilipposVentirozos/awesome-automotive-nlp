@@ -24,11 +24,29 @@ All modalities (text, speech, multimodal, image, tabular+text) and all languages
 
 ## Sections, sub-headings and section notes
 
-The primary axis is the application area, bucket codes `A` to `K` (listed in the *Taxonomy* section of `README.md`). Pick the bucket that matches the corpus's main use with `section`; the task, modality and language columns carry the rest.
+The primary axis is the application area, bucket codes `A` to `M` (listed in the *Taxonomy* section of `README.md`). Pick the bucket that matches the corpus's main use with `section`; the task, modality and language columns carry the rest.
+
+| Code | Section | Covers |
+|---|---|---|
+| `A` | 🚗 Vehicle identification & specifications | make/model/trim/engine NER, car-type recognition from text or image, VIN, spec sheets |
+| `B` | 🏷️ Listings, adverts & claims | classified-ad IE (condition, history, offers), ad generation & verification, listing corpora |
+| `C` | 🧩 Features, attributes & catalogue linking | feature-conditioned NER, attribute-value extraction, product/catalogue linking |
+| `D` | ⭐ Reviews, opinion & sentiment | car reviews, automotive ABSA, forums, social media opinion |
+| `E` | ⚠️ Complaints, safety, recalls & incidents | NHTSA/ODI complaints, defect reports, crash narratives, recall text |
+| `F` | 📘 Owner's manuals & technical QA | owner's-manual and FAQ question answering, manual retrieval, FAQ-oriented NER |
+| `G` | 🔧 Faults, diagnostics & repair | fault and repair-case text, customer failure reports, diagnostic NER and relation extraction, parts NER |
+| `H` | 📐 Engineering documents | requirements, safety standards and patents |
+| `I` | 🗣️ In-car voice assistants & dialogue | in-car task-oriented dialogue, SLU intent/slot, in-vehicle ASR/speech, driver-vehicle interaction |
+| `J` | 🛣️ Driving-scene language & multimodal | Talk2Car, nuScenes-QA, DriveLM, BDD-X, LingoQA, HAD, DRAMA, referring expressions, driving captions |
+| `K` | 🔎 Search, queries & semantic parsing | NL-to-structured automotive search, query logs, synthetic query corpora, text-to-SQL on car data |
+| `L` | 💷 Market, pricing & listing tables with text | used-car price datasets that carry free text, Craigslist/Kaggle car listings |
+| `M` | 🕸️ Knowledge graphs, ontologies & lexicons | automotive ontologies (e.g. VSS), KGs, taxonomies, lexicons |
+
+The emoji are set in `HEADING_EMOJI` in `scripts/build_readme.py`, which also gives the top-level headings theirs (Contents 📑, Taxonomy 🗂️, Related papers (no public data) 📄, How to cite 📝, Contributing 🤝). Codes were re-lettered on 2026-10-26, when the old section F was split into F, G and H: the former G-K are now I-M.
 
 - **Sub-headings.** `subsection` places the entry under a sub-heading inside its section. Reuse an existing sub-heading string exactly (copy it from `data/corpora.yaml`); a new string creates a new sub-heading. Entries with `subsection: ""` render first, in a table directly under the section heading; the named sub-headings follow in the order in which they first appear in the YAML. Within each table, rows are sorted by name. Do not name a sub-heading after a section or a top-level heading (for example "Taxonomy"): the renderer rejects anchors that would collide.
-- **Section notes.** Every bucket is rendered, even when it has no entries. A section may carry one short italic note under its heading, kept in `SECTION_NOTES` in `scripts/build_readme.py`, which explains a gap (for example, why section J is empty) or points to where related corpora are listed. Propose a change to a note in the pull request that makes it necessary.
-- **Merging.** No buckets are merged (`MERGE_INTO` in `scripts/build_readme.py` is empty). Adding a pair such as `"J": "B"` would fold a bucket with fewer than three entries into its neighbour, with a line saying so.
+- **Section notes.** Every bucket is rendered, even when it has no entries. A section may carry one short italic note under its heading, kept in `SECTION_NOTES` in `scripts/build_readme.py`, which explains a gap (for example, why section L is empty) or points to where related corpora are listed. Propose a change to a note in the pull request that makes it necessary.
+- **Merging.** No buckets are merged (`MERGE_INTO` in `scripts/build_readme.py` is empty). Adding a pair such as `"L": "B"` would fold a bucket with fewer than three entries into its neighbour, with a line saying so.
 
 ## Short Task and Size columns
 
@@ -61,7 +79,7 @@ Add one mapping to the `entries:` list. Every key must be present; use `null` wh
 |---|---|---|
 | `name` | string | canonical corpus name (unique across both files) |
 | `aliases` | list of strings | other names (including the original form of a shortened display name), or `[]`; kept for search, not shown in the README |
-| `section` | `A`..`K` | bucket code |
+| `section` | `A`..`M` | bucket code (see the table above) |
 | `subsection` | string | sub-heading within the section (see above); `""` for none |
 | `task_type` | string | e.g. NER, span labelling, entity linking, attribute-value extraction, ABSA, sentiment, text classification, dialogue (task-oriented), SLU/intent+slot, ASR, TTS, QA, VQA, captioning, grounding/referring expression, semantic parsing / NL-to-query, summarisation, NLG (ad generation), fact verification, KG/ontology, image classification |
 | `task_short` | string | the Task column: one or two labels from the vocabulary below, joined by " + " (at most 22 characters) |
@@ -135,7 +153,7 @@ Section and top-level headings carry one emoji each, set in `HEADING_EMOJI` in `
 - [ ] The entry satisfies the inclusion rule (freely downloadable, or described in a public paper with `access: paper only (contact authors)`); it is not a commercial catalogue.
 - [ ] Corpus rows are in `data/corpora.yaml`; papers with no public data are in `data/papers.yaml`.
 - [ ] `source_quote` is verbatim from the paper or page; `verified` is set honestly; no invented URLs.
-- [ ] `section` is a bucket code `A`..`K`, `subsection` reuses an existing sub-heading string where one fits, and `access` is one of the allowed values.
+- [ ] `section` is a bucket code `A`..`M`, `subsection` reuses an existing sub-heading string where one fits, and `access` is one of the allowed values.
 - [ ] `task_short` uses the vocabulary above; every number in `size_short` appears in `size`.
 - [ ] `python scripts/build_readme.py` exits 0, and the regenerated `README.md`, `modalities/` pages and `data/` exports are committed (`python scripts/build_readme.py --check` passes).
 - [ ] Free text is in British English (licence, catalogue, labelled).

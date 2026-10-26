@@ -21,12 +21,14 @@ A curated list of corpora for natural language processing on automotive text, sp
   - [🧩 C. Features, attributes & catalogue linking](#-c-features-attributes--catalogue-linking) (1)
   - [⭐ D. Reviews, opinion & sentiment](#-d-reviews-opinion--sentiment) (20)
   - [⚠️ E. Complaints, safety, recalls & incidents](#️-e-complaints-safety-recalls--incidents) (12)
-  - [🔧 F. Maintenance, repair, parts & technical documents](#-f-maintenance-repair-parts--technical-documents) (12)
-  - [🗣️ G. In-car voice assistants & dialogue](#️-g-in-car-voice-assistants--dialogue) (25)
-  - [🛣️ H. Driving-scene language & multimodal](#️-h-driving-scene-language--multimodal) (32)
-  - [🔎 I. Search, queries & semantic parsing](#-i-search-queries--semantic-parsing) (1)
-  - [💷 J. Market, pricing & listing tables with text](#-j-market-pricing--listing-tables-with-text) (0)
-  - [🕸️ K. Knowledge graphs, ontologies & lexicons](#️-k-knowledge-graphs-ontologies--lexicons) (11)
+  - [📘 F. Owner's manuals & technical QA](#-f-owners-manuals--technical-qa) (4)
+  - [🔧 G. Faults, diagnostics & repair](#-g-faults-diagnostics--repair) (6)
+  - [📐 H. Engineering documents](#-h-engineering-documents) (2)
+  - [🗣️ I. In-car voice assistants & dialogue](#️-i-in-car-voice-assistants--dialogue) (25)
+  - [🛣️ J. Driving-scene language & multimodal](#️-j-driving-scene-language--multimodal) (32)
+  - [🔎 K. Search, queries & semantic parsing](#-k-search-queries--semantic-parsing) (1)
+  - [💷 L. Market, pricing & listing tables with text](#-l-market-pricing--listing-tables-with-text) (0)
+  - [🕸️ M. Knowledge graphs, ontologies & lexicons](#️-m-knowledge-graphs-ontologies--lexicons) (11)
 - [Browse by modality](modalities/README.md)
 - [📄 Related papers (no public data)](#-related-papers-no-public-data) (2)
 - [📝 How to cite](#-how-to-cite)
@@ -41,12 +43,14 @@ The primary axis is the application area, one section per bucket; larger section
 - **🧩 C. Features, attributes & catalogue linking**: feature-conditioned NER, attribute-value extraction, product/catalogue linking
 - **⭐ D. Reviews, opinion & sentiment**: car reviews, automotive ABSA, forums, social media opinion
 - **⚠️ E. Complaints, safety, recalls & incidents**: NHTSA/ODI complaints, defect reports, crash narratives, recall text
-- **🔧 F. Maintenance, repair, parts & technical documents**: auto-parts NER, repair/diagnostic QA, service records, manuals, patents
-- **🗣️ G. In-car voice assistants & dialogue**: in-car task-oriented dialogue, SLU intent/slot, in-vehicle ASR/speech, driver-vehicle interaction
-- **🛣️ H. Driving-scene language & multimodal**: Talk2Car, nuScenes-QA, DriveLM, BDD-X, LingoQA, HAD, DRAMA, referring expressions, driving captions
-- **🔎 I. Search, queries & semantic parsing**: NL-to-structured automotive search, query logs, synthetic query corpora, text-to-SQL on car data
-- **💷 J. Market, pricing & listing tables with text**: used-car price datasets that carry free text, Craigslist/Kaggle car listings
-- **🕸️ K. Knowledge graphs, ontologies & lexicons**: automotive ontologies (e.g. VSS), KGs, taxonomies, lexicons
+- **📘 F. Owner's manuals & technical QA**: owner's-manual and FAQ question answering, manual retrieval, FAQ-oriented NER
+- **🔧 G. Faults, diagnostics & repair**: fault and repair-case text, customer failure reports, diagnostic NER and relation extraction, parts NER
+- **📐 H. Engineering documents**: requirements, safety standards and patents
+- **🗣️ I. In-car voice assistants & dialogue**: in-car task-oriented dialogue, SLU intent/slot, in-vehicle ASR/speech, driver-vehicle interaction
+- **🛣️ J. Driving-scene language & multimodal**: Talk2Car, nuScenes-QA, DriveLM, BDD-X, LingoQA, HAD, DRAMA, referring expressions, driving captions
+- **🔎 K. Search, queries & semantic parsing**: NL-to-structured automotive search, query logs, synthetic query corpora, text-to-SQL on car data
+- **💷 L. Market, pricing & listing tables with text**: used-car price datasets that carry free text, Craigslist/Kaggle car listings
+- **🕸️ M. Knowledge graphs, ontologies & lexicons**: automotive ontologies (e.g. VSS), KGs, taxonomies, lexicons
 
 ## Corpora by application area
 
@@ -170,36 +174,34 @@ The primary axis is the application area, one section per bucket; larger section
 | NHTSA Standing General Order 2021-01 Crash Reports (ADS and Level 2 ADAS) | crash narratives | tabular+text | English | not stated | unknown | open | 2021 | [data](https://static.nhtsa.gov/odi/ffdd/sgo-2021-01/SGO-2021-01_Data_Element_Definitions.pdf) | — |
 | NMVCCS - National Motor Vehicle Crash Causation Survey | crash narratives | multimodal | English | 6,949 crashes | unknown | open | 2008 | [data](https://catalog.data.gov/dataset/national-motor-vehicle-crash-causation-survey-nmvccs-nmvccs-xml-case-viewer) | — |
 
-### 🔧 F. Maintenance, repair, parts & technical documents
-
-#### Manuals, FAQs & question answering
+### 📘 F. Owner's manuals & technical QA
 
 | Corpus | Task | Modality | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|---|
-| ADMit automotive NER data | NER | text | Korean, English | not stated | unknown | paper only | 2023 | paper only · [paper](https://doi.org/10.1016/j.eswa.2023.120007) | AutoSpecNER, Auto-AdvER |
+| ADMit | NER | text | Korean, English | not stated | unknown | paper only | 2023 | paper only · [paper](https://doi.org/10.1016/j.eswa.2023.120007) | AutoSpecNER, Auto-AdvER |
 | DelucionQA | QA + hallucination | text | English | 913 questions | CC BY 4.0 | open | 2023 | [data](https://github.com/boschresearch/DelucionQA) · [paper](https://aclanthology.org/2023.findings-emnlp.59.pdf) | — |
-| FETA car manuals benchmark | retrieval | multimodal | English | not stated | apache-2.0 | open | 2022 | [data](https://huggingface.co/datasets/alfassy/FETA_IKEA_CAR_MANUALS) · [paper](https://arxiv.org/abs/2209.03648) | — |
-| MaQA (Manual Question Answering) | QA + classification | text | Korean, English | 45,641 questions | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.3390/electronics13244972) | — |
+| FETA (car manuals) | retrieval | multimodal | English | not stated | apache-2.0 | open | 2022 | [data](https://huggingface.co/datasets/alfassy/FETA_IKEA_CAR_MANUALS) · [paper](https://arxiv.org/abs/2209.03648) | — |
+| MaQA | QA + classification | text | Korean, English | 45,641 questions | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.3390/electronics13244972) | — |
 
-#### Faults, repair and parts
-
-| Corpus | Task | Modality | Lang | Size | Licence | Access | Year | Links | Cited in |
-|---|---|---|---|---|---|---|---|---|---|
-| Automotive_Industry_Fault_Data_Set | relation extraction | text | Chinese | 1,441 records | apache-2.0 | open | 2023 | [data](https://huggingface.co/datasets/zhengr/Automotive_Industry_Fault_Data_Set) | — |
-| Chinese automobile fault text NER datasets (Entropy 2025) | NER | text | Chinese | \~4.5k/5.5k/4.0k sentences | unknown | on request | 2025 | [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11854445/) | — |
-| Chinese vehicle fault repair case NER (Electronics 2025) | NER | text | Chinese | not stated | unknown | paper only | 2025 | paper only · [paper](https://doi.org/10.3390/electronics14071361) | — |
-| Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University) | NER + KG / ontology | tabular+text | Chinese | not stated | CC BY 4.0 | open | 2026 | [data](https://data.mendeley.com/datasets/r98g7g6k5t/1) | — |
-| Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021) | classification | text | English | not stated | unknown | paper only | 2021 | paper only · [paper](https://arxiv.org/abs/2111.14977) | — |
-| Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model (Hu and Ma) | NER | text | Chinese | not stated | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.1109/NNICE61279.2024.10499162) | AutoSpecNER, Auto-AdvER, Auto-Features |
-
-#### Requirements, standards and patents
+### 🔧 G. Faults, diagnostics & repair
 
 | Corpus | Task | Modality | Lang | Size | Licence | Access | Year | Links | Cited in |
 |---|---|---|---|---|---|---|---|---|---|
-| Automotive ISO 26262 Safety Requirements Dataset | requirements | text | English | \~1,000 samples | MIT | open | — | [data](https://huggingface.co/datasets/Muhammmadd/iso26262-automotive-safety-requirements) | — |
-| Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable | patents | text | English | not stated | cc-by-sa-4.0 | open | 2022 | [data](https://huggingface.co/datasets/HUPD/hupd) · [paper](https://arxiv.org/abs/2207.04043) | — |
+| Automobile fault text NER (Entropy 2025) | NER | text | Chinese | \~4.5k/5.5k/4.0k sentences | unknown | on request | 2025 | [paper](https://pmc.ncbi.nlm.nih.gov/articles/PMC11854445/) | — |
+| Automotive Industry Fault Data Set | relation extraction | text | Chinese | 1,441 records | apache-2.0 | open | 2023 | [data](https://huggingface.co/datasets/zhengr/Automotive_Industry_Fault_Data_Set) | — |
+| Automotive parts NER (Hu and Ma) | NER | text | Chinese | not stated | unknown | paper only | 2024 | paper only · [paper](https://doi.org/10.1109/NNICE61279.2024.10499162) | AutoSpecNER, Auto-AdvER, Auto-Features |
+| Customer failure reports (Khodadadi et al. 2021) | classification | text | English | not stated | unknown | paper only | 2021 | paper only · [paper](https://arxiv.org/abs/2111.14977) | — |
+| Vehicle fault repair case NER (Electronics 2025) | NER | text | Chinese | not stated | unknown | paper only | 2025 | paper only · [paper](https://doi.org/10.3390/electronics14071361) | — |
+| Vehicle Fleet Fault Association Dataset | NER + KG / ontology | tabular+text | Chinese | not stated | CC BY 4.0 | open | 2026 | [data](https://data.mendeley.com/datasets/r98g7g6k5t/1) | — |
 
-### 🗣️ G. In-car voice assistants & dialogue
+### 📐 H. Engineering documents
+
+| Corpus | Task | Modality | Lang | Size | Licence | Access | Year | Links | Cited in |
+|---|---|---|---|---|---|---|---|---|---|
+| HUPD patents (CPC B60, vehicles) | patents | text | English | not stated | cc-by-sa-4.0 | open | 2022 | [data](https://huggingface.co/datasets/HUPD/hupd) · [paper](https://arxiv.org/abs/2207.04043) | — |
+| ISO 26262 Safety Requirements | requirements | text | English | \~1,000 samples | MIT | open | — | [data](https://huggingface.co/datasets/Muhammmadd/iso26262-automotive-safety-requirements) | — |
+
+### 🗣️ I. In-car voice assistants & dialogue
 
 #### Task-oriented dialogue and tool use
 
@@ -251,7 +253,7 @@ The primary axis is the application area, one section per bucket; larger section
 | ASR-CabNois (MagicHub in-vehicle noise dataset) | noise / acoustics | speech | n/a (noise recordings) | 5.08 h noise | Magic Data open-source license / CC… | open | — | [data](https://magichub.com/datasets/in-vehicle-noise-dataset/) | — |
 | CAVEMOVE | noise / acoustics | speech | n/a (noise recordings) | 7.6 GB recordings | Creative Commons Attribution 4.0… | open | 2025 | [data](https://zenodo.org/doi/10.5281/zenodo.13594242) · [paper](https://arxiv.org/abs/2508.19691) | — |
 
-### 🛣️ H. Driving-scene language & multimodal
+### 🛣️ J. Driving-scene language & multimodal
 
 *For papers and models on language in autonomous driving, see [Awesome-LLM4AD](https://github.com/Thinklab-SJTU/Awesome-LLM4AD), which this section complements; it lists corpora only.*
 
@@ -317,7 +319,7 @@ The primary axis is the application area, one section per bucket; larger section
 | SUTD-TrafficQA | video QA | multimodal | English | 62,535 QA pairs | unknown | on request | 2021 | [data](https://github.com/sutdcv/SUTD-TrafficQA) · [paper](https://arxiv.org/abs/2103.15538) | — |
 | TUMTraffic-VideoQA | video QA + captioning | multimodal | English | 85k MCQ pairs | CC BY-NC-SA 4.0 | open | 2025 | [data](https://innovation-mobility.com/en/project-providentia/a9-dataset) · [paper](https://arxiv.org/abs/2502.02449) | — |
 
-### 🔎 I. Search, queries & semantic parsing
+### 🔎 K. Search, queries & semantic parsing
 
 *Spider's car_1 database is the only public automotive slice found. No open corpus maps natural-language car-search queries to structured filters.*
 
@@ -325,11 +327,11 @@ The primary axis is the application area, one section per bucket; larger section
 |---|---|---|---|---|---|---|---|---|---|
 | Spider (car_1 database) | text-to-SQL | text | English | not stated | unknown | open | 2018 | [data](https://yale-lily.github.io/spider) · [paper](https://arxiv.org/abs/1809.08887) | — |
 
-### 💷 J. Market, pricing & listing tables with text
+### 💷 L. Market, pricing & listing tables with text
 
 *Used-car price and specification tables without free text are not NLP corpora and are not listed. Listing corpora with free text are in section B.*
 
-### 🕸️ K. Knowledge graphs, ontologies & lexicons
+### 🕸️ M. Knowledge graphs, ontologies & lexicons
 
 #### Standards and schemas
 
@@ -413,4 +415,4 @@ Contributions are welcome. Open an issue with the *New corpus* form, or send a p
 
 ---
 
-_Generated on 2026-10-25 by `python scripts/build_readme.py` from `data/corpora.yaml` and `data/papers.yaml`. Do not edit README.md, the `modalities/` pages or the `data/*.json` and `data/*.csv` exports by hand: edit the YAML files and re-run the command._
+_Generated on 2026-10-26 by `python scripts/build_readme.py` from `data/corpora.yaml` and `data/papers.yaml`. Do not edit README.md, the `modalities/` pages or the `data/*.json` and `data/*.csv` exports by hand: edit the YAML files and re-run the command._

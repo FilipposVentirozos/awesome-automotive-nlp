@@ -52,17 +52,21 @@ BUCKETS: "OrderedDict[str, tuple[str, str]]" = OrderedDict([
            "car reviews, automotive ABSA, forums, social media opinion")),
     ("E", ("Complaints, safety, recalls & incidents",
            "NHTSA/ODI complaints, defect reports, crash narratives, recall text")),
-    ("F", ("Maintenance, repair, parts & technical documents",
-           "auto-parts NER, repair/diagnostic QA, service records, manuals, patents")),
-    ("G", ("In-car voice assistants & dialogue",
+    ("F", ("Owner's manuals & technical QA",
+           "owner's-manual and FAQ question answering, manual retrieval, FAQ-oriented NER")),
+    ("G", ("Faults, diagnostics & repair",
+           "fault and repair-case text, customer failure reports, diagnostic NER and relation extraction, parts NER")),
+    ("H", ("Engineering documents",
+           "requirements, safety standards and patents")),
+    ("I", ("In-car voice assistants & dialogue",
            "in-car task-oriented dialogue, SLU intent/slot, in-vehicle ASR/speech, driver-vehicle interaction")),
-    ("H", ("Driving-scene language & multimodal",
+    ("J", ("Driving-scene language & multimodal",
            "Talk2Car, nuScenes-QA, DriveLM, BDD-X, LingoQA, HAD, DRAMA, referring expressions, driving captions")),
-    ("I", ("Search, queries & semantic parsing",
+    ("K", ("Search, queries & semantic parsing",
            "NL-to-structured automotive search, query logs, synthetic query corpora, text-to-SQL on car data")),
-    ("J", ("Market, pricing & listing tables with text",
+    ("L", ("Market, pricing & listing tables with text",
            "used-car price datasets that carry free text, Craigslist/Kaggle car listings")),
-    ("K", ("Knowledge graphs, ontologies & lexicons",
+    ("M", ("Knowledge graphs, ontologies & lexicons",
            "automotive ontologies (e.g. VSS), KGs, taxonomies, lexicons")),
 ])
 
@@ -71,8 +75,8 @@ BUCKETS: "OrderedDict[str, tuple[str, str]]" = OrderedDict([
 # combining mark): "🗂️ Taxonomy" -> "#\uFE0F-taxonomy" (checked against the GitHub Markdown API).
 HEADING_EMOJI = {
     "A": "\U0001F697", "B": "\U0001F3F7\uFE0F", "C": "\U0001F9E9", "D": "\u2B50", "E": "\u26A0\uFE0F",
-    "F": "\U0001F527", "G": "\U0001F5E3\uFE0F", "H": "\U0001F6E3\uFE0F", "I": "\U0001F50E", "J": "\U0001F4B7",
-    "K": "\U0001F578\uFE0F",
+    "F": "\U0001F4D8", "G": "\U0001F527", "H": "\U0001F4D0", "I": "\U0001F5E3\uFE0F", "J": "\U0001F6E3\uFE0F",
+    "K": "\U0001F50E", "L": "\U0001F4B7", "M": "\U0001F578\uFE0F",
     "Taxonomy": "\U0001F5C2\uFE0F", "Related papers (no public data)": "\U0001F4C4",
     "How to cite": "\U0001F4DD", "Contributing": "\U0001F91D", "Contents": "\U0001F4D1",
 }
@@ -87,7 +91,7 @@ MODALITY_PAGES = OrderedDict([
 ])
 MODALITY_DIR = "modalities"
 
-# Optional merging of thin buckets into a neighbour, e.g. {"J": "B"}. Empty: every bucket renders on its own.
+# Optional merging of thin buckets into a neighbour, e.g. {"L": "B"}. Empty: every bucket renders on its own.
 MERGE_INTO: dict = {}
 MIN_ROWS = 3
 
@@ -96,12 +100,12 @@ SECTION_NOTES = {
     "C": ("No public automotive-specific attribute-extraction or catalogue-linking corpus was found. "
           "Auto-Features (to be released, listed below) is built for this task; the general product-attribute "
           "sets MAVE, OA-Mine and AE-110K contain no automotive category."),
-    "H": ("For papers and models on language in autonomous driving, see "
+    "J": ("For papers and models on language in autonomous driving, see "
           "[Awesome-LLM4AD](https://github.com/Thinklab-SJTU/Awesome-LLM4AD), which this section complements; "
           "it lists corpora only."),
-    "I": ("Spider's car_1 database is the only public automotive slice found. No open corpus maps "
+    "K": ("Spider's car_1 database is the only public automotive slice found. No open corpus maps "
           "natural-language car-search queries to structured filters."),
-    "J": ("Used-car price and specification tables without free text are not NLP corpora and are not listed. "
+    "L": ("Used-car price and specification tables without free text are not NLP corpora and are not listed. "
           "Listing corpora with free text are in section B."),
 }
 
@@ -223,7 +227,7 @@ def validate(entries: list, label: str, *, papers: bool = False) -> list:
 
         section = e.get("section")
         if isinstance(section, str) and section not in BUCKETS:
-            err(e, i, f"section '{section}' is not a bucket code A-K")
+            err(e, i, f"section '{section}' is not a bucket code {next(iter(BUCKETS))}-{next(reversed(BUCKETS))}")
         access = e.get("access")
         if isinstance(access, str) and access not in ACCESS_VALUES:
             if access == "commercial":
@@ -398,7 +402,7 @@ def paper_table(entries: list) -> str:
 # --------------------------------------------------------------------------- sections
 
 def group_sections(corpora: list) -> list:
-    """Return [(code, entries, notes, subsections)] for every bucket A-K, in order.
+    """Return [(code, entries, notes, subsections)] for every bucket A-M, in order.
 
     subsections is [(subsection, entries)]: the "" group first, then named sub-headings in
     first-appearance order from the YAML; rows within each group are sorted by name.

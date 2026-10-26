@@ -2,7 +2,7 @@
 # One entry per corpus. Field reference, inclusion rule and verification rule: CONTRIBUTING.md.
 # Render README.md (and the CSV/JSON exports and modalities/ pages) with: python scripts/build_readme.py
 #
-# section     bucket code A-K (see the Taxonomy section of README.md)
+# section     bucket code A-M (see the Taxonomy section of README.md)
 # subsection  sub-heading within the section; "" for none. Sub-headings render in first-appearance order.
 # task_short  Task column: one or two labels from the vocabulary in CONTRIBUTING.md, joined by " + " (max 22 chars)
 # size_short  Size column: headline figure and unit, e.g. "659 adverts" or "not stated" (max 26 chars)
@@ -32,7 +32,7 @@ entries:
   bibkey: lee-etal-2026-autospecner
   source_quote: 659 car listings annotated with 4,609 entity spans across 15 vehicle-specification types, plus a three-annotator inter-annotator agreement study on 100 documents.
   verified: true
-  notes: 'Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI 10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version). Annotation guidelines are included in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25.'
+  notes: Lee et al., ICNLSP 2026 (ACL Anthology 2026.icnlsp-1.8, pp. 67-81). Archived on Zenodo, DOI 10.5281/zenodo.23562442 (v1.0.0, released 2026-10-22; the DOI resolves to the latest version). Annotation guidelines are included in the release. GitHub page, Zenodo record and ACL Anthology page fetched 2026-10-25.
 - name: Auto-AdvER
   aliases: []
   section: B
@@ -105,7 +105,7 @@ entries:
   bibkey: guan2024findvehicle
   source_quote: Datasets like FindVehicle target vehicle retrieval with entity types including vehicle colour, brand, model, and location, but lack the granularity needed for technical specification extraction.
   verified: true
-  notes: 'Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024 (arXiv 2304.10893). 42.3k labelled natural-language descriptions of vehicle tracks; entity types include vehicle colour, brand, model, type, orientation and location. Companion retrieval system: github.com/GuanRunwei/VehicleFinder-CTIM. It could also sit in section H, because the descriptions refer to vehicles in traffic scenes. GitHub repository and arXiv record checked 2026-10-25.'
+  notes: 'Guan et al., Multimedia Tools and Applications 83(8):24841-24874, 2024 (arXiv 2304.10893). 42.3k labelled natural-language descriptions of vehicle tracks; entity types include vehicle colour, brand, model, type, orientation and location. Companion retrieval system: github.com/GuanRunwei/VehicleFinder-CTIM. It could also sit in section J, because the descriptions refer to vehicles in traffic scenes. GitHub repository and arXiv record checked 2026-10-25.'
 - name: EWNERTC (automotive subset)
   aliases:
   - English Wikipedia Named Entity Recognition and Text Categorization (EWNERTC) dataset
@@ -130,12 +130,12 @@ entries:
   source_quote: To the best of our knowledge, the earliest relevant work is by Lothritz et al. (2020), who evaluate a sequence labelling task on Wikipedia articles spanning multiple domains, including the automotive domain. The annotation-tags included automotive-specific entities such as fuel, engine, dates, manufacturers, models, generation and vehicle types.
   verified: true
   notes: Lothritz et al., COLING 2020, pp. 3750-3760, evaluated fine-grained NER on EWNERTC (Sahin et al. 2017), whose automotive domain has 10,349 sentences. EWNERTC is on Mendeley Data (DOI 10.17632/cdcztymf4k.1, CC BY 4.0); per-domain statistics are at github.com/lothritz/FG-NER-data-statistics. Annotations are automatic (gazetteer-based) and the register is encyclopaedic, not advert text. ACL Anthology page, paper PDF and Mendeley record checked 2026-10-25.
-- name: ADMit automotive NER data
+- name: ADMit
   aliases:
-  - ADMit
   - 'ADMit: Improving NER in automotive domain with domain adversarial training and multi-task learning'
+  - ADMit automotive NER data
   section: F
-  subsection: Manuals, FAQs & question answering
+  subsection: ''
   task_type: NER (domain-adversarial multi-task training)
   task_short: NER
   modality: text
@@ -397,7 +397,7 @@ entries:
   bibkey: null
   source_quote: Specifically, the created dataset contains 1.4 million images from 899 car models
   verified: true
-  notes: 'Huang, Chen, Luo, Yue, Ounis, IEEE BigData 2022 (arXiv Aug 2021). DVM-CAR 1.0 Aug 2019, 2.0 May 2021. Download via Figshare (CSV tables; 13.6 GB images; 730 MB front-view). Ad table is structured fields (no free-text description observed on page) so B/J overlap: listing corpus without ad prose. Site states: ''Researcher shall use this dataset only for non-commercial research and educational purposes.'' | TEXT-BEARING (ad table). v1.0 Aug 2019, v2.0 May 2021; paper Huang et al., IEEE BigData 2022. Figshare (13.6 GB full images, 730 MB front-view subset). Cross-list with bucket J (pricing tables).'
+  notes: 'Huang, Chen, Luo, Yue, Ounis, IEEE BigData 2022 (arXiv Aug 2021). DVM-CAR 1.0 Aug 2019, 2.0 May 2021. Download via Figshare (CSV tables; 13.6 GB images; 730 MB front-view). Ad table is structured fields (no free-text description observed on page) so B/L overlap: listing corpus without ad prose. Site states: ''Researcher shall use this dataset only for non-commercial research and educational purposes.'' | TEXT-BEARING (ad table). v1.0 Aug 2019, v2.0 May 2021; paper Huang et al., IEEE BigData 2022. Figshare (13.6 GB full images, 730 MB front-view subset). Cross-list with bucket L (pricing tables).'
 - name: Craigslist Used Cars
   aliases:
   - craigslist-carstrucks-data
@@ -1005,7 +1005,7 @@ entries:
   bibkey: null
   source_quote: The Manufacturer Communications files contains manufacturer communications received by NHTSA since January 1, 1995.
   verified: true
-  notes: 'Free-text field ''Summary'': ''Description of the communication''s most pertinent information''. Also Communication Type, Make, Model, Model Year, NHTSA Components, Mfr Component System / Subsystem (manufacturer taxonomy labels). Bridges bucket E and F (repair/technical docs). Files split into 5-year chunks by date received.'
+  notes: 'Free-text field ''Summary'': ''Description of the communication''s most pertinent information''. Also Communication Type, Make, Model, Model Year, NHTSA Components, Mfr Component System / Subsystem (manufacturer taxonomy labels). Bridges bucket E and G (faults and repair). Files split into 5-year chunks by date received.'
 - name: NHTSA Customer Complaints (Kaggle)
   aliases:
   - alshival/nhtsa-complaints
@@ -1198,7 +1198,7 @@ entries:
 - name: DelucionQA
   aliases: []
   section: F
-  subsection: Manuals, FAQs & question answering
+  subsection: ''
   task_type: QA / hallucination detection (RAG over car manual)
   task_short: QA + hallucination
   modality: text
@@ -1216,11 +1216,12 @@ entries:
   source_quote: The dataset DelucionQA is derived from Jeep 2023 Gladiator car manual.
   verified: true
   notes: EMNLP 2023 Findings (Bosch Research). Binary hallucinated/not labels from sentence-level supported/conflicted/neither annotations. Also redistributed as the 'delucionqa' subset of RAGBench (huggingface.co/datasets/rungalileo/ragbench, CC BY 4.0, fetched). Closest public 'car manual QA' set found.
-- name: FETA car manuals benchmark
+- name: FETA (car manuals)
   aliases:
   - FETA_IKEA_CAR_MANUALS
+  - FETA car manuals benchmark
   section: F
-  subsection: Manuals, FAQs & question answering
+  subsection: ''
   task_type: text-to-image / image-to-text retrieval over manuals
   task_short: retrieval
   modality: multimodal
@@ -1238,10 +1239,11 @@ entries:
   source_quote: Our FETA benchmark focuses on text-to-image and image-to-text retrieval in public car manuals and sales catalogue brochures.
   verified: true
   notes: NeurIPS 2022 (per HF card). Data hosted as feta_data.tar.gz on HF; not loadable via datasets library. Human-curated annotations released; automatic annotation code 'upon acceptance'.
-- name: MaQA (Manual Question Answering)
-  aliases: []
+- name: MaQA
+  aliases:
+  - MaQA (Manual Question Answering)
   section: F
-  subsection: Manuals, FAQs & question answering
+  subsection: ''
   task_type: QA / FAQ classification from car manual
   task_short: QA + classification
   modality: text
@@ -1259,10 +1261,11 @@ entries:
   source_quote: To tackle this task, we constructed the MaQA dataset in both Korean and English, each consisting of 45,641 questions, and propose an end-to-end neural FAQ model.
   verified: true
   notes: 'LEAD (demoted): paper_url (MDPI) returned HTTP 403 in this session; abstract confirmed verbatim via Crossref API only, which does not meet the fetch rule. Electronics 13(24):4972 (MDPI). Abstract retrieved verbatim via the Crossref API for this DOI because mdpi.com returned HTTP 403 in this session; data-availability statement not seen, so release status unknown. Largest car-manual QA set found. Verified through the Crossref metadata API (publisher-deposited abstract); the MDPI page blocked the fetcher.'
-- name: Chinese automobile fault text NER datasets (Entropy 2025)
-  aliases: []
-  section: F
-  subsection: Faults, repair and parts
+- name: Automobile fault text NER (Entropy 2025)
+  aliases:
+  - Chinese automobile fault text NER datasets (Entropy 2025)
+  section: G
+  subsection: ''
   task_type: NER
   task_short: NER
   modality: text
@@ -1280,11 +1283,12 @@ entries:
   source_quote: Our model is evaluated on the automotive fault datasets, Weibo and Resume datasets, and achieves state-of-the-art results.
   verified: true
   notes: '''Chinese Named Entity Recognition for Automobile Fault Texts Based on External Context Retrieving and Adversarial Training'', Entropy 27(2):133. Entity types FL/FP/FR/RS. Data Availability Statement: ''The data presented in this study are available upon request from the corresponding author.'' / ''The data are not publicly available due to copyright.'' Source platform cited: autosaas.cn.'
-- name: Automotive_Industry_Fault_Data_Set
+- name: Automotive Industry Fault Data Set
   aliases:
   - Automotive_Industry_Fault_Data_Set (zhengr)
-  section: F
-  subsection: Faults, repair and parts
+  - Automotive_Industry_Fault_Data_Set
+  section: G
+  subsection: ''
   task_type: relation / triple extraction (instruction format)
   task_short: relation extraction
   modality: text
@@ -1302,10 +1306,11 @@ entries:
   source_quote: 你现在是一个信息抽取模型，请你帮我抽取出关系内容为"性能故障", "部件故障", "组成"和 "检测工具"的相关三元组，三元组内部用"_"连接，三元组之间用\n分割。文本：
   verified: true
   notes: Dataset card is empty; quote is the instruction field of every record (data file downloaded and line-counted this session). Inputs are repair-case narratives (e.g. '故障现象：发动机水温高...'), outputs 'part_relation_fault' triples. Origin not stated (format resembles a Chinese automotive fault-mode relation-extraction shared task; unconfirmed). Only openly downloadable Chinese fault-text set found.
-- name: Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University)
-  aliases: []
-  section: F
-  subsection: Faults, repair and parts
+- name: Vehicle Fleet Fault Association Dataset
+  aliases:
+  - Chinese Vehicle Fleet Fault Association Dataset (Hangzhou Normal University)
+  section: G
+  subsection: ''
   task_type: NER + KG triples over repair/maintenance records
   task_short: NER + KG / ontology
   modality: tabular+text
@@ -1322,11 +1327,12 @@ entries:
   bibkey: null
   source_quote: This is a dataset of real-world vehicle fleet maintenance records from some repair facilities in China
   verified: true
-  notes: Mendeley Data v1, published 2026-06-03, DOI 10.17632/r98g7g6k5t.1. Entity type names and record counts not shown on landing page. The only openly licensed Chinese repair-record NER resource found; F/K overlap (triples).
-- name: Chinese vehicle fault repair case NER (Electronics 2025)
-  aliases: []
-  section: F
-  subsection: Faults, repair and parts
+  notes: Mendeley Data v1, published 2026-06-03, DOI 10.17632/r98g7g6k5t.1. Entity type names and record counts not shown on landing page. The only openly licensed Chinese repair-record NER resource found; G/M overlap (triples).
+- name: Vehicle fault repair case NER (Electronics 2025)
+  aliases:
+  - Chinese vehicle fault repair case NER (Electronics 2025)
+  section: G
+  subsection: ''
   task_type: NER (incl. discontinuous/nested entities)
   task_short: NER
   modality: text
@@ -1344,10 +1350,11 @@ entries:
   source_quote: This paper addresses the inefficiency of manually screening fault knowledge in Chinese vehicle repair cases and proposes a NER method based on a combined model aimed at efficiently extracting automotive fault knowledge entities from unstructured vehicle repair case texts.
   verified: true
   notes: 'LEAD (demoted): paper_url (MDPI) returned HTTP 403 in this session; abstract confirmed verbatim via Crossref API only, which does not meet the fetch rule. ''A Named Entity Recognition Method for Chinese Vehicle Fault Repair Cases Based on a Combined Model'', Electronics 14(7):1361. Abstract via Crossref API (mdpi.com 403). Data release not confirmed; treat as paper-only unless DAS says otherwise. Verified through the Crossref metadata API (publisher-deposited abstract); the MDPI page blocked the fetcher.'
-- name: Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021)
-  aliases: []
-  section: F
-  subsection: Faults, repair and parts
+- name: Customer failure reports (Khodadadi et al. 2021)
+  aliases:
+  - Free-text customer failure reports for automated vehicle diagnostics (Khodadadi et al. 2021)
+  section: G
+  subsection: ''
   task_type: text classification / IE on service-call failure reports
   task_short: classification
   modality: text
@@ -1365,10 +1372,11 @@ entries:
   source_quote: free-text failure reports (generated during customers' calls to the service department)
   verified: true
   notes: '''A Natural Language Processing and Deep Learning based Model for Automated Vehicle Diagnostics using Free-Text Customer Service Reports''. Proprietary data; no release stated. Recorded as evidence that repair-order NER corpora are not public.'
-- name: Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model
-  aliases: []
-  section: F
-  subsection: Faults, repair and parts
+- name: Automotive parts NER
+  aliases:
+  - Named Entity Recognition of Automotive Parts Based on RoBERTa-CRF Model
+  section: G
+  subsection: ''
   authors: Hu and Ma
   task_type: NER
   task_short: NER
@@ -1390,11 +1398,12 @@ entries:
   source_quote: Closest to our work, Hu et al. (2024) address NER for automotive accessories and parts in Chinese (e.g., brake discs) with entities such as accessory name, price, and warranty period
   verified: true
   notes: 2024 4th International Conference on Neural Networks, Information and Communication Engineering (NNICE), pp. 604-612. DOI metadata verified through the Crossref API on 2026-10-25 (title, authors, venue and pages match the bibliographic record); the IEEE Xplore landing page itself could not be fetched. The description is quoted from the related-work section of Auto-Features; no dataset release is known. Cited in AutoSpecNER and Auto-Features as hu2024named and in Auto-AdvER under the BibTeX key 10499162.
-- name: Automotive ISO 26262 Safety Requirements Dataset
+- name: ISO 26262 Safety Requirements
   aliases:
   - Automotive ISO 26262 Safety Requirements Dataset (Muhammmadd)
-  section: F
-  subsection: Requirements, standards and patents
+  - Automotive ISO 26262 Safety Requirements Dataset
+  section: H
+  subsection: ''
   task_type: text classification (ASIL rating) / generation
   task_short: requirements
   modality: text
@@ -1412,10 +1421,11 @@ entries:
   source_quote: This is a highly structured synthetic dataset designed as a **gold-standard benchmark and evaluation set** for LLMs operating in the automotive technical safety domain.
   verified: true
   notes: Fully synthetic (generated by a 'deterministic generation engine'). Requirements-engineering NLP; no real OEM text.
-- name: Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable
-  aliases: []
-  section: F
-  subsection: Requirements, standards and patents
+- name: HUPD patents (CPC B60, vehicles)
+  aliases:
+  - Harvard USPTO Patent Dataset (HUPD) - CPC B60 (vehicles) filterable
+  section: H
+  subsection: ''
   task_type: patent corpus (classification, LM, summarisation); automotive via CPC filter
   task_short: patents
   modality: text
@@ -1439,7 +1449,7 @@ entries:
   - Stanford Multi-Domain Dialogue (SMD)
   - In-Car Assistant dataset
   - ConvLab/kvret
-  section: G
+  section: I
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
   task_short: dialogue
@@ -1461,7 +1471,7 @@ entries:
 - name: CarMem
   aliases:
   - CarMem long-term memory in-car voice assistant dataset
-  section: G
+  section: I
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
   task_short: dialogue
@@ -1483,7 +1493,7 @@ entries:
 - name: CAR-bench
   aliases:
   - 'CAR-bench: Evaluating the Consistency and Limit-Awareness of LLM Agents under Real-World Uncertainty'
-  section: G
+  section: I
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
   task_short: dialogue
@@ -1505,7 +1515,7 @@ entries:
 - name: In-Vehicle-Tool-Calls
   aliases:
   - Senthi1Kumar/In-Vehicle-Tool-Calls-v0.2
-  section: G
+  section: I
   subsection: Task-oriented dialogue and tool use
   task_type: semantic parsing / NL-to-query
   task_short: tool calling
@@ -1528,7 +1538,7 @@ entries:
   aliases:
   - AMIE
   - Intel in-cabin intent/slot dataset
-  section: G
+  section: I
   subsection: Task-oriented dialogue and tool use
   task_type: SLU/intent+slot
   task_short: SLU
@@ -1550,7 +1560,7 @@ entries:
 - name: LoCar
   aliases:
   - Localization-Aware Evaluation of In-Vehicle Assistants
-  section: G
+  section: I
   subsection: Task-oriented dialogue and tool use
   task_type: dialogue (task-oriented)
   task_short: dialogue
@@ -1573,7 +1583,7 @@ entries:
   aliases:
   - Multi-Intent Automotive Cabin Spoken Language Understanding Benchmark
   - Gatsby1984/MAC_SLU
-  section: G
+  section: I
   subsection: Spoken commands and language understanding
   task_type: SLU/intent+slot
   task_short: SLU
@@ -1599,7 +1609,7 @@ entries:
   - Angeriod/in_car_commands_26
   - Angeriod/in_car_commands_26_prepro
   - Angeriod in_car_commands (Korean in-car voice commands)
-  section: G
+  section: I
   subsection: Spoken commands and language understanding
   task_type: ASR
   task_short: ASR
@@ -1621,7 +1631,7 @@ entries:
 - name: CarExpert factual-correctness evaluation dataset (Giebisch et al. 2025)
   aliases:
   - Automated Factual Benchmarking for In-Car Conversational Systems dataset
-  section: G
+  section: I
   subsection: Assistant evaluation
   task_type: QA
   task_short: QA
@@ -1643,7 +1653,7 @@ entries:
 - name: In-car contextual-understanding benchmark (Habicht et al. 2025)
   aliases:
   - Benchmarking Contextual Understanding for In-Car Conversational Systems dataset
-  section: G
+  section: I
   subsection: Assistant evaluation
   task_type: text classification
   task_short: classification
@@ -1665,7 +1675,7 @@ entries:
 - name: Vehicle Voice Command Authorization safety benchmark (Afroze et al. 2026)
   aliases:
   - From Intent to Action benchmark
-  section: G
+  section: I
   subsection: Assistant evaluation
   task_type: text classification
   task_short: classification
@@ -1687,7 +1697,7 @@ entries:
 - name: InCarEmo
   aliases:
   - In-Cabin Emotion Recognition and Driver State Monitoring dataset
-  section: G
+  section: I
   subsection: Assistant evaluation
   task_type: text classification
   task_short: classification
@@ -1710,7 +1720,7 @@ entries:
   aliases:
   - OpenSLR SLR159
   - ICMC-ASR corpus (released version)
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1733,7 +1743,7 @@ entries:
   aliases:
   - Corpus and Environment for Noisy Speech RECognition 2
   - IPSJ SIG-SLP in-car connected digits corpus
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1756,7 +1766,7 @@ entries:
   aliases:
   - Corpus and Environment for Noisy Speech RECognition 3
   - IPSJ SIG-SLP in-car isolated word corpus
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1779,7 +1789,7 @@ entries:
   aliases:
   - STAZKA
   - LINDAT 11234/1-1510
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1802,7 +1812,7 @@ entries:
   aliases:
   - AlienKevin/guangzhou-cabin-speech
   - MagicHub Guangzhou Cantonese in-vehicle speech
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1824,7 +1834,7 @@ entries:
 - name: CI-AVSR
   aliases:
   - Cantonese In-car Audio-Visual Speech Recognition dataset
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: audio-visual ASR
@@ -1847,7 +1857,7 @@ entries:
   aliases:
   - UTDrive Corpus Classical
   - UTDrive Corpus Portable
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1870,7 +1880,7 @@ entries:
   aliases:
   - CU-Move in-vehicle speech corpus
   - University of Colorado CU-Move
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1892,7 +1902,7 @@ entries:
 - name: AVICAR
   aliases:
   - Audio-Visual Speech Corpus in a Car Environment
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1916,7 +1926,7 @@ entries:
   - CIAIR in-car speech corpus
   - Nagoya University in-car multimedia corpus
   - Center for Integrated Acoustic Information Research corpus
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: dialogue (task-oriented)
   task_short: dialogue
@@ -1939,7 +1949,7 @@ entries:
   aliases:
   - Taiwan in-CAR speech database
   - TaiCar
-  section: G
+  section: I
   subsection: In-car speech recognition
   task_type: ASR
   task_short: ASR
@@ -1961,7 +1971,7 @@ entries:
 - name: CAVEMOVE
   aliases:
   - CAVEMOVE acoustic database for voice-enabled technologies inside moving vehicles
-  section: G
+  section: I
   subsection: Cabin acoustics and noise
   task_type: ASR
   task_short: noise / acoustics
@@ -1984,7 +1994,7 @@ entries:
   aliases:
   - MagicHub ASR-CabNois
   - A Cabin Noise Dataset
-  section: G
+  section: I
   subsection: Cabin acoustics and noise
   task_type: ASR
   task_short: noise / acoustics
@@ -2005,7 +2015,7 @@ entries:
   notes: 'Labelled ''Open Source'' but download requires MagicHub sign-in. Noise types: tire, engine, radio, human voice. Supporting resource for the in-car acoustic-conditions sub-group (with CAVEMOVE and the AISHELL-5 noise set).'
 - name: Talk2Car
   aliases: []
-  section: H
+  section: J
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression
   task_short: grounding
@@ -2026,7 +2036,7 @@ entries:
   notes: 'EMNLP-IJCNLP 2019. Built on nuScenes (360 RGB, LiDAR, RADAR, maps). Eval: AP on predicted 2D box of referred object. Code github.com/talk2car/Talk2Car. Sub-heading: grounding/referring.'
 - name: Refer-KITTI
   aliases: []
-  section: H
+  section: J
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression (referring multi-object tracking)
   task_short: grounding
@@ -2049,7 +2059,7 @@ entries:
   aliases:
   - Prompt4Driving
   - Language Prompt for Autonomous Driving
-  section: H
+  section: J
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression (prompt-based 3D multi-object tracking)
   task_short: grounding
@@ -2072,7 +2082,7 @@ entries:
   aliases:
   - HRI Advice Dataset
   - Honda Advice Dataset
-  section: H
+  section: J
   subsection: Grounding, referring expressions and retrieval
   task_type: grounding/referring expression (advice grounding) + captioning
   task_short: grounding + captioning
@@ -2093,7 +2103,7 @@ entries:
   notes: 'CVPR 2019. Goal-oriented vs stimulus-driven advice; CAN-bus included. Request form; university email required. Sub-heading: explanations/advice.'
 - name: CityFlow-NL
   aliases: []
-  section: H
+  section: J
   subsection: Grounding, referring expressions and retrieval
   task_type: retrieval (NL-based vehicle track retrieval) / grounding
   task_short: retrieval + grounding
@@ -2114,7 +2124,7 @@ entries:
   notes: 'AI City Challenge NL retrieval track 2021-2023. Metrics MRR, Recall@5/10. Third-person traffic cameras. Sub-heading: NL vehicle retrieval.'
 - name: NuScenes-QA
   aliases: []
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: VQA
   task_short: VQA
@@ -2135,7 +2145,7 @@ entries:
   notes: 'AAAI 2024. v1.0 released 2023-09-04; QA annotations + CenterPoint features on Google Drive; needs raw nuScenes (own licence). Sub-heading: nuScenes-derived scene VQA.'
 - name: NuInstruct
   aliases: []
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: 'VQA (instruction; 17 subtasks: perception, prediction, risk, planning with reasoning)'
   task_short: VQA
@@ -2156,7 +2166,7 @@ entries:
   notes: 'CVPR 2024 (BEV-InMLLM, Ding et al.). Annotations on Google Drive keyed by nuScenes sample tokens. Sub-heading: nuScenes-derived instruction VQA.'
 - name: NuScenes-MQA
   aliases: []
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: VQA + captioning (Markup-QA)
   task_short: VQA + captioning
@@ -2178,7 +2188,7 @@ entries:
 - name: Talk2BEV
   aliases:
   - Talk2BEV-Bench
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: VQA (spatial reasoning over BEV maps)
   task_short: VQA
@@ -2200,7 +2210,7 @@ entries:
 - name: SURDS
   aliases:
   - DriveMLLM
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: VQA (spatial understanding and reasoning)
   task_short: VQA
@@ -2222,7 +2232,7 @@ entries:
 - name: OmniDrive-nuScenes
   aliases:
   - OmniDrive
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: VQA (reasoning, planning, counterfactual)
   task_short: VQA
@@ -2243,7 +2253,7 @@ entries:
   notes: 'CVPR 2025 (NVIDIA). v1.0 released 2024-05-02 via GitHub release. Sub-heading: reasoning/planning-with-language.'
 - name: MAPLM
   aliases: []
-  section: H
+  section: J
   subsection: Scene question answering and instruction tuning
   task_type: VQA (map and traffic-scene understanding)
   task_short: VQA
@@ -2265,7 +2275,7 @@ entries:
 - name: BDD-X
   aliases:
   - Berkeley DeepDrive-eXplanation
-  section: H
+  section: J
   subsection: Explanations, captions and risk narration
   task_type: captioning (action description + justification)
   task_short: explanation
@@ -2286,7 +2296,7 @@ entries:
   notes: 'ECCV 2018 (Kim, Rohrbach, Darrell, Canny, Akata). 3-4 actions/video, each with description + justification + timestamps; annotators wrote as driving instructors. CSV on Google Drive. Basis for DriveGPT4 evaluation. Sub-heading: explanations/captions.'
 - name: BDD-OIA
   aliases: []
-  section: H
+  section: J
   subsection: Explanations, captions and risk narration
   task_type: text classification (action + explanation labels)
   task_short: classification
@@ -2307,7 +2317,7 @@ entries:
   notes: 'CVPR 2020 ''Explainable Object-induced Action Decision for Autonomous Vehicles'' (Xu et al.). Google Drive archive. 4 action / 21 explanation labels are from the paper, not on the fetched page. Sub-heading: explanations.'
 - name: DRAMA
   aliases: []
-  section: H
+  section: J
   subsection: Explanations, captions and risk narration
   task_type: captioning + grounding (risk localisation) + VQA
   task_short: captioning + grounding
@@ -2328,7 +2338,7 @@ entries:
   notes: 'WACV 2023. Two cameras + CAN + IMU; video- and object-level QA; ego intention, scene class, driver suggestion labels. Request form; university email. Sub-heading: risk/importance narration.'
 - name: Rank2Tell
   aliases: []
-  section: H
+  section: J
   subsection: Explanations, captions and risk narration
   task_type: VQA + captioning (importance ranking + reasoning)
   task_short: VQA + captioning
@@ -2350,7 +2360,7 @@ entries:
 - name: CoVLA
   aliases:
   - CoVLA-Dataset
-  section: H
+  section: J
   subsection: Explanations, captions and risk narration
   task_type: 'captioning (vision-language-action: captions + trajectories)'
   task_short: captioning
@@ -2371,7 +2381,7 @@ entries:
   notes: 'WACV 2025 oral (Turing Inc.). Automated caption pipeline from sensor data. HF turing-motors/CoVLA-Dataset. Sub-heading: captions/VLA.'
 - name: DriveGPT4 instruction data
   aliases: []
-  section: H
+  section: J
   subsection: Explanations, captions and risk narration
   task_type: VQA / visual instruction tuning
   task_short: VQA
@@ -2395,7 +2405,7 @@ entries:
   - DriveLM-Data
   - DriveLM-nuScenes
   - DriveLM-CARLA
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: 'VQA (graph VQA: perception -> prediction -> planning)'
   task_short: VQA
@@ -2416,7 +2426,7 @@ entries:
   notes: 'ECCV 2024 oral. v1.0 Dec 2023. DriveLM-nuScenes released; DriveLM-CARLA listed as TODO on README. Challenge devkit + HF leaderboard. Sub-heading: reasoning/planning-with-language.'
 - name: Reason2Drive
   aliases: []
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: 'VQA (chain-based reasoning: perception, prediction, reasoning)'
   task_short: VQA
@@ -2437,7 +2447,7 @@ entries:
   notes: 'ECCV 2024. Templates filled from object metadata, verified/enriched with GPT-4 + manual. Only a mini version released (Google Drive/Baidu); full benchmark on TODO. Sub-heading: reasoning/planning-with-language.'
 - name: LingoQA
   aliases: []
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: VQA (video QA)
   task_short: video QA
@@ -2458,7 +2468,7 @@ entries:
   notes: 'ECCV 2024. Lingo-Judge learned metric on HF wayveai/Lingo-Judge. Google Drive downloads. Sub-heading: scene VQA / reasoning.'
 - name: DriveBench
   aliases: []
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: 'VQA (VLM reliability benchmark: MCQ / VQA / captioning over perception, prediction, planning, behavior)'
   task_short: VQA
@@ -2481,7 +2491,7 @@ entries:
   aliases:
   - V2V-LLM
   - V2V-GoT-QA
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: VQA (grounding, notable-object identification, planning; cooperative)
   task_short: VQA
@@ -2502,7 +2512,7 @@ entries:
   notes: 'ICRA 2026. Five QA types. HF eddyhkchiu/V2V-GoT-QA; code github.com/eddyhkchiu/V2V-LLM. Sub-heading: reasoning/planning (cooperative).'
 - name: LaMPilot
   aliases: []
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: semantic parsing / NL-to-program (instruction following via language-model programs)
   task_short: semantic parsing
@@ -2520,11 +2530,11 @@ entries:
   bibkey: null
   source_quote: The benchmark includes 32 diverse driving scenarios, each with multiple samples and commands
   verified: true
-  notes: 'CVPR 2024 (Ma et al.). Simulator-based (highway, intersection, ramp merge); NO camera/LiDAR data -- LLM generates code calling driving primitives. Kept in H because task named it; flag as simulator/program bucket. Sub-heading: planning-with-language (simulator).'
+  notes: 'CVPR 2024 (Ma et al.). Simulator-based (highway, intersection, ramp merge); NO camera/LiDAR data -- LLM generates code calling driving primitives. Kept in J because task named it; flag as simulator/program bucket. Sub-heading: planning-with-language (simulator).'
 - name: Driving-with-LLMs
   aliases:
   - LLM-Driver DrivingQA
-  section: H
+  section: J
   subsection: Reasoning and planning with language
   task_type: VQA (object-level vector input; action prediction, justification, DrivingQA)
   task_short: VQA
@@ -2546,7 +2556,7 @@ entries:
 - name: DriveQA
   aliases:
   - Passing the Driving Knowledge Test
-  section: H
+  section: J
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA (traffic rules, signs, right-of-way; multiple choice)
   task_short: QA + VQA
@@ -2567,7 +2577,7 @@ entries:
   notes: 'ICCV 2025 ''Passing the Driving Knowledge Test'' (Wei, Liu, Ohn-Bar). 19 categories / 5 domains; controlled lighting/weather/perspective variations; synthetic subset for sim-to-real. HF DriveQA/DriveQA_Dataset; code h2xlab/driveQA. Sub-heading: traffic-rule / theory-test QA.'
 - name: DrivingVQA
   aliases: []
-  section: H
+  section: J
   subsection: Traffic rules and driving-test QA
   task_type: VQA (driving theory-exam MCQ with explanations and grounded entities)
   task_short: VQA
@@ -2588,7 +2598,7 @@ entries:
   notes: 'EPFL (RIV-CoT). HF EPFL-DrivingVQA/DrivingVQA. Source country of exams not stated on fetched pages. Sub-heading: theory-test QA.'
 - name: DriveCombo
   aliases: []
-  section: H
+  section: J
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA (compositional traffic-rule reasoning, multiple choice)
   task_short: QA + VQA
@@ -2610,7 +2620,7 @@ entries:
 - name: Romanian Driving Laws QA
   aliases:
   - Do LLMs Understand Romanian Driving Laws?
-  section: H
+  section: J
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA with explanation generation
   task_short: QA + VQA
@@ -2632,7 +2642,7 @@ entries:
 - name: IDKB
   aliases:
   - Intelligent Driving Knowledge Base
-  section: H
+  section: J
   subsection: Traffic rules and driving-test QA
   task_type: QA + VQA (driving handbooks, theory tests, simulated road tests)
   task_short: QA + VQA
@@ -2653,7 +2663,7 @@ entries:
   notes: 'Project page (unfetched): 4dvlab.github.io/project_page/idkb.html. 15 LVLMs evaluated; fine-tuning data. Question language not stated on page; ''multi'' inferred from ''various countries''. Sub-heading: traffic-rule / theory-test QA.'
 - name: SUTD-TrafficQA
   aliases: []
-  section: H
+  section: J
   subsection: Roadside traffic-video QA
   task_type: VQA (video QA over traffic events; 6 reasoning tasks)
   task_short: video QA
@@ -2674,7 +2684,7 @@ entries:
   notes: 'CVPR 2021. Largely third-person/roadside traffic video rather than ego-driving. Download via request on project page (released July 2021). Sub-heading: roadside traffic video QA.'
 - name: TUMTraffic-VideoQA
   aliases: []
-  section: H
+  section: J
   subsection: Roadside traffic-video QA
   task_type: VQA + captioning + grounding (video MCQ, referred-object captioning, spatio-temporal grounding)
   task_short: video QA + captioning
@@ -2697,7 +2707,7 @@ entries:
   aliases:
   - Spider 1.0
   - car_1
-  section: I
+  section: K
   subsection: ''
   task_type: semantic parsing / NL-to-query (text-to-SQL)
   task_short: text-to-SQL
@@ -2720,7 +2730,7 @@ entries:
   aliases:
   - VSS
   - GENIVI VSS
-  section: K
+  section: M
   subsection: Standards and schemas
   task_type: KG/ontology (signal taxonomy / data model)
   task_short: schema / standard
@@ -2743,7 +2753,7 @@ entries:
   aliases:
   - Markup for Autos
   - GAO - Generic Automotive Ontology (W3C Automotive Ontology Community Group)
-  section: K
+  section: M
   subsection: Standards and schemas
   task_type: KG/ontology (web vocabulary)
   task_short: schema / standard
@@ -2765,7 +2775,7 @@ entries:
 - name: NHTSA vPIC (Vehicle Product Information Catalog) VIN decoder API & standalone database
   aliases:
   - vPIC
-  section: K
+  section: M
   subsection: Make, model and VIN catalogues
   task_type: VIN decoding / vehicle identification lookup (structured)
   task_short: VIN decoding
@@ -2786,7 +2796,7 @@ entries:
   notes: US government reference resource, not an annotated corpus. API endpoints for DecodeVIN (incl. partial VINs, flat file), GetAllMakes, GetModelsForMake(Year), manufacturers. Standalone database download offered on page (format not stated). Useful as gazetteer/normalisation target for make/model NER.
 - name: vehiclesdb
   aliases: []
-  section: K
+  section: M
   subsection: Make, model and VIN catalogues
   task_type: reference table / gazetteer (make-model catalogue)
   task_short: gazetteer
@@ -2804,11 +2814,11 @@ entries:
   bibkey: null
   source_quote: 'Official, openly-licensed sources only: vehicle registers, type-approval catalogues, and government statistics.'
   verified: true
-  notes: Formats CSV, Parquet, JSON, SQLite; fields incl. kind, make_name, model_name, body_types, countries, aliases, popularity deciles. Monthly releases (built 2026-10-10). Counts on page are inconsistent (19,282 vs 15,068). Candidate catalogue for linking MAKE/MODEL spans (A/K overlap).
+  notes: Formats CSV, Parquet, JSON, SQLite; fields incl. kind, make_name, model_name, body_types, countries, aliases, popularity deciles. Monthly releases (built 2026-10-10). Counts on page are inconsistent (19,282 vs 15,068). Candidate catalogue for linking MAKE/MODEL spans (A/M overlap).
 - name: vehicle-makes-models
   aliases:
   - vehicle-makes-models (gor3a)
-  section: K
+  section: M
   subsection: Make, model and VIN catalogues
   task_type: reference table (make -> model -> generation -> engine specs)
   task_short: gazetteer
@@ -2829,7 +2839,7 @@ entries:
   notes: JSON/CSV/SQLite; regenerated weekly; sourced from autoevolution.com plus Egyptian-market additions. Spec-sheet style data (engine codes, power) relevant to ENGINE_SPEC/TRIM normalisation.
 - name: us-car-models-data
   aliases: []
-  section: K
+  section: M
   subsection: Make, model and VIN catalogues
   task_type: reference table (US car models by year)
   task_short: gazetteer
@@ -2850,7 +2860,7 @@ entries:
   notes: 'Access detail: public (free tier; paid tier for extended specs). Maintainer states the free version will no longer be updated. Fields of free tier not stated. Gazetteer use only.'
 - name: VehicleName - multilingual automotive name database
   aliases: []
-  section: K
+  section: M
   subsection: Make, model and VIN catalogues
   task_type: lexicon / gazetteer (models, brands, terms with cross-market aliases)
   task_short: gazetteer
@@ -2868,10 +2878,10 @@ entries:
   bibkey: null
   source_quote: 面向 AI 与人类的 4 语言(en / zh-CN / zh-TW / ja)汽车名词资料库:车型、品牌、术语、级别分类与跨市场异名。
   verified: true
-  notes: JSON + Markdown builds. Directly useful for MAKE/MODEL normalisation across English/Chinese/Japanese (A/K overlap).
+  notes: JSON + Markdown builds. Directly useful for MAKE/MODEL normalisation across English/Chinese/Japanese (A/M overlap).
 - name: Wikidata 'car model' class (Q3231690) and vehicle subgraph
   aliases: []
-  section: K
+  section: M
   subsection: Make, model and VIN catalogues
   task_type: KG (SPARQL-queryable)
   task_short: KG / ontology
@@ -2893,7 +2903,7 @@ entries:
 - name: Italian Automotive Glossary
   aliases:
   - Italian Automotive Glossary (DealerMax)
-  section: K
+  section: M
   subsection: Glossaries and knowledge graphs
   task_type: lexicon / glossary (schema.org DefinedTerm)
   task_short: lexicon
@@ -2914,7 +2924,7 @@ entries:
   notes: 'Fields: language, category (motore, garanzie, finanziamento, documenti, aftermarket...), term, slug, definition. Small but clean lexicon.'
 - name: EVKG - Electric Vehicle Knowledge Graph
   aliases: []
-  section: K
+  section: M
   subsection: Glossaries and knowledge graphs
   task_type: KG/ontology
   task_short: KG / ontology
@@ -2936,7 +2946,7 @@ entries:
 - name: Car-identification - Autohome car knowledge graph & QA
   aliases:
   - Car-identification (LongxingHu) - Autohome car knowledge graph & QA
-  section: K
+  section: M
   subsection: Glossaries and knowledge graphs
   task_type: KG construction + simple QA (plus image classification)
   task_short: KG / ontology + QA
