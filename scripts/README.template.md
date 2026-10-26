@@ -6,6 +6,8 @@ A curated list of corpora for natural language processing on automotive text, sp
 
 {{SUMMARY}}
 
+_Listing a dataset here does not grant any licence to it: each dataset keeps its own terms, so check them before use. If you own a listed dataset and want its entry corrected or removed, please [open an issue](../../issues)._
+
 **Download:** [CSV](data/corpora.csv) · [JSON](data/corpora.json) (related papers: [CSV](data/papers.csv) · [JSON](data/papers.json))
 
 {{BROWSE}}
