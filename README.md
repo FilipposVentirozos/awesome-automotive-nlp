@@ -8,6 +8,8 @@ A curated list of corpora for natural language processing on automotive text, sp
 
 **Languages:** English 90 · Chinese 14 · Korean 5 · Japanese 4 · Cantonese 2 · German 2 · Italian 2 · Czech 1 · French 1 · Indonesian 1 · Romanian 1 · n/a (images) 10 · Multilingual 3 · n/a (noise recordings) 2 · unknown 1
 
+_Listing a dataset here does not grant any licence to it: each dataset keeps its own terms, so check them before use. If you own a listed dataset and want its entry corrected or removed, please [open an issue](https://github.com/FilipposVentirozos/awesome-automotive-nlp/issues)._
+
 **Download:** [CSV](data/corpora.csv) · [JSON](data/corpora.json) (related papers: [CSV](data/papers.csv) · [JSON](data/papers.json))
 
 **Browse by modality:** [Text](modalities/text.md) (55) · [Speech](modalities/speech.md) (11) · [Multimodal](modalities/multimodal.md) (40) · [Images](modalities/image.md) (10) · [Tabular + text](modalities/tabular-text.md) (15)
